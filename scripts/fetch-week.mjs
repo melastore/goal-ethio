@@ -37,14 +37,21 @@ const CODE_TO_ID = new Map(COMPETITIONS.map((c) => [c.code, c.id]));
 const FORM_MATCHES = 8;
 // A season is only weeks old in August, so form reaches back into the last one.
 const FORM_WINDOW_DAYS = 160;
-// Free tier allows ten calls a minute.
-const GAP_MS = 6500;
+// Free tier allows ten calls a minute. Seven seconds leaves room for the clock
+// skew between us and their window.
+const GAP_MS = 7000;
+// Throttling is reported as a 400 "token is invalid", so the token is checked
+// once up front and that message is treated as backpressure afterwards.
+const THROTTLE_MESSAGE = "Your API token is invalid.";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 let calls = 0;
+// Set once the first call proves the token works, so a later rejection can be
+// read as throttling rather than a bad credential.
+let tokenChecked = false;
 
-async function api(endpoint, params = {}) {
+async function api(endpoint, params = {}, attempt = 0) {
   const url = new URL(`${HOST}/${endpoint}`);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
 
@@ -62,18 +69,25 @@ async function api(endpoint, params = {}) {
 
   const response = await fetch(url, { headers: { "X-Auth-Token": TOKEN } });
 
-  if (response.status === 429) {
-    // The window is a minute; waiting it out beats failing the whole run.
-    console.log("rate limited, waiting 60s");
-    await sleep(60_000);
-    return api(endpoint, params);
-  }
-
   if (!response.ok) {
-    throw new Error(`${endpoint} ${response.status}: ${await response.text()}`);
+    const text = await response.text();
+    const throttled =
+      response.status === 429 ||
+      (response.status === 400 && text.includes(THROTTLE_MESSAGE) && tokenChecked);
+
+    if (throttled && attempt < 3) {
+      // The window is a minute; waiting it out beats failing the whole run.
+      console.log(`throttled on ${endpoint}, waiting 60s`);
+      await sleep(60_000);
+      return api(endpoint, params, attempt + 1);
+    }
+
+    throw new Error(`${endpoint} ${response.status}: ${text}`);
   }
 
   const body = await response.json();
+
+  tokenChecked = true;
 
   await mkdir(CACHE, { recursive: true });
   await writeFile(cached, JSON.stringify(body));
@@ -147,6 +161,7 @@ async function main() {
 
     const matches = body.matches ?? [];
     scheduled.push(...matches.map((match) => ({ ...match, leagueId: competition.id })));
+    // The Champions League sits out most of August, so an empty week is normal.
     console.log(`${competition.code}: ${matches.length} fixtures`);
   }
 

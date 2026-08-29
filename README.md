@@ -25,8 +25,13 @@ npm run fetch:week
 ```
 
 That writes `src/data/week.json`: this week's fixtures and each team's last eight
-matches split home and away. Ten calls a minute on the free tier, so a run takes a
-few minutes, with responses cached in `.cache/`.
+matches split home and away. A busy league week involves around ninety teams and
+the free tier allows ten calls a minute, so a cold run takes about ten minutes.
+Responses are cached in `.cache/`, so a re-run the same day is nearly instant.
+
+Throttling comes back as a 400 reading "Your API token is invalid", which is not
+what it sounds like. The script checks the token once at the start and treats that
+message as backpressure afterwards, waiting out the minute.
 
 The free tier carries no goal-event feed, so who scored first is read off the
 half-time score: a lead at the break settles it, and so does a level break when
