@@ -20,7 +20,7 @@ export function LeagueRail({ counts, active, onSelect, total }: Props) {
 
   return (
     <div className="-mx-4 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
-      <div className="flex w-max gap-2 lg:w-full lg:flex-wrap">
+      <div className="flex w-max gap-1.5 lg:w-full lg:flex-wrap">
         <Chip
           label={t("filter.all")}
           count={total}
@@ -64,7 +64,7 @@ function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`group flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2 text-sm transition-all duration-200 ${
+      className={`group flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[13px] transition-all duration-200 ${
         active
           ? "border-primary bg-primary text-primary-foreground shadow-[var(--shadow-card)]"
           : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground"

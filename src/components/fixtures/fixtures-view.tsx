@@ -8,7 +8,6 @@ import { MatchCard } from "@/components/fixtures/match-card";
 import { SampleNotice } from "@/components/layout/sample-notice";
 import { useLanguage } from "@/components/providers/language-provider";
 import { readKickoff } from "@/lib/ethiopian-date";
-import { LEAGUES } from "@/lib/leagues";
 import type { MatchView } from "@/lib/view";
 
 // How many of the soonest fixtures lead the page.
@@ -16,11 +15,10 @@ const NEXT_UP = 3;
 
 type Props = {
   upcoming: MatchView[];
-  playedCount: number;
   sample: boolean;
 };
 
-export function FixturesView({ upcoming, playedCount, sample }: Props) {
+export function FixturesView({ upcoming, sample }: Props) {
   const { t, language } = useLanguage();
   const amharic = language === "am";
 
@@ -88,35 +86,23 @@ export function FixturesView({ upcoming, playedCount, sample }: Props) {
     <>
       {sample && <SampleNotice />}
 
-      <header className="mb-6">
-        <h1
-          className={`text-[28px] font-bold leading-tight tracking-tight sm:text-4xl ${
-            amharic ? "amharic" : ""
-          }`}
-        >
+      {/* One line, not a hero: the counts live on the chips below anyway. */}
+      <div className="mb-3 flex items-baseline gap-2.5">
+        <h1 className={`text-xl font-bold tracking-tight ${amharic ? "amharic" : ""}`}>
           {t("week.heading")}
         </h1>
-        <p className={`mt-1.5 text-sm text-muted-foreground ${amharic ? "amharic" : ""}`}>
+        <span className="font-mono text-xs tnum text-subtle">{shown.length}</span>
+        <span className={`ml-auto text-xs text-subtle ${amharic ? "amharic" : ""}`}>
           {t("site.tagline")}
-        </p>
+        </span>
+      </div>
 
-        <dl className="mt-5 flex gap-7 border-t border-hairline pt-4">
-          <Figure value={upcoming.length} label={t("nav.fixtures")} amharic={amharic} />
-          <Figure value={playedCount} label={t("nav.results")} amharic={amharic} />
-          <Figure
-            value={LEAGUES.filter((l) => leagueCounts.has(l.id) || league === l.id).length}
-            label={amharic ? "ውድድሮች" : "competitions"}
-            amharic={amharic}
-          />
-        </dl>
-      </header>
-
-      <div className="sticky top-[92px] z-10 -mx-4 mb-6 space-y-2.5 border-b border-hairline bg-background/92 px-4 py-3 backdrop-blur-md sm:mx-0 sm:rounded-2xl sm:border sm:px-4">
+      <div className="sticky top-[49px] z-10 -mx-4 mb-5 space-y-1.5 border-b border-hairline bg-background/92 px-4 py-2 backdrop-blur-md sm:mx-0 sm:rounded-xl sm:border sm:px-3">
         <LeagueRail
           counts={leagueCounts}
           active={league}
           onSelect={setLeague}
-          total={day === null ? upcoming.length : leagueCounts.size > 0 ? [...leagueCounts.values()].reduce((a, b) => a + b, 0) : 0}
+          total={upcoming.length}
         />
         <DayRail days={byDay} active={day} onSelect={setDay} total={shown.length} />
       </div>
@@ -186,26 +172,3 @@ function SectionHeading({
   );
 }
 
-function Figure({
-  value,
-  label,
-  amharic,
-}: {
-  value: number;
-  label: string;
-  amharic: boolean;
-}) {
-  return (
-    <div>
-      <dt className="sr-only">{label}</dt>
-      <dd className="font-mono text-2xl font-bold tnum leading-none">{value}</dd>
-      <div
-        className={`mt-1.5 text-[11px] uppercase tracking-wide text-subtle ${
-          amharic ? "amharic normal-case tracking-normal" : ""
-        }`}
-      >
-        {label}
-      </div>
-    </div>
-  );
-}

@@ -18,40 +18,43 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-20 border-b border-hairline bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1440px] items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="group flex items-center gap-2">
+    <header className="sticky top-0 z-20 border-b border-hairline bg-background/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1440px] items-center gap-3 px-4 py-2.5 sm:px-6 lg:px-8">
+        <Link href="/" className="flex shrink-0 items-center gap-2">
           <Mark />
-          <span className="text-[15px] font-bold tracking-tight">{t("site.name")}</span>
+          <span className="hidden text-[15px] font-bold tracking-tight sm:inline">
+            {t("site.name")}
+          </span>
         </Link>
 
-        <div className="ml-auto flex items-center gap-2">
+        {/* One row: the nav sits beside the wordmark rather than under it. */}
+        <nav className="flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {LINKS.map((link) => {
+            const active =
+              link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`shrink-0 rounded-full px-2.5 py-1.5 text-sm transition ${
+                  active
+                    ? "bg-muted font-semibold text-foreground"
+                    : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                } ${language === "am" ? "amharic" : ""}`}
+              >
+                {t(link.key)}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="flex shrink-0 items-center gap-1.5">
           <LanguageToggle />
           <ThemeToggle />
         </div>
       </div>
-
-      <nav className="mx-auto flex max-w-[1440px] gap-1 px-4 pb-2 sm:px-6 lg:px-8">
-        {LINKS.map((link) => {
-          const active =
-            link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
-
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              aria-current={active ? "page" : undefined}
-              className={`relative rounded-full px-3 py-1.5 text-sm transition ${
-                active
-                  ? "bg-muted font-semibold text-foreground"
-                  : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
-              } ${language === "am" ? "amharic" : ""}`}
-            >
-              {t(link.key)}
-            </Link>
-          );
-        })}
-      </nav>
     </header>
   );
 }

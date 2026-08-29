@@ -29,16 +29,16 @@ export function DayRail({ days, active, onSelect, total }: Props) {
           type="button"
           onClick={() => onSelect(null)}
           aria-pressed={active === null}
-          className={`shrink-0 rounded-xl border px-3 py-2 text-left transition ${
+          className={`flex shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1 transition ${
             active === null
               ? "border-foreground/20 bg-muted"
               : "border-transparent hover:bg-muted/60"
           }`}
         >
-          <div className={`text-xs font-semibold ${amharic ? "amharic" : ""}`}>
+          <span className={`text-[13px] font-medium ${amharic ? "amharic" : ""}`}>
             {t("filter.allDays")}
-          </div>
-          <div className="font-mono text-[11px] tnum text-subtle">{total}</div>
+          </span>
+          <span className="font-mono text-[11px] tnum text-subtle">{total}</span>
         </button>
 
         {days.map((day) => (
@@ -47,19 +47,17 @@ export function DayRail({ days, active, onSelect, total }: Props) {
             type="button"
             onClick={() => onSelect(day.key === active ? null : day.key)}
             aria-pressed={day.key === active}
-            className={`w-[74px] shrink-0 rounded-xl border px-2.5 py-2 text-left transition ${
+            className={`flex shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1 transition ${
               day.key === active
                 ? "border-foreground/20 bg-muted"
                 : "border-transparent hover:bg-muted/60"
             }`}
           >
-            <div className={`truncate text-xs font-semibold ${amharic ? "amharic" : ""}`}>
+            <span className={`text-[13px] font-medium ${amharic ? "amharic" : ""}`}>
               {amharic ? day.kickoff.weekday.amharic : day.kickoff.weekday.label.slice(0, 3)}
-            </div>
-            <div className="truncate font-mono text-[11px] tnum text-muted-foreground">
-              {day.kickoff.ethiopian.day}/{day.kickoff.ethiopian.month}
-            </div>
-            <div className="font-mono text-[11px] tnum text-subtle">{day.count}</div>
+            </span>
+            <span className="font-mono text-[13px] tnum">{day.kickoff.ethiopian.day}</span>
+            <span className="font-mono text-[11px] tnum text-subtle">{day.count}</span>
           </button>
         ))}
       </div>
