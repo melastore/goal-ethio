@@ -1,0 +1,40 @@
+{
+  "name": "goalethio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Weekly fixtures from Europe's top five leagues and the Champions League, in Ethiopian date and time, with form-based match and first-goal projections.",
+  "author": "melastore",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run feed && next build",
+    "lint": "eslint",
+    "test": "node --import ./scripts/test-alias.mjs --test \"src/**/*.test.ts\"",
+    "fetch:week": "node scripts/fetch-week.mjs",
+    "feed": "node --import ./scripts/test-alias.mjs scripts/build-feed.mjs"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "kenat": "^3.0.0",
+    "lucide-react": "^0.543.0",
+    "next": "15.5.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

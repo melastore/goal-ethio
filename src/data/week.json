@@ -1,0 +1,3032 @@
+{
+  "generatedAt": "2026-08-24T06:00:00.000Z",
+  "weekStart": "2026-08-24",
+  "fixtures": [
+    {
+      "id": 900051,
+      "leagueId": 39,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-24T11:30:00Z",
+      "status": "finished",
+      "home": {
+        "team": {
+          "id": 51,
+          "name": "Brighton",
+          "short": "Brighton",
+          "logo": "https://media.api-sports.io/football/teams/51.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900059,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Chelsea",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 46
+          },
+          {
+            "fixtureId": 900058,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Chelsea",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 86
+          },
+          {
+            "fixtureId": 900057,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Newcastle",
+            "goalsFor": 5,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900056,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Aston Villa",
+            "goalsFor": 3,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 24
+          },
+          {
+            "fixtureId": 900055,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Newcastle",
+            "goalsFor": 0,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900054,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Newcastle",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 71
+          },
+          {
+            "fixtureId": 900053,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Everton",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 10
+          },
+          {
+            "fixtureId": 900052,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Newcastle",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 8
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 33,
+          "name": "Manchester United",
+          "short": "Man United",
+          "logo": "https://media.api-sports.io/football/teams/33.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900067,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Arsenal",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 56
+          },
+          {
+            "fixtureId": 900066,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Liverpool",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 17
+          },
+          {
+            "fixtureId": 900065,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Everton",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 35
+          },
+          {
+            "fixtureId": 900064,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Arsenal",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 57
+          },
+          {
+            "fixtureId": 900063,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Chelsea",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 29
+          },
+          {
+            "fixtureId": 900062,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Aston Villa",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 29
+          },
+          {
+            "fixtureId": 900061,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Newcastle",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 42
+          },
+          {
+            "fixtureId": 900060,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Arsenal",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 88
+          }
+        ]
+      },
+      "result": {
+        "goalsHome": 2,
+        "goalsAway": 3,
+        "firstGoal": "away",
+        "firstGoalMinute": 14,
+        "firstScorer": "Palmer"
+      }
+    },
+    {
+      "id": 900068,
+      "leagueId": 39,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-24T14:00:00Z",
+      "status": "finished",
+      "home": {
+        "team": {
+          "id": 66,
+          "name": "Aston Villa",
+          "short": "Aston Villa",
+          "logo": "https://media.api-sports.io/football/teams/66.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900076,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Everton",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900075,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man United",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900074,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Arsenal",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 84
+          },
+          {
+            "fixtureId": 900073,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Newcastle",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 20
+          },
+          {
+            "fixtureId": 900072,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Man City",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900071,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man City",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900070,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Liverpool",
+            "goalsFor": 1,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 70
+          },
+          {
+            "fixtureId": 900069,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man United",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 47,
+          "name": "Tottenham",
+          "short": "Tottenham",
+          "logo": "https://media.api-sports.io/football/teams/47.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900084,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Liverpool",
+            "goalsFor": 0,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 12
+          },
+          {
+            "fixtureId": 900083,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man United",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900082,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Man United",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 2
+          },
+          {
+            "fixtureId": 900081,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Aston Villa",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 48
+          },
+          {
+            "fixtureId": 900080,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Chelsea",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 7
+          },
+          {
+            "fixtureId": 900079,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man United",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 18
+          },
+          {
+            "fixtureId": 900078,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Man City",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900077,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Aston Villa",
+            "goalsFor": 3,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 14
+          }
+        ]
+      },
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "firstGoal": "away",
+        "firstGoalMinute": 68,
+        "firstScorer": "Palmer"
+      }
+    },
+    {
+      "id": 900221,
+      "leagueId": 140,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-24T17:00:00Z",
+      "status": "finished",
+      "home": {
+        "team": {
+          "id": 531,
+          "name": "Athletic Club",
+          "short": "Athletic",
+          "logo": "https://media.api-sports.io/football/teams/531.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900229,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Sociedad",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 18
+          },
+          {
+            "fixtureId": 900228,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 39
+          },
+          {
+            "fixtureId": 900227,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Barcelona",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900226,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 29
+          },
+          {
+            "fixtureId": 900225,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Valencia",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 87
+          },
+          {
+            "fixtureId": 900224,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 24
+          },
+          {
+            "fixtureId": 900223,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Atletico",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "firstGoal": "for",
+            "firstGoalMinute": 5
+          },
+          {
+            "fixtureId": 900222,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 62
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 530,
+          "name": "Atletico Madrid",
+          "short": "Atletico",
+          "logo": "https://media.api-sports.io/football/teams/530.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900237,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Valencia",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900236,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Sevilla",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 31
+          },
+          {
+            "fixtureId": 900235,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Sevilla",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 20
+          },
+          {
+            "fixtureId": 900234,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Athletic",
+            "goalsFor": 3,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900233,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Athletic",
+            "goalsFor": 0,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 8
+          },
+          {
+            "fixtureId": 900232,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Sociedad",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900231,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Athletic",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900230,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Sevilla",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 55
+          }
+        ]
+      },
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "firstGoal": "away",
+        "firstGoalMinute": 24,
+        "firstScorer": "Vinícius Jr"
+      }
+    },
+    {
+      "id": 900153,
+      "leagueId": 78,
+      "round": "Regular Season - 2",
+      "kickoff": "2026-08-25T13:30:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 157,
+          "name": "Bayern Munich",
+          "short": "Bayern",
+          "logo": "https://media.api-sports.io/football/teams/157.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900161,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Leverkusen",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 7
+          },
+          {
+            "fixtureId": 900160,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Dortmund",
+            "goalsFor": 2,
+            "goalsAgainst": 5,
+            "firstGoal": "for",
+            "firstGoalMinute": 10
+          },
+          {
+            "fixtureId": 900159,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 37
+          },
+          {
+            "fixtureId": 900158,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Dortmund",
+            "goalsFor": 5,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 9
+          },
+          {
+            "fixtureId": 900157,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 13
+          },
+          {
+            "fixtureId": 900156,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Dortmund",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900155,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 3,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 32
+          },
+          {
+            "fixtureId": 900154,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Stuttgart",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 168,
+          "name": "Bayer Leverkusen",
+          "short": "Leverkusen",
+          "logo": "https://media.api-sports.io/football/teams/168.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900169,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Leipzig",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900168,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Gladbach",
+            "goalsFor": 4,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 78
+          },
+          {
+            "fixtureId": 900167,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Bayern",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900166,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Leipzig",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900165,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Leipzig",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 33
+          },
+          {
+            "fixtureId": 900164,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Stuttgart",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 11
+          },
+          {
+            "fixtureId": 900163,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 26
+          },
+          {
+            "fixtureId": 900162,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Bayern",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 11
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900085,
+      "leagueId": 39,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-25T15:30:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 50,
+          "name": "Manchester City",
+          "short": "Man City",
+          "logo": "https://media.api-sports.io/football/teams/50.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900093,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Arsenal",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 50
+          },
+          {
+            "fixtureId": 900092,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Brighton",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 72
+          },
+          {
+            "fixtureId": 900091,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Arsenal",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 67
+          },
+          {
+            "fixtureId": 900090,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man United",
+            "goalsFor": 5,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 5
+          },
+          {
+            "fixtureId": 900089,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Liverpool",
+            "goalsFor": 1,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 32
+          },
+          {
+            "fixtureId": 900088,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Arsenal",
+            "goalsFor": 3,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 31
+          },
+          {
+            "fixtureId": 900087,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Everton",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900086,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Liverpool",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 61
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 45,
+          "name": "Everton",
+          "short": "Everton",
+          "logo": "https://media.api-sports.io/football/teams/45.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900101,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Tottenham",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 11
+          },
+          {
+            "fixtureId": 900100,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man City",
+            "goalsFor": 0,
+            "goalsAgainst": 4,
+            "firstGoal": "against",
+            "firstGoalMinute": 54
+          },
+          {
+            "fixtureId": 900099,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Aston Villa",
+            "goalsFor": 2,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 13
+          },
+          {
+            "fixtureId": 900098,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man United",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 51
+          },
+          {
+            "fixtureId": 900097,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Liverpool",
+            "goalsFor": 0,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 5
+          },
+          {
+            "fixtureId": 900096,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Aston Villa",
+            "goalsFor": 4,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 7
+          },
+          {
+            "fixtureId": 900095,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Chelsea",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 32
+          },
+          {
+            "fixtureId": 900094,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man City",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 9
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900187,
+      "leagueId": 135,
+      "round": "Regular Season - 2",
+      "kickoff": "2026-08-25T16:45:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 499,
+          "name": "Atalanta",
+          "short": "Atalanta",
+          "logo": "https://media.api-sports.io/football/teams/499.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900195,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Fiorentina",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 40
+          },
+          {
+            "fixtureId": 900194,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Milan",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 44
+          },
+          {
+            "fixtureId": 900193,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Juventus",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 18
+          },
+          {
+            "fixtureId": 900192,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Milan",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 23
+          },
+          {
+            "fixtureId": 900191,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Milan",
+            "goalsFor": 4,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 4
+          },
+          {
+            "fixtureId": 900190,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Fiorentina",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 59
+          },
+          {
+            "fixtureId": 900189,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Fiorentina",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 19
+          },
+          {
+            "fixtureId": 900188,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Juventus",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 8
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 487,
+          "name": "Lazio",
+          "short": "Lazio",
+          "logo": "https://media.api-sports.io/football/teams/487.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900203,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 11
+          },
+          {
+            "fixtureId": 900202,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Juventus",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 7
+          },
+          {
+            "fixtureId": 900201,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Juventus",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 27
+          },
+          {
+            "fixtureId": 900200,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Juventus",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900199,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 52
+          },
+          {
+            "fixtureId": 900198,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Juventus",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 45
+          },
+          {
+            "fixtureId": 900197,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Juventus",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900196,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Inter",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "firstGoal": "for",
+            "firstGoalMinute": 18
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900119,
+      "leagueId": 61,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-25T18:00:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 80,
+          "name": "Lyon",
+          "short": "Lyon",
+          "logo": "https://media.api-sports.io/football/teams/80.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900127,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Marseille",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 79
+          },
+          {
+            "fixtureId": 900126,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lille",
+            "goalsFor": 3,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 3
+          },
+          {
+            "fixtureId": 900125,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Lille",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 7
+          },
+          {
+            "fixtureId": 900124,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Monaco",
+            "goalsFor": 4,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 2
+          },
+          {
+            "fixtureId": 900123,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Monaco",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 23
+          },
+          {
+            "fixtureId": 900122,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lille",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 59
+          },
+          {
+            "fixtureId": 900121,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Marseille",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900120,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Monaco",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 11
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 85,
+          "name": "Paris Saint Germain",
+          "short": "PSG",
+          "logo": "https://media.api-sports.io/football/teams/85.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900135,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Lille",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 36
+          },
+          {
+            "fixtureId": 900134,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lyon",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 19
+          },
+          {
+            "fixtureId": 900133,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Lille",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900132,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Marseille",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 22
+          },
+          {
+            "fixtureId": 900131,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Marseille",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 20
+          },
+          {
+            "fixtureId": 900130,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Marseille",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 11
+          },
+          {
+            "fixtureId": 900129,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Marseille",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900128,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Monaco",
+            "goalsFor": 5,
+            "goalsAgainst": 3,
+            "firstGoal": "for",
+            "firstGoalMinute": 5
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900238,
+      "leagueId": 140,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-25T19:00:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 543,
+          "name": "Real Betis",
+          "short": "Betis",
+          "logo": "https://media.api-sports.io/football/teams/543.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900246,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 47
+          },
+          {
+            "fixtureId": 900245,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 15
+          },
+          {
+            "fixtureId": 900244,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Sociedad",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 87
+          },
+          {
+            "fixtureId": 900243,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900242,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 7
+          },
+          {
+            "fixtureId": 900241,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Athletic",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900240,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Sociedad",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 21
+          },
+          {
+            "fixtureId": 900239,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 529,
+          "name": "Barcelona",
+          "short": "Barcelona",
+          "logo": "https://media.api-sports.io/football/teams/529.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900254,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Atletico",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900253,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Athletic",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 4
+          },
+          {
+            "fixtureId": 900252,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Sociedad",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 59
+          },
+          {
+            "fixtureId": 900251,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Valencia",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900250,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Sociedad",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 32
+          },
+          {
+            "fixtureId": 900249,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Sevilla",
+            "goalsFor": 3,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 69
+          },
+          {
+            "fixtureId": 900248,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Valencia",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 55
+          },
+          {
+            "fixtureId": 900247,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Sociedad",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 4
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900102,
+      "leagueId": 39,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-26T13:00:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 40,
+          "name": "Liverpool",
+          "short": "Liverpool",
+          "logo": "https://media.api-sports.io/football/teams/40.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900110,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Newcastle",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 8
+          },
+          {
+            "fixtureId": 900109,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Chelsea",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900108,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Chelsea",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900107,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man City",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 3
+          },
+          {
+            "fixtureId": 900106,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Tottenham",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 15
+          },
+          {
+            "fixtureId": 900105,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Tottenham",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900104,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Newcastle",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 12
+          },
+          {
+            "fixtureId": 900103,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Arsenal",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 49,
+          "name": "Chelsea",
+          "short": "Chelsea",
+          "logo": "https://media.api-sports.io/football/teams/49.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900118,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Newcastle",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900117,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Aston Villa",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900116,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Arsenal",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 76
+          },
+          {
+            "fixtureId": 900115,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Everton",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 53
+          },
+          {
+            "fixtureId": 900114,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Man City",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 40
+          },
+          {
+            "fixtureId": 900113,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Everton",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 20
+          },
+          {
+            "fixtureId": 900112,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Tottenham",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900111,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Brighton",
+            "goalsFor": 3,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 2
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900136,
+      "leagueId": 61,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-26T15:00:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 84,
+          "name": "Nice",
+          "short": "Nice",
+          "logo": "https://media.api-sports.io/football/teams/84.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900144,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Lille",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 44
+          },
+          {
+            "fixtureId": 900143,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lille",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 49
+          },
+          {
+            "fixtureId": 900142,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Monaco",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 66
+          },
+          {
+            "fixtureId": 900141,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Monaco",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 7
+          },
+          {
+            "fixtureId": 900140,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Marseille",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 73
+          },
+          {
+            "fixtureId": 900139,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Monaco",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 51
+          },
+          {
+            "fixtureId": 900138,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Marseille",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 6
+          },
+          {
+            "fixtureId": 900137,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lyon",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 20
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 79,
+          "name": "Lille",
+          "short": "Lille",
+          "logo": "https://media.api-sports.io/football/teams/79.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900152,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "PSG",
+            "goalsFor": 0,
+            "goalsAgainst": 4,
+            "firstGoal": "against",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900151,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lyon",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 71
+          },
+          {
+            "fixtureId": 900150,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Nice",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900149,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Nice",
+            "goalsFor": 5,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 17
+          },
+          {
+            "fixtureId": 900148,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Monaco",
+            "goalsFor": 3,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 5
+          },
+          {
+            "fixtureId": 900147,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Marseille",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "firstGoal": "against",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900146,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Monaco",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 60
+          },
+          {
+            "fixtureId": 900145,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "PSG",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900170,
+      "leagueId": 78,
+      "round": "Regular Season - 2",
+      "kickoff": "2026-08-26T16:30:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 172,
+          "name": "VfB Stuttgart",
+          "short": "Stuttgart",
+          "logo": "https://media.api-sports.io/football/teams/172.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900178,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Leipzig",
+            "goalsFor": 0,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 42
+          },
+          {
+            "fixtureId": 900177,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Leverkusen",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 38
+          },
+          {
+            "fixtureId": 900176,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 30
+          },
+          {
+            "fixtureId": 900175,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Bayern",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 64
+          },
+          {
+            "fixtureId": 900174,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Dortmund",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 3
+          },
+          {
+            "fixtureId": 900173,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Leipzig",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 73
+          },
+          {
+            "fixtureId": 900172,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 34
+          },
+          {
+            "fixtureId": 900171,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Bayern",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 17
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 165,
+          "name": "Borussia Dortmund",
+          "short": "Dortmund",
+          "logo": "https://media.api-sports.io/football/teams/165.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900186,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900185,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Stuttgart",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900184,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Leipzig",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900183,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Gladbach",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900182,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 26
+          },
+          {
+            "fixtureId": 900181,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Leverkusen",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900180,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Gladbach",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 67
+          },
+          {
+            "fixtureId": 900179,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Leverkusen",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 47
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900204,
+      "leagueId": 135,
+      "round": "Regular Season - 2",
+      "kickoff": "2026-08-26T18:45:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 505,
+          "name": "Inter",
+          "short": "Inter",
+          "logo": "https://media.api-sports.io/football/teams/505.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900212,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 0,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 24
+          },
+          {
+            "fixtureId": 900211,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Napoli",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 2
+          },
+          {
+            "fixtureId": 900210,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Roma",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 6
+          },
+          {
+            "fixtureId": 900209,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lazio",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 17
+          },
+          {
+            "fixtureId": 900208,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Atalanta",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 5
+          },
+          {
+            "fixtureId": 900207,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Milan",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900206,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Lazio",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 35
+          },
+          {
+            "fixtureId": 900205,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lazio",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 502,
+          "name": "Fiorentina",
+          "short": "Fiorentina",
+          "logo": "https://media.api-sports.io/football/teams/502.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900220,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Juventus",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 23
+          },
+          {
+            "fixtureId": 900219,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Lazio",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 59
+          },
+          {
+            "fixtureId": 900218,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Inter",
+            "goalsFor": 1,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 10
+          },
+          {
+            "fixtureId": 900217,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Juventus",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 22
+          },
+          {
+            "fixtureId": 900216,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Inter",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900215,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Juventus",
+            "goalsFor": 3,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 4
+          },
+          {
+            "fixtureId": 900214,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Atalanta",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 37
+          },
+          {
+            "fixtureId": 900213,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Atalanta",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "firstGoal": "for",
+            "firstGoalMinute": 4
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900255,
+      "leagueId": 140,
+      "round": "Regular Season - 3",
+      "kickoff": "2026-08-26T19:30:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 532,
+          "name": "Valencia",
+          "short": "Valencia",
+          "logo": "https://media.api-sports.io/football/teams/532.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900263,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Sevilla",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "for",
+            "firstGoalMinute": 3
+          },
+          {
+            "fixtureId": 900262,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900261,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Sevilla",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 79
+          },
+          {
+            "fixtureId": 900260,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 0,
+            "goalsAgainst": 4,
+            "firstGoal": "against",
+            "firstGoalMinute": 26
+          },
+          {
+            "fixtureId": 900259,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Atletico",
+            "goalsFor": 1,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 21
+          },
+          {
+            "fixtureId": 900258,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Sociedad",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 47
+          },
+          {
+            "fixtureId": 900257,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Athletic",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900256,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 7
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 536,
+          "name": "Sevilla",
+          "short": "Sevilla",
+          "logo": "https://media.api-sports.io/football/teams/536.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900271,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Atletico",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 36
+          },
+          {
+            "fixtureId": 900270,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Valencia",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900269,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Atletico",
+            "goalsFor": 0,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 13
+          },
+          {
+            "fixtureId": 900268,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900267,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Barcelona",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 33
+          },
+          {
+            "fixtureId": 900266,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Valencia",
+            "goalsFor": 2,
+            "goalsAgainst": 5,
+            "firstGoal": "against",
+            "firstGoalMinute": 3
+          },
+          {
+            "fixtureId": 900265,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Barcelona",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 33
+          },
+          {
+            "fixtureId": 900264,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Athletic",
+            "goalsFor": 2,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 2
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900000,
+      "leagueId": 2,
+      "round": "League Phase - 1",
+      "kickoff": "2026-08-27T19:00:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 157,
+          "name": "Bayern Munich",
+          "short": "Bayern",
+          "logo": "https://media.api-sports.io/football/teams/157.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900008,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Inter",
+            "goalsFor": 1,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 21
+          },
+          {
+            "fixtureId": 900007,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Napoli",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 34
+          },
+          {
+            "fixtureId": 900006,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Man City",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900005,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 27
+          },
+          {
+            "fixtureId": 900004,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900003,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 65
+          },
+          {
+            "fixtureId": 900002,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900001,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "PSG",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 36
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 492,
+          "name": "Napoli",
+          "short": "Napoli",
+          "logo": "https://media.api-sports.io/football/teams/492.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900016,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Barcelona",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 3
+          },
+          {
+            "fixtureId": 900015,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 30
+          },
+          {
+            "fixtureId": 900014,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Man City",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900013,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man City",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900012,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Bayern",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900011,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "PSG",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 25
+          },
+          {
+            "fixtureId": 900010,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "PSG",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 12
+          },
+          {
+            "fixtureId": 900009,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 37
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900017,
+      "leagueId": 2,
+      "round": "League Phase - 1",
+      "kickoff": "2026-08-27T19:00:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 505,
+          "name": "Inter",
+          "short": "Inter",
+          "logo": "https://media.api-sports.io/football/teams/505.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900025,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Barcelona",
+            "goalsFor": 1,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900024,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man City",
+            "goalsFor": 3,
+            "goalsAgainst": 4,
+            "firstGoal": "for",
+            "firstGoalMinute": 30
+          },
+          {
+            "fixtureId": 900023,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 55
+          },
+          {
+            "fixtureId": 900022,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "PSG",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 17
+          },
+          {
+            "fixtureId": 900021,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900020,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 0,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 37
+          },
+          {
+            "fixtureId": 900019,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Dortmund",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 6
+          },
+          {
+            "fixtureId": 900018,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 24
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 85,
+          "name": "Paris Saint Germain",
+          "short": "PSG",
+          "logo": "https://media.api-sports.io/football/teams/85.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900033,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Bayern",
+            "goalsFor": 2,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 3
+          },
+          {
+            "fixtureId": 900032,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 26
+          },
+          {
+            "fixtureId": 900031,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Man City",
+            "goalsFor": 1,
+            "goalsAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": 7
+          },
+          {
+            "fixtureId": 900030,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Inter",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 17
+          },
+          {
+            "fixtureId": 900029,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 16
+          },
+          {
+            "fixtureId": 900028,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Real Madrid",
+            "goalsFor": 2,
+            "goalsAgainst": 4,
+            "firstGoal": "against",
+            "firstGoalMinute": 3
+          },
+          {
+            "fixtureId": 900027,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 10
+          },
+          {
+            "fixtureId": 900026,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 9
+          }
+        ]
+      },
+      "result": null
+    },
+    {
+      "id": 900034,
+      "leagueId": 2,
+      "round": "League Phase - 1",
+      "kickoff": "2026-08-28T19:00:00Z",
+      "status": "scheduled",
+      "home": {
+        "team": {
+          "id": 165,
+          "name": "Borussia Dortmund",
+          "short": "Dortmund",
+          "logo": "https://media.api-sports.io/football/teams/165.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900042,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 900041,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 26
+          },
+          {
+            "fixtureId": 900040,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Bayern",
+            "goalsFor": 2,
+            "goalsAgainst": 3,
+            "firstGoal": "for",
+            "firstGoalMinute": 19
+          },
+          {
+            "fixtureId": 900039,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Bayern",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "firstGoal": "against",
+            "firstGoalMinute": 1
+          },
+          {
+            "fixtureId": 900038,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Bayern",
+            "goalsFor": 2,
+            "goalsAgainst": 5,
+            "firstGoal": "for",
+            "firstGoalMinute": 5
+          },
+          {
+            "fixtureId": 900037,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man City",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": 41
+          },
+          {
+            "fixtureId": 900036,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Man City",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 18
+          },
+          {
+            "fixtureId": 900035,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Man City",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          }
+        ]
+      },
+      "away": {
+        "team": {
+          "id": 541,
+          "name": "Real Madrid",
+          "short": "Real Madrid",
+          "logo": "https://media.api-sports.io/football/teams/541.png"
+        },
+        "matches": [
+          {
+            "fixtureId": 900050,
+            "kickoff": "2026-08-23T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Bayern",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 49
+          },
+          {
+            "fixtureId": 900049,
+            "kickoff": "2026-08-16T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Bayern",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 9
+          },
+          {
+            "fixtureId": 900048,
+            "kickoff": "2026-08-09T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Inter",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": 51
+          },
+          {
+            "fixtureId": 900047,
+            "kickoff": "2026-08-02T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Inter",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "firstGoal": "against",
+            "firstGoalMinute": 34
+          },
+          {
+            "fixtureId": 900046,
+            "kickoff": "2026-07-26T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "PSG",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 90
+          },
+          {
+            "fixtureId": 900045,
+            "kickoff": "2026-07-19T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Barcelona",
+            "goalsFor": 3,
+            "goalsAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": 35
+          },
+          {
+            "fixtureId": 900044,
+            "kickoff": "2026-07-12T14:00:00.000Z",
+            "venue": "away",
+            "opponent": "Napoli",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 5
+          },
+          {
+            "fixtureId": 900043,
+            "kickoff": "2026-07-05T14:00:00.000Z",
+            "venue": "home",
+            "opponent": "Napoli",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": 74
+          }
+        ]
+      },
+      "result": null
+    }
+  ]
+}
