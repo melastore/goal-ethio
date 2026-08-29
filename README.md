@@ -32,12 +32,14 @@ is 100 calls a day and a run costs about sixty, with responses cached in `.cache
 Pushing to `main` builds and publishes to GitHub Pages. `refresh.yml` re-pulls the
 data every morning and commits it, which triggers the deploy.
 
+It publishes to `https://melastore.github.io/goal-ethio/`. The sub-path is baked
+in by `NEXT_PUBLIC_BASE_PATH`, which the workflow sets from the repo name; for a
+custom domain later, drop that and add a `public/CNAME`.
+
 Repo settings needed:
 
 - Secret `API_FOOTBALL_KEY`
-- Variable `SITE_URL`, the site's own origin
 - Pages source set to GitHub Actions
-- `public/CNAME` holding the custom domain
 
 ## The model
 
