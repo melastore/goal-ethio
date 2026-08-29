@@ -3,7 +3,7 @@
 // Corners, cards and shots are not in this feed, so they are not modelled. A
 // number here is only ever a sum over scorelines the model already assigns.
 
-import { poisson, scoreMatrix, type Baseline } from "@/lib/model";
+import { poisson, scoreMatrix } from "@/lib/model";
 import type { TeamForm, Venue } from "@/lib/types";
 
 export type Line = { line: number; over: number; under: number };

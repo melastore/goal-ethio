@@ -10,7 +10,6 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { readKickoff } from "@/lib/ethiopian-date";
 import { LEAGUES } from "@/lib/leagues";
 import type { MatchView } from "@/lib/view";
-import { margin } from "@/lib/view";
 
 // How many of the soonest fixtures lead the page.
 const NEXT_UP = 3;

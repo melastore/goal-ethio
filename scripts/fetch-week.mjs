@@ -214,6 +214,9 @@ async function main() {
 
   for (const match of history) {
     if (seen.has(match.id)) continue;
+    // Anything outside the tracked competitions is a different standard of
+    // opposition, and the baselines are pooled per competition.
+    if (!CODE_TO_ID.has(match.competition?.code)) continue;
     seen.add(match.id);
 
     for (const teamId of [match.homeTeam.id, match.awayTeam.id]) {
