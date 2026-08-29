@@ -19,19 +19,26 @@ const BASELINE: Baseline = { homeGoals: 1.5, awayGoals: 1.2, sample: 100 };
 
 let nextFixtureId = 1;
 
+// Everything is dated on NOW so time decay leaves the weights at 1 and the
+// arithmetic under test is the shrinkage, not the decay.
+const NOW = "2026-08-29T12:00:00Z";
+
 const match = (
   venue: Venue,
   goalsFor: number,
   goalsAgainst: number,
   firstGoal: PastMatch["firstGoal"] = null,
-  firstGoalMinute: number | null = null
+  firstGoalMinute: number | null = null,
+  kickoff = NOW
 ): PastMatch => ({
   fixtureId: nextFixtureId++,
-  kickoff: "2026-08-01T14:00:00Z",
+  kickoff,
   venue,
   opponent: "Someone",
   goalsFor,
   goalsAgainst,
+  halfFor: null,
+  halfAgainst: null,
   firstGoal,
   firstGoalMinute,
 });
@@ -67,13 +74,13 @@ test("equal rates give a symmetric match", () => {
 
 test("a thin sample is pulled back toward the league", () => {
   // One 5-0 at home is not a 5-goal team.
-  const strength = strengthAt(form([match("home", 5, 0)]), "home", BASELINE);
+  const strength = strengthAt(form([match("home", 5, 0)]), "home", BASELINE, NOW);
   assert.ok(strength.attack > 1);
   assert.ok(strength.attack < 2);
 });
 
 test("a full venue sample moves further than a thin one", () => {
-  const one = strengthAt(form([match("home", 3, 0)]), "home", BASELINE);
+  const one = strengthAt(form([match("home", 3, 0)]), "home", BASELINE, NOW);
   const four = strengthAt(
     form([
       match("home", 3, 0),
@@ -82,13 +89,14 @@ test("a full venue sample moves further than a thin one", () => {
       match("home", 3, 0),
     ]),
     "home",
-    BASELINE
+    BASELINE,
+    NOW
   );
   assert.ok(four.attack > one.attack);
 });
 
 test("no matches at a venue reads as exactly average", () => {
-  const strength = strengthAt(form([match("away", 4, 0)]), "home", BASELINE);
+  const strength = strengthAt(form([match("away", 4, 0)]), "home", BASELINE, NOW);
   assert.equal(strength.matches, 0);
   assert.ok(Math.abs(strength.attack - 1) < 1e-9);
   assert.ok(Math.abs(strength.defence - 1) < 1e-9);
@@ -138,7 +146,7 @@ test("baseline falls back until there is enough of a sample", () => {
     id: 1,
     leagueId: 39,
     round: "Round 1",
-    kickoff: "2026-08-29T14:00:00Z",
+    kickoff: NOW,
     status: "scheduled",
     home: form([match("home", 2, 1)]),
     away: form([match("away", 0, 0)]),
@@ -154,6 +162,31 @@ test("both teams to score is never above the chance of a goal", () => {
   const markets = goalMarkets(scoreMatrix(1.6, 1.3));
   assert.ok(markets.btts > 0 && markets.btts < 1);
   assert.ok(markets.overTwoFive > 0 && markets.overTwoFive < 1);
+});
+
+test("a stale match counts for less than a fresh one", () => {
+  const fresh = strengthAt(form([match("home", 4, 0)]), "home", BASELINE, NOW);
+  // Four months back is roughly two half-lives.
+  const stale = strengthAt(
+    form([match("home", 4, 0, null, null, "2026-04-29T12:00:00Z")]),
+    "home",
+    BASELINE,
+    NOW
+  );
+
+  assert.ok(stale.attack < fresh.attack);
+  assert.ok(stale.effective < 0.3);
+  assert.equal(fresh.effective, 1);
+});
+
+test("weighting never revives a match into the future", () => {
+  const ahead = strengthAt(
+    form([match("home", 2, 0, null, null, "2027-01-01T12:00:00Z")]),
+    "home",
+    BASELINE,
+    NOW
+  );
+  assert.equal(ahead.effective, 1);
 });
 
 test("lean names the top outcome and its margin", () => {

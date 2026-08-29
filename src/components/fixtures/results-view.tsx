@@ -4,15 +4,16 @@ import { ResultCard } from "@/components/fixtures/result-card";
 import { SampleNotice } from "@/components/layout/sample-notice";
 import { useLanguage } from "@/components/providers/language-provider";
 import { percent, rate } from "@/lib/format";
-import type { Graded, Tally } from "@/lib/scoring";
+import type { Tally } from "@/lib/scoring";
+import type { ResultView } from "@/lib/week-data";
 
 type Props = {
-  graded: Graded[];
+  results: ResultView[];
   record: Tally;
   sample: boolean;
 };
 
-export function ResultsView({ graded, record, sample }: Props) {
+export function ResultsView({ results, record, sample }: Props) {
   const { t, language } = useLanguage();
   const amharic = language === "am";
 
@@ -27,7 +28,7 @@ export function ResultsView({ graded, record, sample }: Props) {
         {t("results.heading")}
       </h1>
 
-      {graded.length === 0 ? (
+      {results.length === 0 ? (
         <p
           className={`rounded-[16px] border border-hairline bg-card px-6 py-10 text-center text-sm text-muted-foreground ${
             amharic ? "amharic" : ""
@@ -71,9 +72,9 @@ export function ResultsView({ graded, record, sample }: Props) {
             </div>
           </section>
 
-          <div className="space-y-3">
-            {graded.map((entry) => (
-              <ResultCard key={entry.fixture.id} graded={entry} />
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {results.map((entry) => (
+              <ResultCard key={entry.view.id} entry={entry} />
             ))}
           </div>
         </div>

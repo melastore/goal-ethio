@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-screen flex-col">
         <LanguageProvider>
           <Header />
-          <main className="mx-auto w-full max-w-2xl flex-1 px-4 pb-10 pt-6 sm:px-6">
+          <main className="mx-auto w-full max-w-[1440px] flex-1 px-4 pb-14 pt-7 sm:px-6 lg:px-8">
             {children}
           </main>
           <Footer generatedAt={generatedAt} />

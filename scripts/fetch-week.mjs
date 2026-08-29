@@ -30,16 +30,25 @@ const COMPETITIONS = [
   { code: "BL1", id: 78 },
   { code: "FL1", id: 61 },
   { code: "CL", id: 2 },
+  { code: "DED", id: 88 },
+  { code: "PPL", id: 94 },
+  { code: "ELC", id: 40 },
+  { code: "BSA", id: 71 },
+  // Only has fixtures in a tournament summer; costs one call to ask.
+  { code: "EC", id: 4 },
 ];
 
 const CODE_TO_ID = new Map(COMPETITIONS.map((c) => [c.code, c.id]));
 
 const FORM_MATCHES = 8;
+// How far ahead to list. A month is as far as most of these competitions have
+// confirmed kickoff times for.
+const AHEAD_DAYS = 30;
 // A season is only weeks old in August, so form reaches back into the last one.
 const FORM_WINDOW_DAYS = 160;
-// Free tier allows ten calls a minute. Seven seconds leaves room for the clock
-// skew between us and their window.
-const GAP_MS = 7000;
+// Free tier allows ten calls a minute. Ten seconds sits clear of the edge, and
+// the whole run is two calls per competition, so the slack costs little.
+const GAP_MS = 10_000;
 // Throttling is reported as a 400 "token is invalid", so the token is checked
 // once up front and that message is treated as backpressure afterwards.
 const THROTTLE_MESSAGE = "Your API token is invalid.";
@@ -96,16 +105,22 @@ async function api(endpoint, params = {}, attempt = 0) {
 
 const iso = (date) => date.toISOString().slice(0, 10);
 
-// Monday to Sunday of the week the given day falls in, in Addis terms.
-function weekWindow(now = new Date()) {
+/**
+ * From the Monday of the current week out to a month ahead, in Addis terms.
+ *
+ * It starts on Monday rather than today so results from earlier in the week are
+ * still carried, which is what the results page grades against.
+ */
+function listingWindow(now = new Date()) {
   const addis = new Date(now.getTime() + 3 * 60 * 60 * 1000);
   const monday = new Date(addis);
   // getUTCDay is Sunday-first; shift so Monday starts the week.
   monday.setUTCDate(addis.getUTCDate() - ((addis.getUTCDay() + 6) % 7));
-  const sunday = new Date(monday);
-  sunday.setUTCDate(monday.getUTCDate() + 6);
 
-  return { from: iso(monday), to: iso(sunday) };
+  const end = new Date(addis);
+  end.setUTCDate(addis.getUTCDate() + AHEAD_DAYS);
+
+  return { from: iso(monday), to: iso(end) };
 }
 
 const shortName = (team) =>
@@ -144,62 +159,77 @@ function openedScoring(score) {
 
 async function main() {
   const now = new Date();
-  const { from, to } = weekWindow(now);
+  const { from, to } = listingWindow(now);
 
   const formFrom = new Date(now);
   formFrom.setUTCDate(formFrom.getUTCDate() - FORM_WINDOW_DAYS);
 
-  console.log(`week ${from} to ${to}`);
+  console.log(`listing ${from} to ${to}`);
 
-  // 1. This week's fixtures across the six competitions.
   const scheduled = [];
+  // Every finished match across the tracked competitions, which is what form is
+  // built from. Pulling it per competition rather than per team turns two
+  // hundred calls into two.
+  const history = [];
+
   for (const competition of COMPETITIONS) {
-    const body = await api(`competitions/${competition.code}/matches`, {
+    const listing = await api(`competitions/${competition.code}/matches`, {
       dateFrom: from,
       dateTo: to,
     });
 
-    const matches = body.matches ?? [];
-    scheduled.push(...matches.map((match) => ({ ...match, leagueId: competition.id })));
-    // The Champions League sits out most of August, so an empty week is normal.
-    console.log(`${competition.code}: ${matches.length} fixtures`);
+    const matches = (listing.matches ?? []).map((match) => ({
+      ...match,
+      leagueId: competition.id,
+    }));
+    scheduled.push(...matches);
+
+    const past = await api(`competitions/${competition.code}/matches`, {
+      dateFrom: iso(formFrom),
+      dateTo: iso(now),
+      status: "FINISHED",
+    });
+
+    history.push(...(past.matches ?? []));
+
+    console.log(
+      `${competition.code}: ${matches.length} listed, ${(past.matches ?? []).length} played`
+    );
   }
 
   if (scheduled.length === 0) {
-    console.error("No fixtures in this window. Mid-season break, or an international week.");
+    console.error("No fixtures in this window. Every competition is between seasons.");
     process.exit(1);
   }
 
-  // 2. Recent form for every team involved.
   const teams = new Map();
   for (const match of scheduled) {
     teams.set(match.homeTeam.id, match.homeTeam);
     teams.set(match.awayTeam.id, match.awayTeam);
   }
 
-  console.log(`${teams.size} teams to fetch form for`);
-
+  // Each finished match lands in both teams' form, told from their own side.
   const formByTeam = new Map();
-  for (const teamId of teams.keys()) {
-    const body = await api(`teams/${teamId}/matches`, {
-      status: "FINISHED",
-      dateFrom: iso(formFrom),
-      dateTo: iso(now),
-    });
+  const seen = new Set();
 
-    const played = (body.matches ?? [])
-      // Cups outside the six are a different standard of opposition, and the
-      // baseline is pooled per competition, so they are left out.
-      .filter((match) => CODE_TO_ID.has(match.competition?.code))
-      .sort((a, b) => new Date(b.utcDate) - new Date(a.utcDate))
-      .slice(0, FORM_MATCHES);
+  for (const match of history) {
+    if (seen.has(match.id)) continue;
+    seen.add(match.id);
 
-    formByTeam.set(teamId, played);
+    for (const teamId of [match.homeTeam.id, match.awayTeam.id]) {
+      if (!teams.has(teamId)) continue;
+      if (!formByTeam.has(teamId)) formByTeam.set(teamId, []);
+      formByTeam.get(teamId).push(match);
+    }
+  }
+
+  for (const matches of formByTeam.values()) {
+    matches.sort((a, b) => new Date(b.utcDate) - new Date(a.utcDate));
   }
 
   const formFor = (teamId) => ({
     team: asTeam(teams.get(teamId)),
-    matches: (formByTeam.get(teamId) ?? []).map((match) => {
+    matches: (formByTeam.get(teamId) ?? []).slice(0, FORM_MATCHES).map((match) => {
       const atHome = match.homeTeam.id === teamId;
       const opened = openedScoring(match.score);
 
@@ -210,6 +240,10 @@ async function main() {
         opponent: shortName(atHome ? match.awayTeam : match.homeTeam),
         goalsFor: (atHome ? match.score.fullTime.home : match.score.fullTime.away) ?? 0,
         goalsAgainst: (atHome ? match.score.fullTime.away : match.score.fullTime.home) ?? 0,
+        // The half-time score is the only split of the match this tier gives, and
+        // it is what the first-half markets are fitted on.
+        halfFor: atHome ? (match.score.halfTime?.home ?? null) : (match.score.halfTime?.away ?? null),
+        halfAgainst: atHome ? (match.score.halfTime?.away ?? null) : (match.score.halfTime?.home ?? null),
         firstGoal: opened === null ? null : (opened === "home") === atHome ? "for" : "against",
         // No goal feed on this tier, so the minute is never known.
         firstGoalMinute: null,
@@ -234,6 +268,8 @@ async function main() {
           ? {
               goalsHome: match.score.fullTime.home ?? 0,
               goalsAway: match.score.fullTime.away ?? 0,
+              halfHome: match.score.halfTime?.home ?? null,
+              halfAway: match.score.halfTime?.away ?? null,
               firstGoal: opened,
               firstGoalMinute: null,
               firstScorer: null,
@@ -248,12 +284,13 @@ async function main() {
   await mkdir(path.dirname(OUT), { recursive: true });
   await writeFile(OUT, `${JSON.stringify(data, null, 2)}\n`);
 
-  const decided = fixtures.flatMap((f) => [...f.home.matches, ...f.away.matches]);
-  const known = decided.filter((m) => m.firstGoal !== null).length;
+  const form = fixtures.flatMap((f) => [...f.home.matches, ...f.away.matches]);
+  const known = form.filter((m) => m.firstGoal !== null).length;
+  const upcoming = fixtures.filter((f) => f.status === "scheduled").length;
 
   console.log(
-    `wrote ${fixtures.length} fixtures in ${calls} calls; ` +
-      `first goal known for ${known}/${decided.length} form matches`
+    `wrote ${fixtures.length} fixtures (${upcoming} upcoming) for ${teams.size} teams ` +
+      `in ${calls} calls; first goal known for ${known}/${form.length} form matches`
   );
 }
 

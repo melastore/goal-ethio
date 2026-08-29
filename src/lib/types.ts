@@ -17,6 +17,9 @@ export type PastMatch = {
   opponent: string;
   goalsFor: number;
   goalsAgainst: number;
+  // The only split of the match this data source gives. Null when not reported.
+  halfFor: number | null;
+  halfAgainst: number | null;
   // "for" means this team scored first. Null on a goalless match.
   firstGoal: "for" | "against" | null;
   firstGoalMinute: number | null;
@@ -31,6 +34,8 @@ export type TeamForm = {
 export type Result = {
   goalsHome: number;
   goalsAway: number;
+  halfHome: number | null;
+  halfAway: number | null;
   firstGoal: Venue | null;
   firstGoalMinute: number | null;
   firstScorer: string | null;

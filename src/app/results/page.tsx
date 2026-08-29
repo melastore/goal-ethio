@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function ResultsPage() {
-  const { graded, record, sample } = loadWeek();
+  const { results, record, sample } = loadWeek();
 
-  return <ResultsView graded={graded} record={record} sample={sample} />;
+  return <ResultsView results={results} record={record} sample={sample} />;
 }

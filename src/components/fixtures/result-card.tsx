@@ -6,26 +6,26 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { percent } from "@/lib/format";
 import { readKickoff } from "@/lib/ethiopian-date";
 import { leagueById } from "@/lib/leagues";
-import type { Graded } from "@/lib/scoring";
+import type { ResultView } from "@/lib/week-data";
 
-export function ResultCard({ graded }: { graded: Graded }) {
+export function ResultCard({ entry }: { entry: ResultView }) {
   const { t, language } = useLanguage();
-  const { fixture, result, projection, actual, predicted } = graded;
+  const { view, actual, predicted, outcomeHit, firstGoalHit } = entry;
+  const result = view.result;
+  if (!result) return null;
 
   const amharic = language === "am";
-  const kickoff = readKickoff(fixture.kickoff);
-  const league = leagueById(fixture.leagueId);
-  const home = fixture.home.team;
-  const away = fixture.away.team;
+  const kickoff = readKickoff(view.kickoff);
+  const league = leagueById(view.leagueId);
 
   const name = (pick: typeof actual) =>
-    pick === "draw" ? t("card.draw") : pick === "home" ? home.short : away.short;
+    pick === "draw" ? t("card.draw") : pick === "home" ? view.home.short : view.away.short;
 
   return (
-    <article className="overflow-hidden rounded-[16px] border border-hairline bg-card shadow-[var(--shadow-card)]">
-      <div className="flex items-center gap-3 px-4 pt-3">
+    <article className="overflow-hidden rounded-[18px] border border-hairline bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]">
+      <div className="flex items-center gap-3 px-4 pt-3.5">
         <span
-          className={`min-w-0 flex-1 truncate text-[11px] font-medium uppercase tracking-wide text-muted-foreground ${
+          className={`min-w-0 flex-1 truncate text-[11px] font-semibold uppercase tracking-wider text-muted-foreground ${
             amharic ? "amharic normal-case tracking-normal" : ""
           }`}
         >
@@ -37,22 +37,28 @@ export function ResultCard({ graded }: { graded: Graded }) {
       </div>
 
       <div className="space-y-2.5 px-4 py-3.5">
-        <ScoreRow team={home} goals={result.goalsHome} won={actual === "home"} />
-        <ScoreRow team={away} goals={result.goalsAway} won={actual === "away"} />
+        <ScoreRow team={view.home} goals={result.goalsHome} won={actual === "home"} />
+        <ScoreRow team={view.away} goals={result.goalsAway} won={actual === "away"} />
       </div>
 
-      {result.firstGoal && (
-        <div className="flex items-center gap-2 border-t border-hairline px-4 py-2.5 text-xs">
-          <span className={`text-muted-foreground ${amharic ? "amharic" : ""}`}>
-            {t("results.firstScorer")}
-          </span>
-          <span className="min-w-0 truncate font-medium">
-            {result.firstGoal === "home" ? home.short : away.short}
-            {result.firstScorer && <span className="text-muted-foreground"> · {result.firstScorer}</span>}
-          </span>
-          {result.firstGoalMinute !== null && (
-            <span className="ml-auto shrink-0 font-mono tnum text-subtle">
-              {result.firstGoalMinute}&apos;
+      {(result.halfHome !== null || result.firstGoal) && (
+        <div className="flex items-center gap-3 border-t border-hairline px-4 py-2.5 text-xs">
+          {result.halfHome !== null && (
+            <span className="text-muted-foreground">
+              HT{" "}
+              <span className="font-mono tnum text-foreground">
+                {result.halfHome}-{result.halfAway}
+              </span>
+            </span>
+          )}
+          {result.firstGoal && (
+            <span className="ml-auto truncate">
+              <span className={`text-muted-foreground ${amharic ? "amharic" : ""}`}>
+                {t("results.firstScorer")}{" "}
+              </span>
+              <span className="font-semibold">
+                {result.firstGoal === "home" ? view.home.short : view.away.short}
+              </span>
             </span>
           )}
         </div>
@@ -61,20 +67,20 @@ export function ResultCard({ graded }: { graded: Graded }) {
       <div className="grid grid-cols-2 divide-x divide-hairline border-t border-hairline">
         <Verdict
           label={t("results.predicted")}
-          value={`${name(predicted)} ${percent(projection.outcome[predicted])}`}
-          hit={graded.outcomeHit}
+          value={`${name(predicted)} ${percent(view.p.outcome[predicted])}`}
+          hit={outcomeHit}
           amharic={amharic}
         />
         <Verdict
           label={t("results.firstGoalHits")}
           value={
-            graded.firstGoalHit === null
+            firstGoalHit === null
               ? t("card.neither")
-              : projection.firstGoal.home >= projection.firstGoal.away
-                ? home.short
-                : away.short
+              : view.p.firstGoal.home >= view.p.firstGoal.away
+                ? view.home.short
+                : view.away.short
           }
-          hit={graded.firstGoalHit}
+          hit={firstGoalHit}
           amharic={amharic}
         />
       </div>
@@ -105,7 +111,9 @@ function ScoreRow({
         {team.name}
       </span>
       <span
-        className={`shrink-0 font-mono text-xl tnum ${won ? "font-bold" : "font-semibold text-muted-foreground"}`}
+        className={`shrink-0 font-mono text-xl tnum ${
+          won ? "font-bold" : "font-semibold text-muted-foreground"
+        }`}
       >
         {goals}
       </span>
@@ -129,13 +137,13 @@ function Verdict({
     <div className="flex items-center gap-2 px-4 py-2.5">
       <div className="min-w-0 flex-1">
         <div
-          className={`text-[10px] font-medium uppercase tracking-wider text-subtle ${
+          className={`text-[10px] font-semibold uppercase tracking-wider text-subtle ${
             amharic ? "amharic normal-case tracking-normal" : ""
           }`}
         >
           {label}
         </div>
-        <div className="mt-1 truncate text-sm font-semibold">{value}</div>
+        <div className="mt-1 truncate text-sm font-bold">{value}</div>
       </div>
 
       {hit !== null && (

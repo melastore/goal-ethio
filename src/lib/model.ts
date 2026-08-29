@@ -3,6 +3,7 @@
 // two multiply into a scoring rate. Goals fall as Poisson with a correction on
 // the low scores, where independence is known to be wrong.
 
+import { board, type Board } from "@/lib/markets";
 import type { Fixture, TeamForm, Venue } from "@/lib/types";
 
 // Negative firms up 0-0 and 1-1. Fitted values for top leagues sit near -0.05.
@@ -11,6 +12,25 @@ const RHO = -0.06;
 // Prior weight in matches. Eight matches split by venue leaves about four a
 // side, so a rate from four lands halfway between the team and the league.
 const PRIOR_MATCHES = 4;
+
+/**
+ * Half-life of a result, in days.
+ *
+ * Dixon-Coles weights each match by how long ago it was, and it matters more
+ * here than in their paper: in August the last eight reach back into the spring,
+ * across a transfer window and a squad's worth of changes. Sixty days puts a
+ * match from the end of last season at roughly an eighth of last weekend's.
+ */
+const HALF_LIFE_DAYS = 60;
+
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
+// How much a match counts, seen from a given date.
+export function weightOf(kickoff: string, asOf: string): number {
+  const days = (new Date(asOf).getTime() - new Date(kickoff).getTime()) / MS_PER_DAY;
+  if (!Number.isFinite(days) || days <= 0) return 1;
+  return 0.5 ** (days / HALF_LIFE_DAYS);
+}
 
 const MAX_GOALS = 10;
 const MINUTES = 90;
@@ -28,7 +48,14 @@ const FALLBACK: Baseline = { homeGoals: 1.5, awayGoals: 1.2, sample: 0 };
 // What a match in this competition normally looks like, pooled from the form of
 // every fixture in it. Deduplicated by id: a derby sits in both teams' form.
 export function baselineFor(fixtures: Fixture[], leagueId: number): Baseline {
-  const seen = new Map<number, { home: number; away: number }>();
+  const seen = new Map<number, { home: number; away: number; weight: number }>();
+
+  // Weighted against the newest fixture in the set, so every competition is
+  // measured from the same point in its own calendar.
+  const asOf = fixtures.reduce(
+    (latest, fixture) => (fixture.kickoff > latest ? fixture.kickoff : latest),
+    fixtures[0]?.kickoff ?? new Date().toISOString()
+  );
 
   for (const fixture of fixtures) {
     if (fixture.leagueId !== leagueId) continue;
@@ -36,11 +63,13 @@ export function baselineFor(fixtures: Fixture[], leagueId: number): Baseline {
     for (const form of [fixture.home, fixture.away]) {
       for (const match of form.matches) {
         if (seen.has(match.fixtureId)) continue;
+
+        const weight = weightOf(match.kickoff, asOf);
         seen.set(
           match.fixtureId,
           match.venue === "home"
-            ? { home: match.goalsFor, away: match.goalsAgainst }
-            : { home: match.goalsAgainst, away: match.goalsFor }
+            ? { home: match.goalsFor, away: match.goalsAgainst, weight }
+            : { home: match.goalsAgainst, away: match.goalsFor, weight }
         );
       }
     }
@@ -51,12 +80,16 @@ export function baselineFor(fixtures: Fixture[], leagueId: number): Baseline {
 
   let home = 0;
   let away = 0;
+  let total = 0;
   for (const match of seen.values()) {
-    home += match.home;
-    away += match.away;
+    home += match.home * match.weight;
+    away += match.away * match.weight;
+    total += match.weight;
   }
 
-  return { homeGoals: home / sample, awayGoals: away / sample, sample };
+  if (total <= 0) return FALLBACK;
+
+  return { homeGoals: home / total, awayGoals: away / total, sample };
 }
 
 // A per-match rate pulled toward the league by how thin its evidence is.
@@ -68,9 +101,16 @@ export type Strength = {
   // 1 is average, below 1 is tighter.
   defence: number;
   matches: number;
+  // Matches after time decay. Eight stale ones can be worth less than two fresh.
+  effective: number;
 };
 
-export function strengthAt(form: TeamForm, venue: Venue, baseline: Baseline): Strength {
+export function strengthAt(
+  form: TeamForm,
+  venue: Venue,
+  baseline: Baseline,
+  asOf: string
+): Strength {
   const at = form.matches.filter((match) => match.venue === venue);
 
   // A home side scores at the home rate and concedes at the away rate. Dividing
@@ -78,19 +118,28 @@ export function strengthAt(form: TeamForm, venue: Venue, baseline: Baseline): St
   const scoringNorm = venue === "home" ? baseline.homeGoals : baseline.awayGoals;
   const concedingNorm = venue === "home" ? baseline.awayGoals : baseline.homeGoals;
 
-  const scored = at.reduce((sum, match) => sum + match.goalsFor, 0);
-  const conceded = at.reduce((sum, match) => sum + match.goalsAgainst, 0);
+  let scored = 0;
+  let conceded = 0;
+  let effective = 0;
+
+  for (const match of at) {
+    const weight = weightOf(match.kickoff, asOf);
+    scored += match.goalsFor * weight;
+    conceded += match.goalsAgainst * weight;
+    effective += weight;
+  }
 
   return {
-    attack: shrunk(scored, at.length, scoringNorm) / scoringNorm,
-    defence: shrunk(conceded, at.length, concedingNorm) / concedingNorm,
+    attack: shrunk(scored, effective, scoringNorm) / scoringNorm,
+    defence: shrunk(conceded, effective, concedingNorm) / concedingNorm,
     matches: at.length,
+    effective,
   };
 }
 
 export function expectedGoals(fixture: Fixture, baseline: Baseline) {
-  const home = strengthAt(fixture.home, "home", baseline);
-  const away = strengthAt(fixture.away, "away", baseline);
+  const home = strengthAt(fixture.home, "home", baseline, fixture.kickoff);
+  const away = strengthAt(fixture.away, "away", baseline, fixture.kickoff);
 
   return {
     home: baseline.homeGoals * home.attack * away.defence,
@@ -298,17 +347,19 @@ export type Projection = {
   homeForm: { overall: FormSummary; venue: FormSummary };
   awayForm: { overall: FormSummary; venue: FormSummary };
   confidence: Confidence;
+  // Every other market the goal data supports.
+  board: Board;
 };
 
 export function project(fixture: Fixture, baseline: Baseline): Projection {
   const { home, away, homeStrength, awayStrength } = expectedGoals(fixture, baseline);
   const matrix = scoreMatrix(home, away);
 
-  // The thinner of the two venue samples sets the confidence: both sides need
-  // matches on record before the home/away split says anything.
-  const venueMatches = Math.min(homeStrength.matches, awayStrength.matches);
+  // The thinner of the two venue samples sets the confidence, counted after
+  // decay: four matches from last spring are not four matches.
+  const venueMatches = Math.min(homeStrength.effective, awayStrength.effective);
   const confidence: Confidence =
-    venueMatches >= 4 ? "solid" : venueMatches >= 2 ? "fair" : "thin";
+    venueMatches >= 2.5 ? "solid" : venueMatches >= 1.2 ? "fair" : "thin";
 
   return {
     lambdaHome: home,
@@ -328,6 +379,7 @@ export function project(fixture: Fixture, baseline: Baseline): Projection {
       venue: summariseForm(fixture.away, "away"),
     },
     confidence,
+    board: board(matrix, home, away, fixture.home, fixture.away),
   };
 }
 

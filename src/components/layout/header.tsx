@@ -19,7 +19,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-20 border-b border-hairline bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-2xl items-center gap-3 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-[1440px] items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="group flex items-center gap-2">
           <Mark />
           <span className="text-[15px] font-bold tracking-tight">{t("site.name")}</span>
@@ -31,7 +31,7 @@ export function Header() {
         </div>
       </div>
 
-      <nav className="mx-auto flex max-w-2xl gap-1 px-4 pb-2 sm:px-6">
+      <nav className="mx-auto flex max-w-[1440px] gap-1 px-4 pb-2 sm:px-6 lg:px-8">
         {LINKS.map((link) => {
           const active =
             link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);

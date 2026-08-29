@@ -1,12 +1,12 @@
-// Reads the JSON the fetch script committed and hangs a projection off every
-// fixture. Runs at build time only, so nothing here costs an API call.
+// Reads the JSON the fetch script committed, projects every fixture, and hands
+// the pages a compact view. Runs at build time only, so nothing here costs a
+// network call.
 
-import { baselineFor, project, type Baseline, type Projection } from "@/lib/model";
+import { baselineFor, project, type Baseline } from "@/lib/model";
 import { grade, tally, type Graded } from "@/lib/scoring";
+import { toView, type MatchView } from "@/lib/view";
 import type { Fixture, WeekData } from "@/lib/types";
 import week from "@/data/week.json";
-
-export type Projected = { fixture: Fixture; projection: Projection };
 
 const data = week as WeekData;
 
@@ -24,7 +24,7 @@ function baselines(fixtures: Fixture[]): Map<number, Baseline> {
 export function loadWeek() {
   const byLeague = baselines(data.fixtures);
 
-  const projected: Projected[] = data.fixtures.map((fixture) => ({
+  const projected = data.fixtures.map((fixture) => ({
     fixture,
     projection: project(fixture, byLeague.get(fixture.leagueId)!),
   }));
@@ -34,7 +34,10 @@ export function loadWeek() {
       new Date(a.fixture.kickoff).getTime() - new Date(b.fixture.kickoff).getTime()
   );
 
-  const upcoming = byKickoff.filter(({ fixture }) => fixture.status === "scheduled");
+  const upcoming: MatchView[] = byKickoff
+    .filter(({ fixture }) => fixture.status === "scheduled")
+    .map(({ fixture, projection }) => toView(fixture, projection));
+
   const played = byKickoff.filter(({ fixture }) => fixture.status === "finished");
 
   const graded = played
@@ -43,12 +46,23 @@ export function loadWeek() {
     // Newest result first, which is what anyone checking a score wants.
     .reverse();
 
+  // The results page needs the same compact shape, keyed by fixture.
+  const results = graded.map((entry) => ({
+    view: toView(entry.fixture, entry.projection),
+    outcomeHit: entry.outcomeHit,
+    firstGoalHit: entry.firstGoalHit,
+    predicted: entry.predicted,
+    actual: entry.actual,
+  }));
+
   return {
     sample: data.sample === true,
     generatedAt: data.generatedAt,
     weekStart: data.weekStart,
     upcoming,
-    graded,
+    results,
     record: tally(graded),
   };
 }
+
+export type ResultView = ReturnType<typeof loadWeek>["results"][number];
