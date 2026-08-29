@@ -1,37 +1,50 @@
-// Pulls the coming week's fixtures and each team's last eight matches from
-// api-football, then writes src/data/week.json for the build to bake in.
+// Pulls the coming week's fixtures and each team's recent form from
+// football-data.org, then writes src/data/week.json for the build to bake in.
 //
-//   API_FOOTBALL_KEY=... node scripts/fetch-week.mjs
+//   FOOTBALL_DATA_TOKEN=... node scripts/fetch-week.mjs
 //
-// Free tier is 100 requests a day and this run costs about sixty, so responses
-// are cached under .cache/ and a re-run inside the same week is nearly free.
+// Free tier covers the current season for all six competitions but carries no
+// goal-event feed, so who scored first is read off the half-time score. That
+// settles most matches and leaves the rest unknown rather than guessed.
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 
-const KEY = process.env.API_FOOTBALL_KEY;
-if (!KEY) {
-  console.error("API_FOOTBALL_KEY is not set. Copy .env.example to .env and fill it in.");
+const TOKEN = process.env.FOOTBALL_DATA_TOKEN;
+if (!TOKEN) {
+  console.error("FOOTBALL_DATA_TOKEN is not set. Copy .env.example to .env and fill it in.");
   process.exit(1);
 }
 
-const HOST = "https://v3.football.api-sports.io";
+const HOST = "https://api.football-data.org/v4";
 const CACHE = ".cache";
 const OUT = "src/data/week.json";
 
-const LEAGUES = [39, 140, 135, 78, 61, 2];
+// The ids the rest of the app knows these competitions by, kept stable so the
+// league table and the Android app need no change if the source moves again.
+const COMPETITIONS = [
+  { code: "PL", id: 39 },
+  { code: "PD", id: 140 },
+  { code: "SA", id: 135 },
+  { code: "BL1", id: 78 },
+  { code: "FL1", id: 61 },
+  { code: "CL", id: 2 },
+];
+
+const CODE_TO_ID = new Map(COMPETITIONS.map((c) => [c.code, c.id]));
+
 const FORM_MATCHES = 8;
-// The ids endpoint takes at most twenty per call.
-const ID_BATCH = 20;
-// Free plan throttles per minute, so leave room between calls.
-const GAP_MS = 2500;
+// A season is only weeks old in August, so form reaches back into the last one.
+const FORM_WINDOW_DAYS = 160;
+// Free tier allows ten calls a minute.
+const GAP_MS = 6500;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 let calls = 0;
 
-async function api(endpoint, params) {
+async function api(endpoint, params = {}) {
   const url = new URL(`${HOST}/${endpoint}`);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
 
@@ -47,18 +60,27 @@ async function api(endpoint, params) {
   if (calls > 0) await sleep(GAP_MS);
   calls += 1;
 
-  const response = await fetch(url, { headers: { "x-apisports-key": KEY } });
-  if (!response.ok) throw new Error(`${endpoint} ${response.status} ${await response.text()}`);
+  const response = await fetch(url, { headers: { "X-Auth-Token": TOKEN } });
+
+  if (response.status === 429) {
+    // The window is a minute; waiting it out beats failing the whole run.
+    console.log("rate limited, waiting 60s");
+    await sleep(60_000);
+    return api(endpoint, params);
+  }
+
+  if (!response.ok) {
+    throw new Error(`${endpoint} ${response.status}: ${await response.text()}`);
+  }
 
   const body = await response.json();
-  if (body.errors && Object.keys(body.errors).length > 0) {
-    throw new Error(`${endpoint}: ${JSON.stringify(body.errors)}`);
-  }
 
   await mkdir(CACHE, { recursive: true });
   await writeFile(cached, JSON.stringify(body));
   return body;
 }
+
+const iso = (date) => date.toISOString().slice(0, 10);
 
 // Monday to Sunday of the week the given day falls in, in Addis terms.
 function weekWindow(now = new Date()) {
@@ -69,158 +91,155 @@ function weekWindow(now = new Date()) {
   const sunday = new Date(monday);
   sunday.setUTCDate(monday.getUTCDate() + 6);
 
-  const iso = (date) => date.toISOString().slice(0, 10);
   return { from: iso(monday), to: iso(sunday) };
 }
 
-// A European season is stamped with the year it started in.
-const seasonFor = (date) => (date.getUTCMonth() >= 6 ? date.getUTCFullYear() : date.getUTCFullYear() - 1);
-
-const shortName = (name) => {
-  const trimmed = name.replace(/\s+(FC|CF|AC|AS|SC|SV|BSC)$/i, "");
-  return trimmed.length <= 14 ? trimmed : trimmed.slice(0, 13).trimEnd() + ".";
-};
+const shortName = (team) =>
+  team.tla || team.shortName || team.name.replace(/\s+(FC|CF|AC|AS|SC|SV|BSC)$/i, "");
 
 const asTeam = (team) => ({
   id: team.id,
-  name: team.name,
-  short: shortName(team.name),
-  logo: team.logo ?? "",
+  name: team.shortName || team.name,
+  short: shortName(team),
+  logo: team.crest ?? "",
 });
 
-// The opening goal of a match, from the event feed. Own goals count for the
-// side they went in against, which is how the feed already reports them.
-function openingGoal(events = []) {
-  const goals = events
-    .filter((event) => event.type === "Goal" && event.detail !== "Missed Penalty")
-    .map((event) => ({
-      teamId: event.team?.id,
-      minute: (event.time?.elapsed ?? 0) + (event.time?.extra ?? 0),
-      player: event.player?.name ?? null,
-    }))
-    .sort((a, b) => a.minute - b.minute);
+/**
+ * Which side opened the scoring, from the two scorelines alone.
+ *
+ * A lead at half time settles it outright. Level at half time still settles it
+ * when only one side scored across the match. Anything else genuinely cannot be
+ * known without a goal feed, and is left null rather than guessed.
+ */
+function openedScoring(score) {
+  const ht = score.halfTime ?? {};
+  const ft = score.fullTime ?? {};
 
-  return goals[0] ?? null;
+  const htHome = ht.home ?? 0;
+  const htAway = ht.away ?? 0;
+  if (htHome > htAway) return "home";
+  if (htAway > htHome) return "away";
+
+  const ftHome = ft.home ?? 0;
+  const ftAway = ft.away ?? 0;
+  if (ftHome > 0 && ftAway === 0) return "home";
+  if (ftAway > 0 && ftHome === 0) return "away";
+
+  return null;
 }
 
 async function main() {
   const now = new Date();
   const { from, to } = weekWindow(now);
-  const season = seasonFor(now);
 
-  console.log(`week ${from} to ${to}, season ${season}`);
+  const formFrom = new Date(now);
+  formFrom.setUTCDate(formFrom.getUTCDate() - FORM_WINDOW_DAYS);
+
+  console.log(`week ${from} to ${to}`);
 
   // 1. This week's fixtures across the six competitions.
   const scheduled = [];
-  for (const league of LEAGUES) {
-    const body = await api("fixtures", { league, season, from, to, timezone: "UTC" });
-    scheduled.push(...body.response);
-    console.log(`league ${league}: ${body.response.length} fixtures`);
+  for (const competition of COMPETITIONS) {
+    const body = await api(`competitions/${competition.code}/matches`, {
+      dateFrom: from,
+      dateTo: to,
+    });
+
+    const matches = body.matches ?? [];
+    scheduled.push(...matches.map((match) => ({ ...match, leagueId: competition.id })));
+    console.log(`${competition.code}: ${matches.length} fixtures`);
   }
 
   if (scheduled.length === 0) {
-    console.error("No fixtures in this window. Mid-season break, or the season is wrong.");
+    console.error("No fixtures in this window. Mid-season break, or an international week.");
     process.exit(1);
   }
 
-  // 2. Last eight for every team involved.
-  const teamIds = new Set();
-  for (const fixture of scheduled) {
-    teamIds.add(fixture.teams.home.id);
-    teamIds.add(fixture.teams.away.id);
+  // 2. Recent form for every team involved.
+  const teams = new Map();
+  for (const match of scheduled) {
+    teams.set(match.homeTeam.id, match.homeTeam);
+    teams.set(match.awayTeam.id, match.awayTeam);
   }
+
+  console.log(`${teams.size} teams to fetch form for`);
 
   const formByTeam = new Map();
-  for (const teamId of teamIds) {
-    const body = await api("fixtures", { team: teamId, last: FORM_MATCHES, timezone: "UTC" });
-    formByTeam.set(teamId, body.response);
+  for (const teamId of teams.keys()) {
+    const body = await api(`teams/${teamId}/matches`, {
+      status: "FINISHED",
+      dateFrom: iso(formFrom),
+      dateTo: iso(now),
+    });
+
+    const played = (body.matches ?? [])
+      // Cups outside the six are a different standard of opposition, and the
+      // baseline is pooled per competition, so they are left out.
+      .filter((match) => CODE_TO_ID.has(match.competition?.code))
+      .sort((a, b) => new Date(b.utcDate) - new Date(a.utcDate))
+      .slice(0, FORM_MATCHES);
+
+    formByTeam.set(teamId, played);
   }
 
-  // 3. Events for the past matches, and for anything already played this week,
-  //    fetched in batches so one call covers twenty fixtures.
-  const needEvents = new Set();
-  for (const matches of formByTeam.values()) {
-    for (const match of matches) needEvents.add(match.fixture.id);
-  }
-  for (const fixture of scheduled) {
-    if (fixture.fixture.status.short === "FT") needEvents.add(fixture.fixture.id);
-  }
+  const formFor = (teamId) => ({
+    team: asTeam(teams.get(teamId)),
+    matches: (formByTeam.get(teamId) ?? []).map((match) => {
+      const atHome = match.homeTeam.id === teamId;
+      const opened = openedScoring(match.score);
 
-  const eventsByFixture = new Map();
-  const ids = [...needEvents];
-  for (let i = 0; i < ids.length; i += ID_BATCH) {
-    const batch = ids.slice(i, i + ID_BATCH);
-    const body = await api("fixtures", { ids: batch.join("-"), timezone: "UTC" });
-    for (const entry of body.response) {
-      eventsByFixture.set(entry.fixture.id, entry.events ?? []);
-    }
-    console.log(`events ${i + batch.length}/${ids.length}`);
-  }
-
-  // Form for one team, told from that team's side of each match.
-  const formFor = (teamId, team) => ({
-    team: asTeam(team),
-    matches: (formByTeam.get(teamId) ?? [])
-      .filter((match) => match.fixture.status.short === "FT")
-      .map((match) => {
-        const atHome = match.teams.home.id === teamId;
-        const opening = openingGoal(eventsByFixture.get(match.fixture.id));
-
-        return {
-          fixtureId: match.fixture.id,
-          kickoff: match.fixture.date,
-          venue: atHome ? "home" : "away",
-          opponent: shortName(atHome ? match.teams.away.name : match.teams.home.name),
-          goalsFor: (atHome ? match.goals.home : match.goals.away) ?? 0,
-          goalsAgainst: (atHome ? match.goals.away : match.goals.home) ?? 0,
-          firstGoal: opening ? (opening.teamId === teamId ? "for" : "against") : null,
-          firstGoalMinute: opening ? opening.minute : null,
-        };
-      })
-      .sort((a, b) => new Date(b.kickoff) - new Date(a.kickoff))
-      .slice(0, FORM_MATCHES),
+      return {
+        fixtureId: match.id,
+        kickoff: match.utcDate,
+        venue: atHome ? "home" : "away",
+        opponent: shortName(atHome ? match.awayTeam : match.homeTeam),
+        goalsFor: (atHome ? match.score.fullTime.home : match.score.fullTime.away) ?? 0,
+        goalsAgainst: (atHome ? match.score.fullTime.away : match.score.fullTime.home) ?? 0,
+        firstGoal: opened === null ? null : (opened === "home") === atHome ? "for" : "against",
+        // No goal feed on this tier, so the minute is never known.
+        firstGoalMinute: null,
+      };
+    }),
   });
 
   const fixtures = scheduled
-    .map((fixture) => {
-      const finished = fixture.fixture.status.short === "FT";
-      const opening = finished ? openingGoal(eventsByFixture.get(fixture.fixture.id)) : null;
+    .map((match) => {
+      const finished = match.status === "FINISHED";
+      const opened = finished ? openedScoring(match.score) : null;
 
       return {
-        id: fixture.fixture.id,
-        leagueId: fixture.league.id,
-        round: fixture.league.round,
-        kickoff: fixture.fixture.date,
+        id: match.id,
+        leagueId: match.leagueId,
+        round: match.stage === "REGULAR_SEASON" ? `Matchday ${match.matchday}` : match.stage,
+        kickoff: match.utcDate,
         status: finished ? "finished" : "scheduled",
-        home: formFor(fixture.teams.home.id, fixture.teams.home),
-        away: formFor(fixture.teams.away.id, fixture.teams.away),
+        home: formFor(match.homeTeam.id),
+        away: formFor(match.awayTeam.id),
         result: finished
           ? {
-              goalsHome: fixture.goals.home ?? 0,
-              goalsAway: fixture.goals.away ?? 0,
-              firstGoal: opening
-                ? opening.teamId === fixture.teams.home.id
-                  ? "home"
-                  : "away"
-                : null,
-              firstGoalMinute: opening ? opening.minute : null,
-              firstScorer: opening ? opening.player : null,
+              goalsHome: match.score.fullTime.home ?? 0,
+              goalsAway: match.score.fullTime.away ?? 0,
+              firstGoal: opened,
+              firstGoalMinute: null,
+              firstScorer: null,
             }
           : null,
       };
     })
     .sort((a, b) => new Date(a.kickoff) - new Date(b.kickoff));
 
-  const data = {
-    generatedAt: new Date().toISOString(),
-    weekStart: from,
-    fixtures,
-  };
+  const data = { generatedAt: new Date().toISOString(), weekStart: from, fixtures };
 
   await mkdir(path.dirname(OUT), { recursive: true });
   await writeFile(OUT, `${JSON.stringify(data, null, 2)}\n`);
 
-  console.log(`wrote ${fixtures.length} fixtures to ${OUT} in ${calls} api calls`);
+  const decided = fixtures.flatMap((f) => [...f.home.matches, ...f.away.matches]);
+  const known = decided.filter((m) => m.firstGoal !== null).length;
+
+  console.log(
+    `wrote ${fixtures.length} fixtures in ${calls} calls; ` +
+      `first goal known for ${known}/${decided.length} form matches`
+  );
 }
 
 main().catch((error) => {

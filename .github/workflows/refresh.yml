@@ -21,17 +21,17 @@ jobs:
           cache: npm
       - run: npm ci
 
-      # api-football allows 100 calls a day on the free tier and a full run costs
-      # about sixty, so yesterday's responses are reused where they still hold.
+      # football-data.org allows ten calls a minute, so a full run takes a few
+      # minutes; yesterday's responses are reused where they still hold.
       - uses: actions/cache@v4
         with:
           path: .cache
-          key: api-football-${{ github.run_id }}
-          restore-keys: api-football-
+          key: football-data-${{ github.run_id }}
+          restore-keys: football-data-
 
       - run: npm run fetch:week
         env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
 
       - name: Commit the week
         run: |

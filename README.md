@@ -15,17 +15,25 @@ npm run dev
 
 ## Real data
 
-Get a free key from [api-football](https://www.api-football.com/), then:
+Get a free token from [football-data.org](https://www.football-data.org/client/register),
+then:
 
 ```sh
 cp .env.example .env
-# fill in API_FOOTBALL_KEY
+# fill in FOOTBALL_DATA_TOKEN
 npm run fetch:week
 ```
 
-That writes `src/data/week.json`: this week's fixtures, each team's last eight
-matches split home and away, and the opening goal of every one of them. Free tier
-is 100 calls a day and a run costs about sixty, with responses cached in `.cache/`.
+That writes `src/data/week.json`: this week's fixtures and each team's last eight
+matches split home and away. Ten calls a minute on the free tier, so a run takes a
+few minutes, with responses cached in `.cache/`.
+
+The free tier carries no goal-event feed, so who scored first is read off the
+half-time score: a lead at the break settles it, and so does a level break when
+only one side scored all match. The rest is left unknown rather than guessed, and
+the named first scorer and the goal minute are not available at all.
+`scripts/fetch-week-apifootball.mjs` does carry both, and works the moment an
+api-football key is on a paid tier.
 
 ## Deploying
 
@@ -38,7 +46,7 @@ custom domain later, drop that and add a `public/CNAME`.
 
 Repo settings needed:
 
-- Secret `API_FOOTBALL_KEY`
+- Secret `FOOTBALL_DATA_TOKEN`
 - Pages source set to GitHub Actions
 
 ## The model
@@ -60,7 +68,7 @@ is roughly as accurate as the market, not better.
 ## Layout
 
 ```
-scripts/fetch-week.mjs   pulls from api-football into src/data/week.json
+scripts/fetch-week.mjs   pulls from football-data.org into src/data/week.json
 scripts/build-feed.mjs   projects it into public/feed.json for the Android app
 src/lib/model.ts         the projection
 src/lib/scoring.ts       predicted against actual
