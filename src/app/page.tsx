@@ -1,14 +1,8 @@
 import { FixturesView } from "@/components/fixtures/fixtures-view";
-import { PageHeading } from "@/components/layout/page-heading";
 import { loadWeek } from "@/lib/week-data";
 
 export default function FixturesPage() {
-  const { upcoming } = loadWeek();
+  const { upcoming, graded, sample } = loadWeek();
 
-  return (
-    <>
-      <PageHeading titleKey="week.heading" leadKey="site.tagline" />
-      <FixturesView upcoming={upcoming} />
-    </>
-  );
+  return <FixturesView upcoming={upcoming} playedCount={graded.length} sample={sample} />;
 }

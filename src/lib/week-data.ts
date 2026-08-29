@@ -44,6 +44,7 @@ export function loadWeek() {
     .reverse();
 
   return {
+    sample: data.sample === true,
     generatedAt: data.generatedAt,
     weekStart: data.weekStart,
     upcoming,

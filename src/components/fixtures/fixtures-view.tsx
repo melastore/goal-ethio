@@ -1,24 +1,40 @@
 "use client";
 
 import { MatchCard } from "@/components/fixtures/match-card";
+import { SampleNotice } from "@/components/layout/sample-notice";
+import { WeekHero } from "@/components/fixtures/week-hero";
 import { useLanguage } from "@/components/providers/language-provider";
 import { groupByEthiopianDay } from "@/lib/ethiopian-date";
 import { lean } from "@/lib/model";
 import type { Projected } from "@/lib/week-data";
 
-// The five the model is most sure about, by how far the top outcome clears the
-// next one. A 55/25/20 is a clearer read than a 40/35/25 with a higher top.
+// A 55/25/20 is a clearer read than a 40/35/25 with a higher top, so the picks
+// are ranked by how far the leading outcome clears the next one, not by its size.
 const PICKS = 5;
 
-export function FixturesView({ upcoming }: { upcoming: Projected[] }) {
+type Props = {
+  upcoming: Projected[];
+  playedCount: number;
+  sample: boolean;
+};
+
+export function FixturesView({ upcoming, playedCount, sample }: Props) {
   const { t, language } = useLanguage();
   const amharic = language === "am";
 
   if (upcoming.length === 0) {
     return (
-      <p className={`rounded-lg border bg-card p-6 text-center text-sm text-muted-foreground ${amharic ? "amharic" : ""}`}>
-        {t("week.empty")}
-      </p>
+      <>
+        {sample && <SampleNotice />}
+        <WeekHero upcoming={upcoming} playedCount={playedCount} />
+        <p
+          className={`rounded-[16px] border border-hairline bg-card px-6 py-10 text-center text-sm text-muted-foreground ${
+            amharic ? "amharic" : ""
+          }`}
+        >
+          {t("week.empty")}
+        </p>
+      </>
     );
   }
 
@@ -27,47 +43,46 @@ export function FixturesView({ upcoming }: { upcoming: Projected[] }) {
     .slice(0, PICKS);
 
   const pickIds = new Set(picks.map((entry) => entry.fixture.id));
-  const rest = upcoming.filter((entry) => !pickIds.has(entry.fixture.id));
-  const days = groupByEthiopianDay(rest, (entry) => entry.fixture.kickoff);
+  const days = groupByEthiopianDay(
+    upcoming.filter((entry) => !pickIds.has(entry.fixture.id)),
+    (entry) => entry.fixture.kickoff
+  );
 
   return (
-    <div className="space-y-8">
+    <>
+      {sample && <SampleNotice />}
+      <WeekHero upcoming={upcoming} playedCount={playedCount} />
+
       <section>
-        <h2 className={`text-lg font-semibold ${amharic ? "amharic" : ""}`}>
-          {t("week.picks")}
-        </h2>
-        <p className={`mt-0.5 text-sm text-muted-foreground ${amharic ? "amharic" : ""}`}>
-          {t("week.picksNote")}
-        </p>
-        <div className="mt-3 space-y-3">
-          {picks.map((entry) => (
+        <SectionHeading title={t("week.picks")} note={t("week.picksNote")} amharic={amharic} />
+        <div className="mt-3.5 space-y-3">
+          {picks.map((entry, index) => (
             <MatchCard
               key={entry.fixture.id}
               fixture={entry.fixture}
               projection={entry.projection}
+              rank={index + 1}
             />
           ))}
         </div>
       </section>
 
       {days.length > 0 && (
-        <section>
-          <h2 className={`text-lg font-semibold ${amharic ? "amharic" : ""}`}>
-            {t("week.all")}
-          </h2>
-          <div className="mt-3 space-y-6">
+        <section className="mt-10">
+          <SectionHeading title={t("week.all")} amharic={amharic} />
+
+          <div className="mt-3.5 space-y-7">
             {days.map((day) => (
               <div key={day.kickoff.date.toISOString()}>
-                <h3 className="mb-2 flex items-baseline gap-2 text-sm font-medium">
-                  <span className={amharic ? "amharic" : undefined}>
+                <div className="sticky top-[104px] z-10 -mx-1 mb-2.5 flex items-baseline gap-2 bg-background/90 px-1 py-1 backdrop-blur-sm">
+                  <span className={`text-sm font-semibold ${amharic ? "amharic" : ""}`}>
                     {amharic ? day.kickoff.weekday.amharic : day.kickoff.weekday.label}
                   </span>
-                  <span className={`text-xs font-normal text-muted-foreground ${amharic ? "amharic" : ""}`}>
-                    {amharic
-                      ? day.kickoff.ethiopianDateAmharic
-                      : `${day.kickoff.ethiopianDate} · ${day.kickoff.gregorianDate}`}
+                  <span className={`text-xs text-subtle ${amharic ? "amharic" : ""}`}>
+                    {amharic ? day.kickoff.ethiopianDateAmharic : day.kickoff.ethiopianDate}
                   </span>
-                </h3>
+                </div>
+
                 <div className="space-y-3">
                   {day.items.map((entry) => (
                     <MatchCard
@@ -81,6 +96,27 @@ export function FixturesView({ upcoming }: { upcoming: Projected[] }) {
             ))}
           </div>
         </section>
+      )}
+    </>
+  );
+}
+
+function SectionHeading({
+  title,
+  note,
+  amharic,
+}: {
+  title: string;
+  note?: string;
+  amharic: boolean;
+}) {
+  return (
+    <div>
+      <h2 className={`text-lg font-bold tracking-tight ${amharic ? "amharic" : ""}`}>{title}</h2>
+      {note && (
+        <p className={`mt-0.5 text-sm text-muted-foreground ${amharic ? "amharic" : ""}`}>
+          {note}
+        </p>
       )}
     </div>
   );

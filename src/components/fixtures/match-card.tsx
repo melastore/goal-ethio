@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 import { FormStrip } from "@/components/fixtures/form-strip";
-import { KickoffTime } from "@/components/fixtures/kickoff-time";
 import { OutcomeBar } from "@/components/fixtures/outcome-bar";
 import { useLanguage } from "@/components/providers/language-provider";
 import { goals, minute, odds, percent, rate } from "@/lib/format";
@@ -13,69 +12,72 @@ import { leagueById } from "@/lib/leagues";
 import { lean, type Projection } from "@/lib/model";
 import type { Fixture } from "@/lib/types";
 
-const CONFIDENCE_KEY = {
-  thin: "confidence.thin",
-  fair: "confidence.fair",
-  solid: "confidence.solid",
-} as const;
-
-const CONFIDENCE_TONE = {
-  thin: "bg-muted text-muted-foreground",
-  fair: "bg-[var(--draw)]/20 text-foreground",
-  solid: "bg-[var(--home)]/15 text-foreground",
+const CONFIDENCE = {
+  solid: { key: "confidence.solid", tone: "text-home" },
+  fair: { key: "confidence.fair", tone: "text-draw" },
+  thin: { key: "confidence.thin", tone: "text-subtle" },
 } as const;
 
 type Props = {
   fixture: Fixture;
   projection: Projection;
+  /** Position in the week's picks, shown as a rank on the featured cards. */
+  rank?: number;
 };
 
-export function MatchCard({ fixture, projection }: Props) {
+export function MatchCard({ fixture, projection, rank }: Props) {
   const { t, language } = useLanguage();
   const [open, setOpen] = useState(false);
 
+  const amharic = language === "am";
   const kickoff = readKickoff(fixture.kickoff);
   const league = leagueById(fixture.leagueId);
   const picked = lean(projection.outcome);
   const first = projection.firstGoal;
+  const confidence = CONFIDENCE[projection.confidence];
 
   const home = fixture.home.team;
   const away = fixture.away.team;
 
   const leanLabel =
-    picked.pick === "draw"
-      ? t("card.draw")
-      : picked.pick === "home"
-        ? home.short
-        : away.short;
+    picked.pick === "draw" ? t("card.draw") : picked.pick === "home" ? home.short : away.short;
 
   return (
-    <article className="overflow-hidden rounded-lg border bg-card">
-      <div className="flex items-start justify-between gap-3 border-b px-4 py-2.5">
-        <div className="min-w-0">
-          <div className="truncate text-xs font-medium text-muted-foreground">
-            {language === "am" ? league?.amharic : league?.name}
-          </div>
-          <div className="truncate text-[11px] text-muted-foreground/70">
-            {language === "am" ? kickoff.ethiopianDateAmharic : kickoff.ethiopianDate}
-          </div>
-        </div>
+    <article className="overflow-hidden rounded-[16px] border border-hairline bg-card shadow-[var(--shadow-card)] transition hover:shadow-[var(--shadow-lift)]">
+      <div className="flex items-center gap-2 px-4 pt-3">
+        {rank !== undefined && (
+          <span className="grid size-5 shrink-0 place-items-center rounded-md bg-primary font-mono text-[11px] font-bold text-primary-foreground">
+            {rank}
+          </span>
+        )}
         <span
-          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${CONFIDENCE_TONE[projection.confidence]}`}
+          className={`min-w-0 flex-1 truncate text-[11px] font-medium uppercase tracking-wide text-muted-foreground ${
+            amharic ? "amharic normal-case tracking-normal" : ""
+          }`}
         >
-          {t(CONFIDENCE_KEY[projection.confidence])}
+          {amharic ? league?.amharic : league?.name}
+        </span>
+        <span className={`shrink-0 text-[11px] font-medium ${confidence.tone} ${amharic ? "amharic" : ""}`}>
+          {t(confidence.key)}
         </span>
       </div>
 
-      <div className="flex items-center gap-3 px-4 py-3">
-        <div className="min-w-0 flex-1 space-y-1.5">
-          <TeamRow name={home.name} logo={home.logo} />
-          <TeamRow name={away.name} logo={away.logo} />
+      <div className="flex items-center gap-4 px-4 py-3.5">
+        <div className="min-w-0 flex-1 space-y-2.5">
+          <TeamRow team={home} chance={projection.outcome.home} />
+          <TeamRow team={away} chance={projection.outcome.away} />
         </div>
-        <KickoffTime kickoff={kickoff} />
+
+        <div className="shrink-0 border-l border-hairline pl-4 text-right leading-none">
+          <div className="font-mono text-[22px] font-bold tnum">{kickoff.ethiopianClock}</div>
+          <div className="amharic mt-1 text-[11px] text-muted-foreground">
+            {kickoff.periodAmharic}
+          </div>
+          <div className="mt-2 font-mono text-[11px] tnum text-subtle">{kickoff.eatTime}</div>
+        </div>
       </div>
 
-      <div className="px-4 pb-3">
+      <div className="px-4 pb-3.5">
         <OutcomeBar
           outcome={projection.outcome}
           homeLabel={home.short}
@@ -84,73 +86,75 @@ export function MatchCard({ fixture, projection }: Props) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-px border-t bg-border text-xs">
-        <Cell label={t("card.lean")}>
-          <span className="font-semibold">{leanLabel}</span>
-          <span className="ml-1.5 font-mono text-muted-foreground">
-            {odds(picked.probability)}
-          </span>
-        </Cell>
-        <Cell label={t("card.firstGoal")}>
-          <span className="font-semibold">
-            {first.home >= first.away ? home.short : away.short}
-          </span>
-          <span className="ml-1.5 font-mono text-muted-foreground">
-            {percent(Math.max(first.home, first.away))}
-          </span>
-        </Cell>
+      <div className="grid grid-cols-2 divide-x divide-hairline border-t border-hairline">
+        <Headline label={t("card.lean")} value={leanLabel} detail={odds(picked.probability)} amharic={amharic} />
+        <Headline
+          label={t("card.firstGoal")}
+          value={first.home >= first.away ? home.short : away.short}
+          detail={percent(Math.max(first.home, first.away))}
+          amharic={amharic}
+        />
       </div>
 
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="flex w-full items-center justify-center gap-1 border-t py-2 text-xs text-muted-foreground transition hover:text-foreground"
+        className={`flex w-full items-center justify-center gap-1.5 border-t border-hairline py-2.5 text-xs text-muted-foreground transition hover:bg-muted/50 hover:text-foreground ${
+          amharic ? "amharic" : ""
+        }`}
       >
         {t("card.form")}
         <ChevronDown
-          className={`size-3.5 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`size-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
 
       {open && (
-        <div className="space-y-3 border-t px-4 py-3">
-          <div className="space-y-1.5">
+        <div className="space-y-4 border-t border-hairline bg-elevated px-4 py-4">
+          <div className="space-y-2">
             <FormStrip label={home.short} summary={projection.homeForm.overall} />
-            <FormStrip label={t("card.homeForm")} summary={projection.homeForm.venue} />
+            <FormStrip label={t("card.homeForm")} summary={projection.homeForm.venue} emphasis />
+            <div className="h-1" />
             <FormStrip label={away.short} summary={projection.awayForm.overall} />
-            <FormStrip label={t("card.awayForm")} summary={projection.awayForm.venue} />
+            <FormStrip label={t("card.awayForm")} summary={projection.awayForm.venue} emphasis />
           </div>
 
-          <dl className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-t pt-3 text-xs">
-            <Stat label={t("card.expected")}>
+          <dl className="grid grid-cols-2 gap-x-5 gap-y-2 border-t border-hairline pt-3.5 text-xs">
+            <Stat label={t("card.expected")} amharic={amharic}>
               {goals(projection.lambdaHome)} - {goals(projection.lambdaAway)}
             </Stat>
-            <Stat label={t("card.openingGoal")}>{minute(first.expectedMinute)}</Stat>
-            <Stat label={t("card.btts")}>{percent(projection.markets.btts)}</Stat>
-            <Stat label={t("card.over")}>{percent(projection.markets.overTwoFive)}</Stat>
-            <Stat label={`${home.short} ${t("card.scoredFirstRate")}`}>
+            <Stat label={t("card.openingGoal")} amharic={amharic}>
+              {minute(first.expectedMinute)}
+            </Stat>
+            <Stat label={t("card.btts")} amharic={amharic}>
+              {percent(projection.markets.btts)}
+            </Stat>
+            <Stat label={t("card.over")} amharic={amharic}>
+              {percent(projection.markets.overTwoFive)}
+            </Stat>
+            <Stat label={`${home.short} · ${t("card.scoredFirstRate")}`} amharic={amharic}>
               {rate(projection.homeForm.venue.scoredFirst, projection.homeForm.venue.decided)}
             </Stat>
-            <Stat label={`${away.short} ${t("card.scoredFirstRate")}`}>
+            <Stat label={`${away.short} · ${t("card.scoredFirstRate")}`} amharic={amharic}>
               {rate(projection.awayForm.venue.scoredFirst, projection.awayForm.venue.decided)}
             </Stat>
           </dl>
 
-          <div className="border-t pt-3">
-            <div className="mb-1.5 text-xs text-muted-foreground">
+          <div className="border-t border-hairline pt-3.5">
+            <div className={`mb-2 text-xs text-muted-foreground ${amharic ? "amharic" : ""}`}>
               {t("card.scorelines")}
             </div>
             <div className="flex gap-2">
               {projection.scorelines.map((line) => (
                 <div
                   key={`${line.home}-${line.away}`}
-                  className="flex-1 rounded-md bg-muted px-2 py-1.5 text-center"
+                  className="flex-1 rounded-[10px] bg-muted py-2 text-center"
                 >
-                  <div className="font-mono text-sm font-semibold">
+                  <div className="font-mono text-sm font-bold tnum">
                     {line.home}-{line.away}
                   </div>
-                  <div className="font-mono text-[10px] text-muted-foreground">
+                  <div className="mt-0.5 font-mono text-[10px] tnum text-muted-foreground">
                     {percent(line.probability)}
                   </div>
                 </div>
@@ -163,33 +167,69 @@ export function MatchCard({ fixture, projection }: Props) {
   );
 }
 
-function TeamRow({ name, logo }: { name: string; logo: string }) {
+function TeamRow({
+  team,
+  chance,
+}: {
+  team: { name: string; logo: string };
+  chance: number;
+}) {
   return (
-    <div className="flex items-center gap-2">
-      {/* Remote crests, and the export is unoptimised, so a plain img is right. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={logo} alt="" width={20} height={20} className="size-5 object-contain" />
-      <span className="truncate text-sm font-medium">{name}</span>
+    <div className="flex items-center gap-2.5">
+      <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-muted">
+        {/* Remote crests, and the export is unoptimised, so a plain img is right. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={team.logo} alt="" width={20} height={20} className="size-5 object-contain" />
+      </span>
+      <span className="min-w-0 flex-1 truncate text-[15px] font-semibold">{team.name}</span>
+      <span className="shrink-0 font-mono text-sm tnum text-muted-foreground">
+        {percent(chance)}
+      </span>
     </div>
   );
 }
 
-function Cell({ label, children }: { label: string; children: React.ReactNode }) {
+function Headline({
+  label,
+  value,
+  detail,
+  amharic,
+}: {
+  label: string;
+  value: string;
+  detail: string;
+  amharic: boolean;
+}) {
   return (
-    <div className="bg-card px-4 py-2">
-      <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
+    <div className="px-4 py-2.5">
+      <div
+        className={`text-[10px] font-medium uppercase tracking-wider text-subtle ${
+          amharic ? "amharic normal-case tracking-normal" : ""
+        }`}
+      >
         {label}
       </div>
-      <div className="mt-0.5">{children}</div>
+      <div className="mt-1 flex items-baseline gap-2">
+        <span className="truncate text-sm font-semibold">{value}</span>
+        <span className="shrink-0 font-mono text-xs tnum text-muted-foreground">{detail}</span>
+      </div>
     </div>
   );
 }
 
-function Stat({ label, children }: { label: string; children: React.ReactNode }) {
+function Stat({
+  label,
+  amharic,
+  children,
+}: {
+  label: string;
+  amharic: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex items-baseline justify-between gap-2">
-      <dt className="truncate text-muted-foreground">{label}</dt>
-      <dd className="shrink-0 font-mono font-medium tabular-nums">{children}</dd>
+      <dt className={`truncate text-muted-foreground ${amharic ? "amharic" : ""}`}>{label}</dt>
+      <dd className="shrink-0 font-mono font-semibold tnum">{children}</dd>
     </div>
   );
 }

@@ -28,6 +28,7 @@ const graded = entries
 // The app only needs the numbers, not the eight raw matches behind them, so the
 // form arrays are dropped and the summaries the projection already holds stay.
 const feed = {
+  sample: week.sample === true,
   generatedAt: week.generatedAt,
   weekStart: week.weekStart,
   record: tally(graded),

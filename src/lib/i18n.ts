@@ -65,6 +65,9 @@ export const translations = {
     "how.disclaimer":
       "Projections only. No bets are taken here and none are placed for you. A model built on eight matches is roughly as accurate as the market, not better than it.",
     "footer.note": "Data from api-football. Times shown on the Ethiopian clock.",
+    "sample.title": "Sample data",
+    "sample.body":
+      "These fixtures, teams and scores are placeholders, not real matches. Set an api-football key and run the fetch script to replace them.",
   },
   am: {
     "site.name": "GoalEthio",
@@ -125,6 +128,9 @@ export const translations = {
     "how.disclaimer":
       "ግምት ብቻ ነው። እዚህ ውርርድ አይቀበልም፣ ለእርስዎም አይደረግም። በስምንት ጨዋታ የተሰራ ሞዴል ከገበያው የተሻለ አይደለም።",
     "footer.note": "መረጃው ከapi-football። ሰዓቱ በኢትዮጵያ አቆጣጠር።",
+    "sample.title": "የናሙና መረጃ",
+    "sample.body":
+      "እነዚህ ጨዋታዎች፣ ቡድኖችና ውጤቶች ናሙና እንጂ ትክክለኛ አይደሉም። እውነተኛ መረጃ ለማግኘት የapi-football ቁልፍ አስገብተው መረጃውን ይሳቡ።",
   },
 } as const;
 

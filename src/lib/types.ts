@@ -49,6 +49,9 @@ export type Fixture = {
 };
 
 export type WeekData = {
+  // True while the shipped placeholder is in place. The fetch script never sets
+  // it, so real data clears it and the warning banner goes away on its own.
+  sample?: boolean;
   generatedAt: string;
   // Monday of the covered week, in Addis terms.
   weekStart: string;

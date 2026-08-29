@@ -6,92 +6,105 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  --color-elevated: var(--elevated);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-subtle: var(--subtle);
   --color-border: var(--border);
+  --color-hairline: var(--hairline);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-accent: var(--accent);
   --color-home: var(--home);
   --color-draw: var(--draw);
   --color-away: var(--away);
-  --font-sans: var(--font-sans-stack);
-  --font-mono: var(--font-mono-stack);
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 4px);
-  --radius-sm: calc(var(--radius) - 8px);
+
+  --font-sans: var(--font-inter), "Segoe UI", sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, monospace;
+  --font-ethiopic: var(--font-ethiopic), var(--font-inter), sans-serif;
+
+  --radius-card: 16px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.04), 0 4px 16px oklch(0% 0 0 / 0.04);
+  --shadow-lift: 0 2px 4px oklch(0% 0 0 / 0.05), 0 12px 32px oklch(0% 0 0 / 0.08);
 }
 
+/*
+  Light is the default and dark is opted into by a class on <html>, set before
+  paint by the bootstrap script so the page never flashes the wrong one.
+*/
 :root {
-  --font-sans-stack: "Inter", "Segoe UI", "Noto Sans Ethiopic", "Helvetica Neue", sans-serif;
-  --font-mono-stack: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-  --radius: 0.85rem;
+  color-scheme: light;
 
-  --background: oklch(97.8% 0.008 145);
-  --foreground: oklch(22% 0.02 160);
+  --background: oklch(97.5% 0.006 150);
+  --foreground: oklch(20% 0.02 165);
   --card: oklch(100% 0 0);
-  --card-foreground: oklch(22% 0.02 160);
-  --muted: oklch(95.4% 0.009 150);
-  --muted-foreground: oklch(48% 0.018 160);
-  --border: oklch(89% 0.012 150);
-  --primary: oklch(52% 0.14 152);
-  --primary-foreground: oklch(98% 0.01 145);
-  --accent: oklch(72% 0.16 78);
+  --elevated: oklch(99.2% 0.003 150);
+  --muted: oklch(95.2% 0.008 155);
+  --muted-foreground: oklch(50% 0.016 160);
+  --subtle: oklch(64% 0.012 160);
+  --border: oklch(90.5% 0.009 155);
+  --hairline: oklch(93.5% 0.007 155);
+  --primary: oklch(48% 0.12 158);
+  --primary-foreground: oklch(98.5% 0.008 150);
 
-  /* One colour per outcome, reused by every bar and badge on the site. */
-  --home: oklch(55% 0.14 152);
-  --draw: oklch(66% 0.09 85);
-  --away: oklch(55% 0.13 255);
+  --home: oklch(52% 0.132 158);
+  --draw: oklch(63% 0.105 78);
+  --away: oklch(52% 0.13 258);
 }
 
 .dark {
-  --background: oklch(18% 0.015 160);
-  --foreground: oklch(95% 0.008 145);
-  --card: oklch(22% 0.018 160);
-  --card-foreground: oklch(95% 0.008 145);
-  --muted: oklch(26% 0.018 160);
-  --muted-foreground: oklch(70% 0.015 150);
-  --border: oklch(31% 0.018 160);
-  --primary: oklch(70% 0.15 152);
-  --primary-foreground: oklch(18% 0.015 160);
-  --accent: oklch(78% 0.15 78);
+  color-scheme: dark;
 
-  --home: oklch(70% 0.15 152);
-  --draw: oklch(78% 0.11 85);
-  --away: oklch(68% 0.13 255);
+  --background: oklch(16.5% 0.014 168);
+  --foreground: oklch(95% 0.008 150);
+  --card: oklch(21% 0.017 168);
+  --elevated: oklch(24% 0.018 168);
+  --muted: oklch(26.5% 0.018 168);
+  --muted-foreground: oklch(71% 0.014 155);
+  --subtle: oklch(58% 0.015 158);
+  --border: oklch(30% 0.018 168);
+  --hairline: oklch(26% 0.016 168);
+  --primary: oklch(76% 0.15 158);
+  --primary-foreground: oklch(17% 0.02 168);
+
+  --home: oklch(74% 0.148 158);
+  --draw: oklch(80% 0.115 82);
+  --away: oklch(70% 0.13 255);
+
+  --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.3), 0 4px 16px oklch(0% 0 0 / 0.2);
+  --shadow-lift: 0 2px 4px oklch(0% 0 0 / 0.35), 0 12px 32px oklch(0% 0 0 / 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --background: oklch(18% 0.015 160);
-    --foreground: oklch(95% 0.008 145);
-    --card: oklch(22% 0.018 160);
-    --card-foreground: oklch(95% 0.008 145);
-    --muted: oklch(26% 0.018 160);
-    --muted-foreground: oklch(70% 0.015 150);
-    --border: oklch(31% 0.018 160);
-    --primary: oklch(70% 0.15 152);
-    --primary-foreground: oklch(18% 0.015 160);
-    --accent: oklch(78% 0.15 78);
-    --home: oklch(70% 0.15 152);
-    --draw: oklch(78% 0.11 85);
-    --away: oklch(68% 0.13 255);
-  }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 * {
   border-color: var(--border);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans-stack);
-  -webkit-font-smoothing: antialiased;
+/* Amharic needs a face that carries fidel; the Latin stack renders boxes. */
+.amharic {
+  font-family: var(--font-ethiopic);
+  line-height: 1.6;
 }
 
-/* Amharic needs a face that carries it; the Latin stack falls back to boxes. */
-.amharic {
-  font-family: "Noto Sans Ethiopic", "Abyssinica SIL", var(--font-sans-stack);
+/* Numbers that sit in a column have to line up. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

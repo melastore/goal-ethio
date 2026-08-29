@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { ResultsView } from "@/components/fixtures/results-view";
-import { PageHeading } from "@/components/layout/page-heading";
 import { loadWeek } from "@/lib/week-data";
 
 export const metadata: Metadata = {
@@ -10,12 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function ResultsPage() {
-  const { graded, record } = loadWeek();
+  const { graded, record, sample } = loadWeek();
 
-  return (
-    <>
-      <PageHeading titleKey="results.heading" />
-      <ResultsView graded={graded} record={record} />
-    </>
-  );
+  return <ResultsView graded={graded} record={record} sample={sample} />;
 }
