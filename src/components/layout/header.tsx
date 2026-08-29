@@ -10,7 +10,6 @@ import { useLanguage } from "@/components/providers/language-provider";
 const LINKS = [
   { href: "/", key: "nav.fixtures" as const },
   { href: "/results/", key: "nav.results" as const },
-  { href: "/how/", key: "nav.how" as const },
 ];
 
 export function Header() {
