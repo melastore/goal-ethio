@@ -14,7 +14,7 @@
     "build": "npm run feed && next build",
     "lint": "eslint",
     "test": "node --import ./scripts/test-alias.mjs --test \"src/**/*.test.ts\"",
-    "fetch:week": "node scripts/fetch-week.mjs",
+    "fetch:week": "node --env-file-if-exists=.env scripts/fetch-week.mjs",
     "feed": "node --import ./scripts/test-alias.mjs scripts/build-feed.mjs"
   },
   "dependencies": {

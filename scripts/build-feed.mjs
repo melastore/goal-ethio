@@ -2,7 +2,7 @@
 // Android app renders the same numbers as the site without a second copy of
 // the model. Run before `next build`.
 
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 import { baselineFor, project } from "../src/lib/model.ts";
 import { grade, tally } from "../src/lib/scoring.ts";
@@ -45,5 +45,7 @@ const feed = {
   })),
 };
 
+// public/ holds nothing else tracked, so git does not carry the directory.
+await mkdir("public", { recursive: true });
 await writeFile("public/feed.json", `${JSON.stringify(feed)}\n`);
 console.log(`feed: ${feed.fixtures.length} fixtures`);
