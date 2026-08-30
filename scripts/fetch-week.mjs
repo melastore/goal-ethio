@@ -40,12 +40,17 @@ const COMPETITIONS = [
 
 const CODE_TO_ID = new Map(COMPETITIONS.map((c) => [c.code, c.id]));
 
-const FORM_MATCHES = 8;
+// Five at home and five away, so each venue block on the card is full and the
+// model reads a team's home form separately from its travelling form.
+const FORM_PER_VENUE = 5;
+// Meetings between the same two sides, newest first.
+const H2H_MATCHES = 6;
 // How far ahead to list. A month is as far as most of these competitions have
 // confirmed kickoff times for.
 const AHEAD_DAYS = 30;
-// A season is only weeks old in August, so form reaches back into the last one.
-const FORM_WINDOW_DAYS = 160;
+// A season is only weeks old in August, so form and head-to-head both reach
+// back into finished ones. Three covers two full prior meetings for most pairs.
+const SEASONS_BACK = 2;
 // Free tier allows ten calls a minute. Ten seconds sits clear of the edge, and
 // the whole run is two calls per competition, so the slack costs little.
 const GAP_MS = 10_000;
@@ -63,7 +68,11 @@ let calls = 0;
 // read as throttling rather than a bad credential.
 let tokenChecked = false;
 
-async function api(endpoint, params = {}, attempt = 0) {
+/**
+ * @param immutable A finished season never changes, so its response is kept
+ *   past the TTL and a two-hourly run pays for it once.
+ */
+async function api(endpoint, params = {}, { immutable = false, optional = false } = {}, attempt = 0) {
   const url = new URL(`${HOST}/${endpoint}`);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
 
@@ -72,7 +81,9 @@ async function api(endpoint, params = {}, attempt = 0) {
 
   try {
     const { mtimeMs } = await stat(cached);
-    if (Date.now() - mtimeMs < CACHE_TTL_MS) return JSON.parse(await readFile(cached, "utf8"));
+    if (immutable || Date.now() - mtimeMs < CACHE_TTL_MS) {
+      return JSON.parse(await readFile(cached, "utf8"));
+    }
   } catch {
     // Not cached yet.
   }
@@ -92,7 +103,14 @@ async function api(endpoint, params = {}, attempt = 0) {
       // The window is a minute; waiting it out beats failing the whole run.
       console.log(`throttled on ${endpoint}, waiting 60s`);
       await sleep(60_000);
-      return api(endpoint, params, attempt + 1);
+      return api(endpoint, params, { immutable, optional }, attempt + 1);
+    }
+
+    // A competition that did not run in some season is a 403 or 404, and is
+    // only one slice of history missing.
+    if (optional) {
+      console.log(`skipped ${endpoint} ${JSON.stringify(params)}: ${response.status}`);
+      return null;
     }
 
     throw new Error(`${endpoint} ${response.status}: ${text}`);
@@ -161,14 +179,52 @@ function openedScoring(score) {
   return null;
 }
 
+/**
+ * The season a date falls in, as football-data labels it.
+ *
+ * European seasons are named for the year they start, so anything from July on
+ * belongs to the current year. Calendar-year competitions are named for the
+ * year outright, which the same rule gets right for most of their run.
+ */
+const seasonOf = (date) => (date.getUTCMonth() >= 6 ? date.getUTCFullYear() : date.getUTCFullYear() - 1);
+
+/** The fixtures from the last run, by id, so results already known are not lost. */
+async function readPrevious() {
+  try {
+    const previous = JSON.parse(await readFile(OUT, "utf8"));
+    return new Map((previous.fixtures ?? []).map((fixture) => [fixture.id, fixture]));
+  } catch {
+    // First run, or the file is unreadable. Nothing to carry.
+    return new Map();
+  }
+}
+
+/** A meeting between the same two sides, told neutrally. */
+const asMeeting = (match) => ({
+  fixtureId: match.id,
+  kickoff: match.utcDate,
+  competition: match.competition?.code ?? null,
+  homeId: match.homeTeam.id,
+  home: shortName(match.homeTeam),
+  away: shortName(match.awayTeam),
+  goalsHome: match.score.fullTime.home ?? 0,
+  goalsAway: match.score.fullTime.away ?? 0,
+  halfHome: match.score.halfTime?.home ?? null,
+  halfAway: match.score.halfTime?.away ?? null,
+});
+
+/** Key for a pair of teams, order-independent. */
+const pairKey = (a, b) => (a < b ? `${a}-${b}` : `${b}-${a}`);
+
 async function main() {
   const now = new Date();
   const { from, to } = listingWindow(now);
 
-  const formFrom = new Date(now);
-  formFrom.setUTCDate(formFrom.getUTCDate() - FORM_WINDOW_DAYS);
+  const season = seasonOf(now);
+  const seasons = [];
+  for (let back = 0; back <= SEASONS_BACK; back += 1) seasons.push(season - back);
 
-  console.log(`listing ${from} to ${to}`);
+  console.log(`listing ${from} to ${to}, history for seasons ${seasons.join(", ")}`);
 
   const scheduled = [];
   // Every finished match across the tracked competitions, which is what form is
@@ -188,17 +244,22 @@ async function main() {
     }));
     scheduled.push(...matches);
 
-    const past = await api(`competitions/${competition.code}/matches`, {
-      dateFrom: iso(formFrom),
-      dateTo: iso(now),
-      status: "FINISHED",
-    });
+    let played = 0;
+    for (const year of seasons) {
+      // Only the running season can still gain results; the rest are settled
+      // and come back from cache for the life of the runner's cache.
+      const past = await api(
+        `competitions/${competition.code}/matches`,
+        { season: year, status: "FINISHED" },
+        { immutable: year !== season, optional: true }
+      );
 
-    history.push(...(past.matches ?? []));
+      const rows = past?.matches ?? [];
+      history.push(...rows);
+      played += rows.length;
+    }
 
-    console.log(
-      `${competition.code}: ${matches.length} listed, ${(past.matches ?? []).length} played`
-    );
+    console.log(`${competition.code}: ${matches.length} listed, ${played} played`);
   }
 
   if (scheduled.length === 0) {
@@ -212,8 +273,10 @@ async function main() {
     teams.set(match.awayTeam.id, match.awayTeam);
   }
 
-  // Each finished match lands in both teams' form, told from their own side.
+  // Each finished match lands in both teams' form, told from their own side, and
+  // in the head-to-head record for the pair that played it.
   const formByTeam = new Map();
+  const h2hByPair = new Map();
   const seen = new Set();
 
   for (const match of history) {
@@ -221,6 +284,8 @@ async function main() {
     // Anything outside the tracked competitions is a different standard of
     // opposition, and the baselines are pooled per competition.
     if (!CODE_TO_ID.has(match.competition?.code)) continue;
+    // A season fetched before it finished can carry a match with no score.
+    if (match.score?.fullTime?.home == null) continue;
     seen.add(match.id);
 
     for (const teamId of [match.homeTeam.id, match.awayTeam.id]) {
@@ -228,35 +293,61 @@ async function main() {
       if (!formByTeam.has(teamId)) formByTeam.set(teamId, []);
       formByTeam.get(teamId).push(match);
     }
+
+    const key = pairKey(match.homeTeam.id, match.awayTeam.id);
+    if (!h2hByPair.has(key)) h2hByPair.set(key, []);
+    h2hByPair.get(key).push(match);
   }
 
-  for (const matches of formByTeam.values()) {
-    matches.sort((a, b) => new Date(b.utcDate) - new Date(a.utcDate));
-  }
+  const newestFirst = (a, b) => new Date(b.utcDate) - new Date(a.utcDate);
+  for (const matches of formByTeam.values()) matches.sort(newestFirst);
+  for (const matches of h2hByPair.values()) matches.sort(newestFirst);
 
-  const formFor = (teamId) => ({
-    team: asTeam(teams.get(teamId)),
-    matches: (formByTeam.get(teamId) ?? []).slice(0, FORM_MATCHES).map((match) => {
-      const atHome = match.homeTeam.id === teamId;
-      const opened = openedScoring(match.score);
+  const asPastMatch = (match, teamId) => {
+    const atHome = match.homeTeam.id === teamId;
+    const opponent = atHome ? match.awayTeam : match.homeTeam;
+    const opened = openedScoring(match.score);
 
-      return {
-        fixtureId: match.id,
-        kickoff: match.utcDate,
-        venue: atHome ? "home" : "away",
-        opponent: shortName(atHome ? match.awayTeam : match.homeTeam),
-        goalsFor: (atHome ? match.score.fullTime.home : match.score.fullTime.away) ?? 0,
-        goalsAgainst: (atHome ? match.score.fullTime.away : match.score.fullTime.home) ?? 0,
-        // The half-time score is the only split of the match this tier gives, and
-        // it is what the first-half markets are fitted on.
-        halfFor: atHome ? (match.score.halfTime?.home ?? null) : (match.score.halfTime?.away ?? null),
-        halfAgainst: atHome ? (match.score.halfTime?.away ?? null) : (match.score.halfTime?.home ?? null),
-        firstGoal: opened === null ? null : (opened === "home") === atHome ? "for" : "against",
-        // No goal feed on this tier, so the minute is never known.
-        firstGoalMinute: null,
-      };
-    }),
-  });
+    return {
+      fixtureId: match.id,
+      kickoff: match.utcDate,
+      competition: match.competition?.code ?? null,
+      venue: atHome ? "home" : "away",
+      opponent: shortName(opponent),
+      opponentName: opponent.shortName || opponent.name,
+      opponentLogo: opponent.crest ?? "",
+      goalsFor: (atHome ? match.score.fullTime.home : match.score.fullTime.away) ?? 0,
+      goalsAgainst: (atHome ? match.score.fullTime.away : match.score.fullTime.home) ?? 0,
+      // The half-time score is the only split of the match this tier gives, and
+      // it is what the first-half markets are fitted on.
+      halfFor: atHome ? (match.score.halfTime?.home ?? null) : (match.score.halfTime?.away ?? null),
+      halfAgainst: atHome ? (match.score.halfTime?.away ?? null) : (match.score.halfTime?.home ?? null),
+      firstGoal: opened === null ? null : (opened === "home") === atHome ? "for" : "against",
+      // No goal feed on this tier, so the minute is never known.
+      firstGoalMinute: null,
+    };
+  };
+
+  /**
+   * Five at each venue rather than the last ten outright, so a side that has
+   * been mostly at home still shows five away matches to be judged on.
+   *
+   * The fixture being projected is left out: a match already played is in the
+   * history, and letting a team's form contain the result the model is about to
+   * predict would flatter every graded score on the results page.
+   */
+  const formFor = (teamId, exclude) => {
+    const all = (formByTeam.get(teamId) ?? []).filter((match) => match.id !== exclude);
+    const pick = (venue) =>
+      all.filter((match) => (match.homeTeam.id === teamId) === (venue === "home")).slice(0, FORM_PER_VENUE);
+
+    return {
+      team: asTeam(teams.get(teamId)),
+      matches: [...pick("home"), ...pick("away")]
+        .sort(newestFirst)
+        .map((match) => asPastMatch(match, teamId)),
+    };
+  };
 
   const fixtures = scheduled
     .map((match) => {
@@ -269,8 +360,13 @@ async function main() {
         round: match.stage === "REGULAR_SEASON" ? `Matchday ${match.matchday}` : match.stage,
         kickoff: match.utcDate,
         status: finished ? "finished" : "scheduled",
-        home: formFor(match.homeTeam.id),
-        away: formFor(match.awayTeam.id),
+        home: formFor(match.homeTeam.id, match.id),
+        away: formFor(match.awayTeam.id, match.id),
+        // Earlier meetings between these two, this fixture itself excluded.
+        h2h: (h2hByPair.get(pairKey(match.homeTeam.id, match.awayTeam.id)) ?? [])
+          .filter((meeting) => meeting.id !== match.id)
+          .slice(0, H2H_MATCHES)
+          .map(asMeeting),
         result: finished
           ? {
               goalsHome: match.score.fullTime.home ?? 0,
@@ -286,6 +382,25 @@ async function main() {
     })
     .sort((a, b) => new Date(a.kickoff) - new Date(b.kickoff));
 
+  // The source occasionally walks a result back to a kickoff time for a few
+  // hours before it returns. A score that has once been recorded is kept, so a
+  // wobble upstream never takes a result off the site.
+  let carried = 0;
+  const previous = await readPrevious();
+
+  for (const fixture of fixtures) {
+    if (fixture.status === "finished") continue;
+
+    const was = previous.get(fixture.id);
+    if (was?.status !== "finished" || !was.result) continue;
+
+    fixture.status = "finished";
+    fixture.result = was.result;
+    carried += 1;
+  }
+
+  if (carried > 0) console.log(`carried ${carried} results the source no longer reports`);
+
   const data = { generatedAt: new Date().toISOString(), weekStart: from, fixtures };
 
   await mkdir(path.dirname(OUT), { recursive: true });
@@ -294,10 +409,13 @@ async function main() {
   const form = fixtures.flatMap((f) => [...f.home.matches, ...f.away.matches]);
   const known = form.filter((m) => m.firstGoal !== null).length;
   const upcoming = fixtures.filter((f) => f.status === "scheduled").length;
+  const withH2H = fixtures.filter((f) => f.h2h.length > 0).length;
 
   console.log(
     `wrote ${fixtures.length} fixtures (${upcoming} upcoming) for ${teams.size} teams ` +
-      `in ${calls} calls; first goal known for ${known}/${form.length} form matches`
+      `in ${calls} calls; ${withH2H} have a head-to-head; ` +
+      `${fixtures.length - upcoming} finished; ` +
+      `first goal known for ${known}/${form.length} form matches`
   );
 }
 

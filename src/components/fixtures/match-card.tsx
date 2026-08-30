@@ -3,6 +3,12 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
+import {
+  FormList,
+  MeetingList,
+  RowSkeleton,
+  useFixtureDetail,
+} from "@/components/fixtures/form-detail";
 import { FormStrip } from "@/components/fixtures/form-strip";
 import { GoalsBoard, HalvesBoard } from "@/components/fixtures/market-board";
 import { OutcomeBar } from "@/components/fixtures/outcome-bar";
@@ -11,6 +17,8 @@ import { goals, minute, odds, percent, rate } from "@/lib/format";
 import { readKickoff } from "@/lib/ethiopian-date";
 import { leagueById } from "@/lib/leagues";
 import { noteText } from "@/lib/note-text";
+import type { FormSummary } from "@/lib/model";
+import type { H2HMatch, PastMatch, Venue } from "@/lib/types";
 import type { MatchView } from "@/lib/view";
 import { leanOf } from "@/lib/view";
 
@@ -234,28 +242,193 @@ function ReadPanel({ match }: { match: MatchView }) {
 }
 
 function FormPanel({ match }: { match: MatchView }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const amharic = language === "am";
   const p = match.p;
+  // Only the record is baked into the page; the rows behind it arrive here.
+  const { detail, failed } = useFixtureDetail(match.id);
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <FormStrip label={match.home.short} summary={p.homeForm.overall} />
-        <FormStrip label={t("card.homeForm")} summary={p.homeForm.venue} emphasis />
-        <div className="h-1.5" />
-        <FormStrip label={match.away.short} summary={p.awayForm.overall} />
-        <FormStrip label={t("card.awayForm")} summary={p.awayForm.venue} emphasis />
-      </div>
+    <div className="space-y-5">
+      <HeadToHead match={match} detail={detail} failed={failed} />
+
+      <TeamForm
+        heading={match.home.name}
+        venueLabel={t("card.homeForm")}
+        overall={p.homeForm.overall}
+        venue={p.homeForm.venue}
+        matches={detail?.home ?? null}
+        at="home"
+        reference={match.kickoff}
+        failed={failed}
+        amharic={amharic}
+      />
+
+      <TeamForm
+        heading={match.away.name}
+        venueLabel={t("card.awayForm")}
+        overall={p.awayForm.overall}
+        venue={p.awayForm.venue}
+        matches={detail?.away ?? null}
+        at="away"
+        reference={match.kickoff}
+        failed={failed}
+        amharic={amharic}
+      />
 
       <dl className="grid grid-cols-2 gap-x-5 gap-y-2 border-t border-hairline pt-3.5 text-xs">
-        <Stat label={`${match.home.short} · ${t("card.scoredFirstRate")}`} amharic={false}>
+        <Stat label={`${match.home.short} · ${t("card.scoredFirstRate")}`} amharic={amharic}>
           {rate(p.homeForm.venue.scoredFirst, p.homeForm.venue.decided)}
         </Stat>
-        <Stat label={`${match.away.short} · ${t("card.scoredFirstRate")}`} amharic={false}>
+        <Stat label={`${match.away.short} · ${t("card.scoredFirstRate")}`} amharic={amharic}>
           {rate(p.awayForm.venue.scoredFirst, p.awayForm.venue.decided)}
         </Stat>
       </dl>
     </div>
+  );
+}
+
+function PanelHeading({ children, amharic }: { children: React.ReactNode; amharic: boolean }) {
+  return (
+    <h4
+      className={`text-[10px] font-semibold uppercase tracking-wider text-subtle ${
+        amharic ? "amharic normal-case tracking-normal" : ""
+      }`}
+    >
+      {children}
+    </h4>
+  );
+}
+
+function HeadToHead({
+  match,
+  detail,
+  failed,
+}: {
+  match: MatchView;
+  detail: { homeId: number; h2h: H2HMatch[] } | null;
+  failed: boolean;
+}) {
+  const { t, language } = useLanguage();
+  const amharic = language === "am";
+  const h2h = match.p.h2h;
+
+  if (h2h.played === 0) {
+    return (
+      <section className="space-y-2">
+        <PanelHeading amharic={amharic}>{t("card.h2h")}</PanelHeading>
+        <p className={`text-xs text-muted-foreground ${amharic ? "amharic" : ""}`}>
+          {t("card.h2hNone")}
+        </p>
+      </section>
+    );
+  }
+
+  return (
+    <section className="space-y-2.5">
+      <div className="flex items-baseline justify-between gap-2">
+        <PanelHeading amharic={amharic}>{t("card.h2h")}</PanelHeading>
+        <span className={`text-[11px] text-subtle ${amharic ? "amharic" : ""}`}>
+          {h2h.played} {t("count.matches")}
+        </span>
+      </div>
+
+      {/* Wins, draws, wins, in the same left-to-right order as the outcome bar. */}
+      <div className="grid grid-cols-3 overflow-hidden rounded-xl bg-muted text-center">
+        <Tally value={h2h.homeWins} label={match.home.short} tone="var(--home)" />
+        <Tally value={h2h.draws} label={t("card.draw")} tone="var(--draw)" amharic={amharic} />
+        <Tally value={h2h.awayWins} label={match.away.short} tone="var(--away)" />
+      </div>
+
+      <dl className="grid grid-cols-2 gap-x-5 gap-y-1.5 text-xs">
+        <Stat label={t("card.h2hGoals")} amharic={amharic}>
+          {h2h.goalsHome}-{h2h.goalsAway}
+        </Stat>
+        <Stat label={t("card.h2hAtGround")} amharic={amharic}>
+          {h2h.atThisVenue === 0
+            ? "-"
+            : `${h2h.homeWinsAtThisVenue}/${h2h.atThisVenue}`}
+        </Stat>
+      </dl>
+
+      {failed ? null : detail ? (
+        <MeetingList meetings={detail.h2h} homeTeamId={detail.homeId} reference={match.kickoff} />
+      ) : (
+        <RowSkeleton rows={Math.min(h2h.played, 4)} />
+      )}
+    </section>
+  );
+}
+
+function Tally({
+  value,
+  label,
+  tone,
+  amharic = false,
+}: {
+  value: number;
+  label: string;
+  tone: string;
+  amharic?: boolean;
+}) {
+  return (
+    <div className="py-2">
+      <div className="font-mono text-lg font-bold tnum" style={{ color: tone }}>
+        {value}
+      </div>
+      <div className={`truncate px-1 text-[10px] text-muted-foreground ${amharic ? "amharic" : ""}`}>
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function TeamForm({
+  heading,
+  venueLabel,
+  overall,
+  venue,
+  matches,
+  at,
+  reference,
+  failed,
+  amharic,
+}: {
+  heading: string;
+  venueLabel: string;
+  overall: FormSummary;
+  venue: FormSummary;
+  matches: PastMatch[] | null;
+  at: Venue;
+  reference: string;
+  failed: boolean;
+  amharic: boolean;
+}) {
+  const { t } = useLanguage();
+
+  return (
+    <section className="space-y-2 border-t border-hairline pt-3.5">
+      <div className="flex items-baseline justify-between gap-2">
+        <PanelHeading amharic={amharic}>{heading}</PanelHeading>
+        <span className={`text-[11px] text-subtle ${amharic ? "amharic" : ""}`}>
+          {venueLabel} · {venue.won}{t("card.w")} {venue.drawn}{t("card.d")} {venue.lost}
+          {t("card.l")}
+        </span>
+      </div>
+
+      {/* The last five outright, for a side that has only just come home. */}
+      <FormStrip label={t("card.form")} summary={overall} />
+
+      {failed ? (
+        <p className={`text-xs text-muted-foreground ${amharic ? "amharic" : ""}`}>
+          {t("card.detailFailed")}
+        </p>
+      ) : matches ? (
+        <FormList matches={matches} venue={at} reference={reference} />
+      ) : (
+        <RowSkeleton rows={Math.max(venue.played, 1)} />
+      )}
+    </section>
   );
 }
 

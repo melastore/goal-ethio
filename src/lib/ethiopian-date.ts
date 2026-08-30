@@ -100,3 +100,23 @@ export function groupByEthiopianDay<T>(items: T[], isoOf: (item: T) => string) {
     (a, b) => a.kickoff.date.getTime() - b.kickoff.date.getTime()
   );
 }
+
+/**
+ * A past date, short enough for a form row.
+ *
+ * The year is only worth the space when the match is from a different Ethiopian
+ * year than the fixture being read, which is what separates last season's
+ * meetings from this season's.
+ */
+export function pastDate(iso: string, reference: string) {
+  const at = readKickoff(iso);
+  const sameYear = at.ethiopian.year === readKickoff(reference).ethiopian.year;
+  const month = ETHIOPIAN_MONTHS[at.ethiopian.month - 1];
+  const year = sameYear ? "" : ` ${at.ethiopian.year}`;
+
+  return {
+    label: `${month.label} ${at.ethiopian.day}${year}`,
+    amharic: `${month.amharic} ${at.ethiopian.day}${year}`,
+    gregorian: at.gregorianDate,
+  };
+}

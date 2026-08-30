@@ -4,8 +4,13 @@
 // The app shows more than the site does, so the feed carries more than the site
 // renders: the notes, the whole market board, and the scoreline grid the phone
 // draws as a heat map.
+//
+// It also writes public/detail/<id>.json, one small file per fixture holding the
+// form rows and the head-to-head meetings. Those are far too heavy to bake into
+// the page for four hundred fixtures, and nobody reads more than a few, so the
+// card fetches one when its form tab is opened.
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 
 import { baselineFor, project, scoreMatrix } from "../src/lib/model.ts";
 import { grade, tally } from "../src/lib/scoring.ts";
@@ -13,6 +18,8 @@ import { readMatch } from "../src/lib/read.ts";
 
 // Scorelines past five are a rounding error, and the grid has to fit a phone.
 const GRID = 6;
+
+const DETAIL = "public/detail";
 
 const r = (value) => Math.round(value * 1e4) / 1e4;
 
@@ -66,4 +73,25 @@ const feed = {
 await mkdir("public", { recursive: true });
 await writeFile("public/feed.json", `${JSON.stringify(feed)}\n`);
 
-console.log(`feed: ${feed.fixtures.length} fixtures`);
+// Rebuilt from scratch so a fixture that has dropped out of the window does not
+// leave a stale file behind in the export.
+await rm(DETAIL, { recursive: true, force: true });
+await mkdir(DETAIL, { recursive: true });
+
+await Promise.all(
+  week.fixtures.map((fixture) =>
+    writeFile(
+      `${DETAIL}/${fixture.id}.json`,
+      JSON.stringify({
+        id: fixture.id,
+        homeId: fixture.home.team.id,
+        awayId: fixture.away.team.id,
+        home: fixture.home.matches,
+        away: fixture.away.matches,
+        h2h: fixture.h2h ?? [],
+      })
+    )
+  )
+);
+
+console.log(`feed: ${feed.fixtures.length} fixtures, ${week.fixtures.length} detail files`);

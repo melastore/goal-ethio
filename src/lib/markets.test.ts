@@ -24,8 +24,11 @@ const past = (
 ): PastMatch => ({
   fixtureId: Math.random(),
   kickoff: "2026-08-01T14:00:00Z",
+  competition: "PL",
   venue: "home",
   opponent: "Someone",
+  opponentName: "Someone",
+  opponentLogo: "",
   goalsFor,
   goalsAgainst,
   halfFor,

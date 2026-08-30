@@ -3,12 +3,13 @@
 // A projection carries a few hundred numbers and there are four hundred
 // fixtures, so the raw objects would be megabytes of RSC payload. Probabilities
 // are rounded to four places, which is three more than anything on screen uses,
-// and the eight raw form matches are dropped: the summaries the projection
-// already holds say everything the cards show.
+// and the raw form matches and head-to-head meetings are dropped: the
+// summaries say everything a closed card shows, and an opened one fetches the
+// rows it needs from public/detail.
 
 import { readMatch, type Note } from "@/lib/read";
 import type { Board, Line } from "@/lib/markets";
-import type { FormSummary, Projection } from "@/lib/model";
+import type { FormSummary, H2HSummary, Projection } from "@/lib/model";
 import type { Fixture, Result, Team } from "@/lib/types";
 
 const r = (value: number) => Math.round(value * 1e4) / 1e4;
@@ -32,6 +33,8 @@ export type MatchView = {
     confidence: "thin" | "fair" | "solid";
     homeForm: { overall: FormSummary; venue: FormSummary };
     awayForm: { overall: FormSummary; venue: FormSummary };
+    // The record only; the meetings behind it are fetched when a card is opened.
+    h2h: H2HSummary;
     board: Board;
   };
 };
@@ -104,6 +107,7 @@ export function toView(fixture: Fixture, projection: Projection): MatchView {
       confidence: projection.confidence,
       homeForm: projection.homeForm,
       awayForm: projection.awayForm,
+      h2h: projection.h2h,
       board: compactBoard(projection.board),
     },
   };

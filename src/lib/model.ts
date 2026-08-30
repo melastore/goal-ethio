@@ -1,16 +1,16 @@
-// Dixon-Coles over the last eight matches: each team carries an attack and a
-// defence number per venue, measured against the competition average, and the
-// two multiply into a scoring rate. Goals fall as Poisson with a correction on
+// Dixon-Coles over the last five matches at each venue: each team carries an
+// attack and a defence number per venue, measured against the competition
+// average, and the two multiply into a scoring rate. Goals fall as Poisson with a correction on
 // the low scores, where independence is known to be wrong.
 
 import { board, type Board } from "@/lib/markets";
-import type { Fixture, TeamForm, Venue } from "@/lib/types";
+import type { Fixture, H2HMatch, TeamForm, Venue } from "@/lib/types";
 
 // Negative firms up 0-0 and 1-1. Fitted values for top leagues sit near -0.05.
 const RHO = -0.06;
 
-// Prior weight in matches. Eight matches split by venue leaves about four a
-// side, so a rate from four lands halfway between the team and the league.
+// Prior weight in matches. Five a venue with decay is worth a few effective
+// matches, so a rate from that lands about halfway between team and league.
 const PRIOR_MATCHES = 4;
 
 /**
@@ -101,7 +101,7 @@ export type Strength = {
   // 1 is average, below 1 is tighter.
   defence: number;
   matches: number;
-  // Matches after time decay. Eight stale ones can be worth less than two fresh.
+  // Matches after time decay. Five stale ones can be worth less than two fresh.
   effective: number;
 };
 
@@ -280,11 +280,11 @@ export type FormSummary = {
   averageFirstGoalMinute: number | null;
 };
 
-// Pass a venue to read only the home or only the away half of the eight.
-export function summariseForm(form: TeamForm, venue?: Venue): FormSummary {
-  const matches = venue
-    ? form.matches.filter((match) => match.venue === venue)
-    : form.matches;
+// Pass a venue to read only the home or only the away half of the ten, and a
+// limit to cut the overall read back to a headline last five.
+export function summariseForm(form: TeamForm, venue?: Venue, limit?: number): FormSummary {
+  const at = venue ? form.matches.filter((match) => match.venue === venue) : form.matches;
+  const matches = limit === undefined ? at : at.slice(0, limit);
 
   const summary: FormSummary = {
     played: matches.length,
@@ -333,6 +333,54 @@ export function summariseForm(form: TeamForm, venue?: Venue): FormSummary {
   return summary;
 }
 
+/** The head-to-head record, always told from the fixture's home side. */
+export type H2HSummary = {
+  played: number;
+  homeWins: number;
+  draws: number;
+  awayWins: number;
+  // Goals scored by each side of the coming fixture, across every meeting.
+  goalsHome: number;
+  goalsAway: number;
+  // Meetings played at the coming fixture's home ground.
+  atThisVenue: number;
+  homeWinsAtThisVenue: number;
+};
+
+export function summariseH2H(meetings: H2HMatch[], homeTeamId: number): H2HSummary {
+  const summary: H2HSummary = {
+    played: meetings.length,
+    homeWins: 0,
+    draws: 0,
+    awayWins: 0,
+    goalsHome: 0,
+    goalsAway: 0,
+    atThisVenue: 0,
+    homeWinsAtThisVenue: 0,
+  };
+
+  for (const meeting of meetings) {
+    // The coming fixture's home side was not necessarily at home that day.
+    const wasHome = meeting.homeId === homeTeamId;
+    const forHome = wasHome ? meeting.goalsHome : meeting.goalsAway;
+    const forAway = wasHome ? meeting.goalsAway : meeting.goalsHome;
+
+    summary.goalsHome += forHome;
+    summary.goalsAway += forAway;
+
+    if (forHome > forAway) summary.homeWins += 1;
+    else if (forHome === forAway) summary.draws += 1;
+    else summary.awayWins += 1;
+
+    if (wasHome) {
+      summary.atThisVenue += 1;
+      if (forHome > forAway) summary.homeWinsAtThisVenue += 1;
+    }
+  }
+
+  return summary;
+}
+
 export type Confidence = "thin" | "fair" | "solid";
 
 export type Projection = {
@@ -346,6 +394,7 @@ export type Projection = {
   awayStrength: Strength;
   homeForm: { overall: FormSummary; venue: FormSummary };
   awayForm: { overall: FormSummary; venue: FormSummary };
+  h2h: H2HSummary;
   confidence: Confidence;
   // Every other market the goal data supports.
   board: Board;
@@ -371,13 +420,16 @@ export function project(fixture: Fixture, baseline: Baseline): Projection {
     homeStrength,
     awayStrength,
     homeForm: {
-      overall: summariseForm(fixture.home),
+      // The overall strip is the last five outright; the venue strip is the
+      // five that actually bear on this fixture.
+      overall: summariseForm(fixture.home, undefined, 5),
       venue: summariseForm(fixture.home, "home"),
     },
     awayForm: {
-      overall: summariseForm(fixture.away),
+      overall: summariseForm(fixture.away, undefined, 5),
       venue: summariseForm(fixture.away, "away"),
     },
+    h2h: summariseH2H(fixture.h2h ?? [], fixture.home.team.id),
     confidence,
     board: board(matrix, home, away, fixture.home, fixture.away),
   };

@@ -11,9 +11,10 @@ import {
   scoreMatrix,
   strengthAt,
   summariseForm,
+  summariseH2H,
   type Baseline,
 } from "@/lib/model";
-import type { Fixture, PastMatch, TeamForm, Venue } from "@/lib/types";
+import type { Fixture, H2HMatch, PastMatch, TeamForm, Venue } from "@/lib/types";
 
 const BASELINE: Baseline = { homeGoals: 1.5, awayGoals: 1.2, sample: 100 };
 
@@ -33,8 +34,11 @@ const match = (
 ): PastMatch => ({
   fixtureId: nextFixtureId++,
   kickoff,
+  competition: "PL",
   venue,
   opponent: "Someone",
+  opponentName: "Someone",
+  opponentLogo: "",
   goalsFor,
   goalsAgainst,
   halfFor: null,
@@ -150,6 +154,7 @@ test("baseline falls back until there is enough of a sample", () => {
     status: "scheduled",
     home: form([match("home", 2, 1)]),
     away: form([match("away", 0, 0)]),
+    h2h: [],
     result: null,
   };
 
@@ -193,4 +198,98 @@ test("lean names the top outcome and its margin", () => {
   const picked = lean({ home: 0.52, draw: 0.26, away: 0.22 });
   assert.equal(picked.pick, "home");
   assert.ok(Math.abs(picked.margin - 0.26) < 1e-9);
+});
+
+const meeting = (
+  homeId: number,
+  goalsHome: number,
+  goalsAway: number,
+  kickoff = NOW
+): H2HMatch => ({
+  fixtureId: nextFixtureId++,
+  kickoff,
+  competition: "PL",
+  homeId,
+  home: "HOM",
+  away: "AWY",
+  goalsHome,
+  goalsAway,
+  halfHome: null,
+  halfAway: null,
+});
+
+const HOME_TEAM = 10;
+const AWAY_TEAM = 20;
+
+test("head-to-head is told from the coming fixture's home side, whichever way round the meeting was", () => {
+  const summary = summariseH2H(
+    [
+      // The home side won this one at home.
+      meeting(HOME_TEAM, 2, 0),
+      // And this one away from home, so the scoreline reads the other way.
+      meeting(AWAY_TEAM, 1, 3),
+      meeting(AWAY_TEAM, 2, 2),
+      meeting(AWAY_TEAM, 4, 0),
+    ],
+    HOME_TEAM
+  );
+
+  assert.equal(summary.played, 4);
+  assert.equal(summary.homeWins, 2);
+  assert.equal(summary.draws, 1);
+  assert.equal(summary.awayWins, 1);
+  assert.equal(summary.goalsHome, 2 + 3 + 2 + 0);
+  assert.equal(summary.goalsAway, 0 + 1 + 2 + 4);
+});
+
+test("only meetings at the coming fixture's ground count toward the venue record", () => {
+  const summary = summariseH2H(
+    [meeting(HOME_TEAM, 2, 0), meeting(HOME_TEAM, 0, 1), meeting(AWAY_TEAM, 0, 3)],
+    HOME_TEAM
+  );
+
+  assert.equal(summary.atThisVenue, 2);
+  assert.equal(summary.homeWinsAtThisVenue, 1);
+});
+
+test("no meetings is an empty record rather than a missing one", () => {
+  const summary = summariseH2H([], HOME_TEAM);
+  assert.equal(summary.played, 0);
+  assert.equal(summary.homeWins, 0);
+  assert.equal(summary.goalsHome, 0);
+});
+
+test("a limit cuts the form read back to the most recent matches", () => {
+  const older = "2026-06-01T12:00:00Z";
+  const summary = summariseForm(
+    form([
+      match("home", 3, 0, null, null, NOW),
+      match("away", 2, 0, null, null, NOW),
+      // Beyond the limit, so neither the sequence nor the goals count them.
+      match("home", 0, 5, null, null, older),
+      match("away", 0, 4, null, null, older),
+    ]),
+    undefined,
+    2
+  );
+
+  assert.equal(summary.played, 2);
+  assert.deepEqual(summary.sequence, ["W", "W"]);
+  assert.equal(summary.goalsAgainst, 0);
+});
+
+test("a venue filter and a limit compose", () => {
+  const summary = summariseForm(
+    form([
+      match("home", 1, 0),
+      match("away", 9, 9),
+      match("home", 2, 0),
+      match("home", 3, 0),
+    ]),
+    "home",
+    2
+  );
+
+  assert.equal(summary.played, 2);
+  assert.equal(summary.goalsFor, 3);
 });
