@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T04:27:51.123Z",
+  "generatedAt": "2026-08-30T04:45:02.065Z",
   "weekStart": "2026-08-24",
   "fixtures": [
     {
@@ -4519,7 +4519,7 @@
       "leagueId": 40,
       "round": "Matchday 3",
       "kickoff": "2026-08-29T11:30:00Z",
-      "status": "finished",
+      "status": "scheduled",
       "home": {
         "team": {
           "id": 76,
@@ -4528,6 +4528,18 @@
           "logo": "https://crests.football-data.org/76.png"
         },
         "matches": [
+          {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "home",
+            "opponent": "STK",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
           {
             "fixtureId": 561778,
             "kickoff": "2026-08-22T14:00:00Z",
@@ -4611,18 +4623,6 @@
             "halfAgainst": 0,
             "firstGoal": "against",
             "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538110,
-            "kickoff": "2026-04-18T14:00:00Z",
-            "venue": "away",
-            "opponent": "LEE",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
           }
         ]
       },
@@ -4634,6 +4634,18 @@
           "logo": "https://crests.football-data.org/70.png"
         },
         "matches": [
+          {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "away",
+            "opponent": "WOL",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
           {
             "fixtureId": 561782,
             "kickoff": "2026-08-22T14:00:00Z",
@@ -4717,30 +4729,10 @@
             "halfAgainst": 1,
             "firstGoal": "against",
             "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541194,
-            "kickoff": "2026-04-06T14:00:00Z",
-            "venue": "away",
-            "opponent": "DER",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
           }
         ]
       },
-      "result": {
-        "goalsHome": 4,
-        "goalsAway": 1,
-        "halfHome": 2,
-        "halfAway": 1,
-        "firstGoal": "home",
-        "firstGoalMinute": null,
-        "firstScorer": null
-      }
+      "result": null
     },
     {
       "id": 561791,
@@ -21130,6 +21122,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "home",
+            "opponent": "STK",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561778,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -21210,18 +21214,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538110,
-            "kickoff": "2026-04-18T14:00:00Z",
-            "venue": "away",
-            "opponent": "LEE",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -22004,6 +21996,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "away",
+            "opponent": "WOL",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561782,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -22084,18 +22088,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 1,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541194,
-            "kickoff": "2026-04-06T14:00:00Z",
-            "venue": "away",
-            "opponent": "DER",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 0,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -26124,6 +26116,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "away",
+            "opponent": "WOL",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561782,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -26204,18 +26208,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 1,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541194,
-            "kickoff": "2026-04-06T14:00:00Z",
-            "venue": "away",
-            "opponent": "DER",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 0,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -34885,6 +34877,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "home",
+            "opponent": "STK",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561778,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -34965,18 +34969,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538110,
-            "kickoff": "2026-04-18T14:00:00Z",
-            "venue": "away",
-            "opponent": "LEE",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -42645,6 +42637,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "away",
+            "opponent": "WOL",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561782,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -42725,18 +42729,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 1,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541194,
-            "kickoff": "2026-04-06T14:00:00Z",
-            "venue": "away",
-            "opponent": "DER",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 0,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -43739,6 +43731,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "home",
+            "opponent": "STK",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561778,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -43819,18 +43823,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538110,
-            "kickoff": "2026-04-18T14:00:00Z",
-            "venue": "away",
-            "opponent": "LEE",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -53708,6 +53700,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "away",
+            "opponent": "WOL",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561782,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -53788,18 +53792,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 1,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541194,
-            "kickoff": "2026-04-06T14:00:00Z",
-            "venue": "away",
-            "opponent": "DER",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 0,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -59752,6 +59744,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "home",
+            "opponent": "STK",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561778,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -59832,18 +59836,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538110,
-            "kickoff": "2026-04-18T14:00:00Z",
-            "venue": "away",
-            "opponent": "LEE",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -71934,6 +71926,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "away",
+            "opponent": "WOL",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561782,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -72014,18 +72018,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 1,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541194,
-            "kickoff": "2026-04-06T14:00:00Z",
-            "venue": "away",
-            "opponent": "DER",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 0,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -79890,6 +79882,18 @@
         },
         "matches": [
           {
+            "fixtureId": 561789,
+            "kickoff": "2026-08-29T11:30:00Z",
+            "venue": "home",
+            "opponent": "STK",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561778,
             "kickoff": "2026-08-22T14:00:00Z",
             "venue": "away",
@@ -79970,18 +79974,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538110,
-            "kickoff": "2026-04-18T14:00:00Z",
-            "venue": "away",
-            "opponent": "LEE",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
