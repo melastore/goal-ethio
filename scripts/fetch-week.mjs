@@ -7,7 +7,7 @@
 // goal-event feed, so who scored first is read off the half-time score. That
 // settles most matches and leaves the rest unknown rather than guessed.
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 
@@ -52,6 +52,9 @@ const GAP_MS = 10_000;
 // Throttling is reported as a 400 "token is invalid", so the token is checked
 // once up front and that message is treated as backpressure afterwards.
 const THROTTLE_MESSAGE = "Your API token is invalid.";
+// A cached response goes stale the moment a match finishes, so it is only
+// reused inside this window. CACHE_TTL_MINUTES=0 always refetches.
+const CACHE_TTL_MS = Number(process.env.CACHE_TTL_MINUTES ?? 60) * 60_000;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -68,7 +71,8 @@ async function api(endpoint, params = {}, attempt = 0) {
   const cached = path.join(CACHE, `${digest}.json`);
 
   try {
-    return JSON.parse(await readFile(cached, "utf8"));
+    const { mtimeMs } = await stat(cached);
+    if (Date.now() - mtimeMs < CACHE_TTL_MS) return JSON.parse(await readFile(cached, "utf8"));
   } catch {
     // Not cached yet.
   }
