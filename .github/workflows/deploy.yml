@@ -6,6 +6,12 @@ on:
   workflow_dispatch:
   # Refresh calls this once it has committed a new week.json.
   workflow_call:
+    inputs:
+      ref:
+        # A called workflow checks out the caller's starting commit, which is
+        # the one before the refresh, so the new commit has to be named.
+        type: string
+        required: true
 
 permissions:
   contents: read
@@ -21,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
