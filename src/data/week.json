@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T06:59:50.408Z",
+  "generatedAt": "2026-08-30T10:56:54.877Z",
   "weekStart": "2026-08-24",
   "fixtures": [
     {
@@ -57287,21 +57287,6 @@
         },
         "matches": [
           {
-            "fixtureId": 558241,
-            "kickoff": "2026-08-28T18:00:00Z",
-            "competition": "DED",
-            "venue": "home",
-            "opponent": "SIT",
-            "opponentName": "Sittard",
-            "opponentLogo": "https://crests.football-data.org/1920.png",
-            "goalsFor": 2,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
             "fixtureId": 558237,
             "kickoff": "2026-08-23T12:30:00Z",
             "competition": "DED",
@@ -57430,6 +57415,21 @@
             "opponentName": "Telstar",
             "opponentLogo": "https://crests.football-data.org/1912.png",
             "goalsFor": 2,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 537684,
+            "kickoff": "2026-03-22T15:45:00Z",
+            "competition": "DED",
+            "venue": "home",
+            "opponent": "AZ",
+            "opponentName": "AZ",
+            "opponentLogo": "https://crests.football-data.org/682.png",
+            "goalsFor": 3,
             "goalsAgainst": 0,
             "halfFor": 1,
             "halfAgainst": 0,
@@ -61223,21 +61223,6 @@
         },
         "matches": [
           {
-            "fixtureId": 558241,
-            "kickoff": "2026-08-28T18:00:00Z",
-            "competition": "DED",
-            "venue": "away",
-            "opponent": "GRO",
-            "opponentName": "Groningen",
-            "opponentLogo": "https://crests.football-data.org/677.png",
-            "goalsFor": 3,
-            "goalsAgainst": 2,
-            "halfFor": 2,
-            "halfAgainst": 1,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
             "fixtureId": 558232,
             "kickoff": "2026-08-22T14:30:00Z",
             "competition": "DED",
@@ -61370,6 +61355,21 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 537677,
+            "kickoff": "2026-03-14T15:30:00Z",
+            "competition": "DED",
+            "venue": "away",
+            "opponent": "VOL",
+            "opponentName": "Volendam",
+            "opponentLogo": "https://crests.football-data.org/1919.png",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 0,
+            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -91975,21 +91975,6 @@
         },
         "matches": [
           {
-            "fixtureId": 558241,
-            "kickoff": "2026-08-28T18:00:00Z",
-            "competition": "DED",
-            "venue": "home",
-            "opponent": "SIT",
-            "opponentName": "Sittard",
-            "opponentLogo": "https://crests.football-data.org/1920.png",
-            "goalsFor": 2,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
             "fixtureId": 558237,
             "kickoff": "2026-08-23T12:30:00Z",
             "competition": "DED",
@@ -92123,6 +92108,21 @@
             "halfAgainst": 0,
             "firstGoal": "for",
             "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 537684,
+            "kickoff": "2026-03-22T15:45:00Z",
+            "competition": "DED",
+            "venue": "home",
+            "opponent": "AZ",
+            "opponentName": "AZ",
+            "opponentLogo": "https://crests.football-data.org/682.png",
+            "goalsFor": 3,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
           }
         ]
       },
@@ -92192,21 +92192,6 @@
           "logo": "https://crests.football-data.org/1920.png"
         },
         "matches": [
-          {
-            "fixtureId": 558241,
-            "kickoff": "2026-08-28T18:00:00Z",
-            "competition": "DED",
-            "venue": "away",
-            "opponent": "GRO",
-            "opponentName": "Groningen",
-            "opponentLogo": "https://crests.football-data.org/677.png",
-            "goalsFor": 3,
-            "goalsAgainst": 2,
-            "halfFor": 2,
-            "halfAgainst": 1,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
           {
             "fixtureId": 558232,
             "kickoff": "2026-08-22T14:30:00Z",
@@ -92340,6 +92325,21 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 537677,
+            "kickoff": "2026-03-14T15:30:00Z",
+            "competition": "DED",
+            "venue": "away",
+            "opponent": "VOL",
+            "opponentName": "Volendam",
+            "opponentLogo": "https://crests.football-data.org/1919.png",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 0,
+            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -107867,21 +107867,6 @@
         },
         "matches": [
           {
-            "fixtureId": 558241,
-            "kickoff": "2026-08-28T18:00:00Z",
-            "competition": "DED",
-            "venue": "home",
-            "opponent": "SIT",
-            "opponentName": "Sittard",
-            "opponentLogo": "https://crests.football-data.org/1920.png",
-            "goalsFor": 2,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
             "fixtureId": 558237,
             "kickoff": "2026-08-23T12:30:00Z",
             "competition": "DED",
@@ -108010,6 +107995,21 @@
             "opponentName": "Telstar",
             "opponentLogo": "https://crests.football-data.org/1912.png",
             "goalsFor": 2,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 537684,
+            "kickoff": "2026-03-22T15:45:00Z",
+            "competition": "DED",
+            "venue": "home",
+            "opponent": "AZ",
+            "opponentName": "AZ",
+            "opponentLogo": "https://crests.football-data.org/682.png",
+            "goalsFor": 3,
             "goalsAgainst": 0,
             "halfFor": 1,
             "halfAgainst": 0,
@@ -128668,21 +128668,6 @@
         },
         "matches": [
           {
-            "fixtureId": 558241,
-            "kickoff": "2026-08-28T18:00:00Z",
-            "competition": "DED",
-            "venue": "away",
-            "opponent": "GRO",
-            "opponentName": "Groningen",
-            "opponentLogo": "https://crests.football-data.org/677.png",
-            "goalsFor": 3,
-            "goalsAgainst": 2,
-            "halfFor": 2,
-            "halfAgainst": 1,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
             "fixtureId": 558232,
             "kickoff": "2026-08-22T14:30:00Z",
             "competition": "DED",
@@ -128815,6 +128800,21 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
+            "fixtureId": 537677,
+            "kickoff": "2026-03-14T15:30:00Z",
+            "competition": "DED",
+            "venue": "away",
+            "opponent": "VOL",
+            "opponentName": "Volendam",
+            "opponentLogo": "https://crests.football-data.org/1919.png",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "halfFor": 2,
+            "halfAgainst": 0,
+            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
