@@ -1,34 +1,130 @@
 "use client";
 
-import { ResultCard } from "@/components/fixtures/result-card";
+import { useCallback, useEffect, useState } from "react";
+import { RotateCw } from "lucide-react";
+
+import { LiveResultCard, ResultCard } from "@/components/fixtures/result-card";
 import { SampleNotice } from "@/components/layout/sample-notice";
 import { useLanguage } from "@/components/providers/language-provider";
 import { percent, rate } from "@/lib/format";
 import type { Tally } from "@/lib/scoring";
+import type { MatchView } from "@/lib/view";
 import type { ResultView } from "@/lib/week-data";
 
 type Props = {
   results: ResultView[];
   record: Tally;
   sample: boolean;
+  live?: MatchView[];
 };
 
-export function ResultsView({ results, record, sample }: Props) {
+type FeedFixture = MatchView & {
+  projection?: MatchView["p"];
+};
+
+export function ResultsView({ results, record, sample, live = [] }: Props) {
   const { t, language } = useLanguage();
   const amharic = language === "am";
+
+  const [liveMatches, setLiveMatches] = useState<MatchView[]>(live);
+  const [currentResults] = useState<ResultView[]>(results);
+  const [currentRecord, setCurrentRecord] = useState<Tally>(record);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [lastChecked, setLastChecked] = useState<string | null>(null);
+
+  const fetchLiveFeed = useCallback(async () => {
+    setIsRefreshing(true);
+    try {
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+      const res = await fetch(`${basePath}/feed.json?_t=${Date.now()}`, { cache: "no-store" });
+      if (!res.ok) return;
+      const data = (await res.json()) as { fixtures?: FeedFixture[]; record?: Tally };
+      if (data && Array.isArray(data.fixtures)) {
+        const activeLive: MatchView[] = data.fixtures
+          .filter((f) => f.status === "live")
+          .map((f) => ({
+            ...f,
+            p: f.projection ?? f.p,
+            finished: false,
+            isLive: true,
+          }));
+        setLiveMatches(activeLive);
+        if (data.record) setCurrentRecord(data.record);
+      }
+    } catch {
+      // Retain existing state on transient network failure
+    } finally {
+      setIsRefreshing(false);
+      const now = new Date();
+      setLastChecked(
+        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    const now = new Date();
+    setLastChecked(
+      now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+    );
+
+    // Auto-poll live feed every 30 seconds
+    const timer = setInterval(fetchLiveFeed, 30_000);
+    return () => clearInterval(timer);
+  }, [fetchLiveFeed]);
 
   return (
     <>
       {sample && <SampleNotice />}
-      <h1
-        className={`mb-6 text-[26px] font-bold leading-tight tracking-tight sm:text-3xl ${
-          amharic ? "amharic" : ""
-        }`}
-      >
-        {t("results.heading")}
-      </h1>
 
-      {results.length === 0 ? (
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <h1
+          className={`text-[26px] font-bold leading-tight tracking-tight sm:text-3xl ${
+            amharic ? "amharic" : ""
+          }`}
+        >
+          {t("results.heading")}
+        </h1>
+
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className={amharic ? "amharic" : ""}>{t("market.liveActive")}</span>
+            {lastChecked && (
+              <span className="font-mono text-[11px] text-subtle tnum">· {lastChecked}</span>
+            )}
+          </span>
+
+          <button
+            type="button"
+            onClick={fetchLiveFeed}
+            disabled={isRefreshing}
+            className="flex items-center gap-1 rounded-lg border border-hairline bg-card px-2.5 py-1 text-xs font-medium transition hover:bg-muted active:scale-95 disabled:opacity-50"
+            title={t("market.refresh")}
+          >
+            <RotateCw className={`size-3 text-muted-foreground ${isRefreshing ? "animate-spin" : ""}`} />
+            <span className={amharic ? "amharic" : ""}>{t("market.refresh")}</span>
+          </button>
+        </div>
+      </div>
+
+      {liveMatches.length > 0 && (
+        <section className="mb-8 space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="size-2.5 rounded-full bg-red-500 animate-ping" />
+            <h2 className={`text-sm font-bold text-red-500 uppercase tracking-wide ${amharic ? "amharic tracking-normal" : ""}`}>
+              {t("results.liveMatches")} ({liveMatches.length})
+            </h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {liveMatches.map((match) => (
+              <LiveResultCard key={match.id} match={match} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {currentResults.length === 0 && liveMatches.length === 0 ? (
         <p
           className={`rounded-[16px] border border-hairline bg-card px-6 py-10 text-center text-sm text-muted-foreground ${
             amharic ? "amharic" : ""
@@ -44,20 +140,20 @@ export function ResultsView({ results, record, sample }: Props) {
             <dl className="mt-4 grid grid-cols-3 gap-4">
               <Score
                 label={t("results.outcomeHits")}
-                value={rate(record.outcomeHits, record.played)}
-                detail={`${record.outcomeHits}/${record.played}`}
+                value={rate(currentRecord.outcomeHits, currentRecord.played)}
+                detail={`${currentRecord.outcomeHits}/${currentRecord.played}`}
                 amharic={amharic}
               />
               <Score
                 label={t("results.firstGoalHits")}
-                value={rate(record.firstGoalHits, record.firstGoalGraded)}
-                detail={`${record.firstGoalHits}/${record.firstGoalGraded}`}
+                value={rate(currentRecord.firstGoalHits, currentRecord.firstGoalGraded)}
+                detail={`${currentRecord.firstGoalHits}/${currentRecord.firstGoalGraded}`}
                 amharic={amharic}
               />
               <Score
                 label={t("results.scorelineHits")}
-                value={rate(record.scorelineHits, record.played)}
-                detail={`${record.scorelineHits}/${record.played}`}
+                value={rate(currentRecord.scorelineHits, currentRecord.played)}
+                detail={`${currentRecord.scorelineHits}/${currentRecord.played}`}
                 amharic={amharic}
               />
             </dl>
@@ -67,13 +163,13 @@ export function ResultsView({ results, record, sample }: Props) {
                 {t("results.calibration")}
               </span>
               <span className="font-mono text-xs font-semibold tnum">
-                {percent(record.meanProbabilityOfActual, 1)}
+                {percent(currentRecord.meanProbabilityOfActual, 1)}
               </span>
             </div>
           </section>
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {results.map((entry) => (
+            {currentResults.map((entry) => (
               <ResultCard key={entry.view.id} entry={entry} />
             ))}
           </div>

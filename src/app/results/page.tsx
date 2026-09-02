@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function ResultsPage() {
-  const { results, record, sample } = loadWeek();
+  const { results, record, sample, live } = loadWeek();
 
-  return <ResultsView results={results} record={record} sample={sample} />;
+  return <ResultsView results={results} record={record} sample={sample} live={live} />;
 }

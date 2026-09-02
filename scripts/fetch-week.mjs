@@ -352,14 +352,31 @@ async function main() {
   const fixtures = scheduled
     .map((match) => {
       const finished = match.status === "FINISHED";
-      const opened = finished ? openedScoring(match.score) : null;
+      const isLive = match.status === "IN_PLAY" || match.status === "PAUSED";
+      const opened = (finished || isLive) ? openedScoring(match.score) : null;
+
+      let result = null;
+      if (finished || isLive) {
+        const goalsHome = match.score?.fullTime?.home ?? match.score?.halfTime?.home ?? 0;
+        const goalsAway = match.score?.fullTime?.away ?? match.score?.halfTime?.away ?? 0;
+        result = {
+          goalsHome,
+          goalsAway,
+          halfHome: match.score?.halfTime?.home ?? null,
+          halfAway: match.score?.halfTime?.away ?? null,
+          firstGoal: opened,
+          firstGoalMinute: null,
+          firstScorer: null,
+          period: match.status === "PAUSED" ? "HT" : isLive ? "LIVE" : null,
+        };
+      }
 
       return {
         id: match.id,
         leagueId: match.leagueId,
         round: match.stage === "REGULAR_SEASON" ? `Matchday ${match.matchday}` : match.stage,
         kickoff: match.utcDate,
-        status: finished ? "finished" : "scheduled",
+        status: finished ? "finished" : isLive ? "live" : "scheduled",
         home: formFor(match.homeTeam.id, match.id),
         away: formFor(match.awayTeam.id, match.id),
         // Earlier meetings between these two, this fixture itself excluded.
@@ -367,17 +384,7 @@ async function main() {
           .filter((meeting) => meeting.id !== match.id)
           .slice(0, H2H_MATCHES)
           .map(asMeeting),
-        result: finished
-          ? {
-              goalsHome: match.score.fullTime.home ?? 0,
-              goalsAway: match.score.fullTime.away ?? 0,
-              halfHome: match.score.halfTime?.home ?? null,
-              halfAway: match.score.halfTime?.away ?? null,
-              firstGoal: opened,
-              firstGoalMinute: null,
-              firstScorer: null,
-            }
-          : null,
+        result,
       };
     })
     .sort((a, b) => new Date(a.kickoff) - new Date(b.kickoff));

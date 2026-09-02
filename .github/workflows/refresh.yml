@@ -2,8 +2,8 @@ name: Refresh fixtures
 
 on:
   schedule:
-    # Match days, so results land within a couple of hours of full time.
-    - cron: "0 */2 * * 6,0"
+    # Match days, so results and live matches land frequently.
+    - cron: "*/30 * * * 6,0"
     # Midweek there is little to move, so four checks a day is plenty.
     - cron: "0 */6 * * 1-5"
   workflow_dispatch:

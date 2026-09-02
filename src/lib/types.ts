@@ -58,6 +58,8 @@ export type Result = {
   firstGoal: Venue | null;
   firstGoalMinute: number | null;
   firstScorer: string | null;
+  minute?: number | null;
+  period?: string | null;
 };
 
 export type Fixture = {
@@ -66,7 +68,7 @@ export type Fixture = {
   round: string;
   // ISO instant. Every clock on the site is derived from this.
   kickoff: string;
-  status: "scheduled" | "finished";
+  status: "scheduled" | "live" | "finished";
   home: TeamForm;
   away: TeamForm;
   // Earlier meetings between these two, most recent first.

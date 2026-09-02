@@ -19,7 +19,9 @@ export type MatchView = {
   id: number;
   leagueId: number;
   kickoff: string;
+  status: "scheduled" | "live" | "finished";
   finished: boolean;
+  isLive: boolean;
   home: Team;
   away: Team;
   result: Result | null;
@@ -43,6 +45,20 @@ const compactBoard = (board: Board): Board => ({
   totals: board.totals.map(line),
   homeGoals: board.homeGoals.map(line),
   awayGoals: board.awayGoals.map(line),
+  btts: {
+    yes: r(board.btts.yes),
+    no: r(board.btts.no),
+  },
+  drawNoBet: {
+    home: r(board.drawNoBet.home),
+    away: r(board.drawNoBet.away),
+  },
+  exactScores: board.exactScores.map((s) => ({
+    score: s.score,
+    home: s.home,
+    away: s.away,
+    probability: r(s.probability),
+  })),
   doubleChance: {
     homeOrDraw: r(board.doubleChance.homeOrDraw),
     homeOrAway: r(board.doubleChance.homeOrAway),
@@ -69,6 +85,11 @@ const compactBoard = (board: Board): Board => ({
     totals: board.halfTime.totals.map(line),
     share: r(board.halfTime.share),
   },
+  highestScoringHalf: {
+    first: r(board.highestScoringHalf.first),
+    draw: r(board.highestScoringHalf.draw),
+    second: r(board.highestScoringHalf.second),
+  },
 });
 
 export function toView(fixture: Fixture, projection: Projection): MatchView {
@@ -76,7 +97,9 @@ export function toView(fixture: Fixture, projection: Projection): MatchView {
     id: fixture.id,
     leagueId: fixture.leagueId,
     kickoff: fixture.kickoff,
+    status: fixture.status,
     finished: fixture.status === "finished",
+    isLive: fixture.status === "live",
     home: fixture.home.team,
     away: fixture.away.team,
     result: fixture.result,

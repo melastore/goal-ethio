@@ -2,11 +2,15 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  btts,
   cleanSheets,
   doubleChance,
+  drawNoBet,
   firstHalf,
   firstHalfShare,
   handicaps,
+  highestScoringHalf,
+  likeliestExactScores,
   oddEven,
   teamTotals,
   totals,
@@ -104,4 +108,31 @@ test("a thin half-time record stays near the league share", () => {
 test("matches with no half-time score are left out", () => {
   const { matches } = firstHalfShare(form([past(1, 0, null, null), past(2, 1, 1, 0)]));
   assert.equal(matches, 1);
+});
+
+test("both teams to score yes and no add to one", () => {
+  const b = btts(matrix);
+  assert.ok(Math.abs(b.yes + b.no - 1) < 1e-9);
+  assert.ok(b.yes > 0 && b.no > 0);
+});
+
+test("draw no bet probabilities add to one and favor stronger side", () => {
+  const dnb = drawNoBet(matrix);
+  assert.ok(Math.abs(dnb.home + dnb.away - 1) < 1e-9);
+  assert.ok(dnb.home > dnb.away);
+});
+
+test("likeliest exact scores are ordered by descending probability", () => {
+  const scores = likeliestExactScores(matrix, 5);
+  assert.equal(scores.length, 5);
+  for (let i = 0; i < scores.length - 1; i += 1) {
+    assert.ok(scores[i].probability >= scores[i + 1].probability);
+  }
+});
+
+test("highest scoring half partitions the match goals", () => {
+  const h = highestScoringHalf(1.6, 1.15, 0.44);
+  assert.ok(Math.abs(h.first + h.draw + h.second - 1) < 1e-6);
+  // Second half has slightly higher share of goals, so second > first
+  assert.ok(h.second > h.first);
 });

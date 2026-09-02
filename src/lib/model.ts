@@ -92,6 +92,42 @@ export function baselineFor(fixtures: Fixture[], leagueId: number): Baseline {
   return { homeGoals: home / total, awayGoals: away / total, sample };
 }
 
+// Competition difficulty weights relative to Europe's top tier (PL/PD/BL1 = 1.0)
+export const COMPETITION_WEIGHTS: Record<
+  string,
+  { attack: number; defence: number; baseElo: number }
+> = {
+  CL: { attack: 1.20, defence: 0.82, baseElo: 1800 },
+  PL: { attack: 1.00, defence: 1.00, baseElo: 1600 },
+  PD: { attack: 0.98, defence: 0.98, baseElo: 1580 },
+  SA: { attack: 0.96, defence: 0.96, baseElo: 1560 },
+  BL1: { attack: 1.02, defence: 1.02, baseElo: 1560 },
+  FL1: { attack: 0.92, defence: 1.05, baseElo: 1500 },
+  DED: { attack: 0.82, defence: 1.22, baseElo: 1420 },
+  PPL: { attack: 0.82, defence: 1.22, baseElo: 1420 },
+  BSA: { attack: 0.80, defence: 1.25, baseElo: 1400 },
+  ELC: { attack: 0.58, defence: 1.65, baseElo: 1340 },
+};
+
+export function teamRating(form: TeamForm): number {
+  if (!form?.matches || form.matches.length === 0) return 1500;
+  let baseSum = 0;
+  let points = 0;
+  for (const m of form.matches) {
+    const comp = (m.competition && COMPETITION_WEIGHTS[m.competition]) || {
+      attack: 1.0,
+      defence: 1.0,
+      baseElo: 1450,
+    };
+    baseSum += comp.baseElo;
+    if (m.goalsFor > m.goalsAgainst) points += 3;
+    else if (m.goalsFor === m.goalsAgainst) points += 1;
+  }
+  const avgBase = baseSum / form.matches.length;
+  const ppg = points / form.matches.length;
+  return avgBase + (ppg - 1.3) * 60;
+}
+
 // A per-match rate pulled toward the league by how thin its evidence is.
 const shrunk = (total: number, matches: number, prior: number) =>
   (total + PRIOR_MATCHES * prior) / (matches + PRIOR_MATCHES);
@@ -124,8 +160,12 @@ export function strengthAt(
 
   for (const match of at) {
     const weight = weightOf(match.kickoff, asOf);
-    scored += match.goalsFor * weight;
-    conceded += match.goalsAgainst * weight;
+    const comp = (match.competition && COMPETITION_WEIGHTS[match.competition]) || {
+      attack: 1.0,
+      defence: 1.0,
+    };
+    scored += match.goalsFor * comp.attack * weight;
+    conceded += match.goalsAgainst * comp.defence * weight;
     effective += weight;
   }
 
@@ -141,9 +181,38 @@ export function expectedGoals(fixture: Fixture, baseline: Baseline) {
   const home = strengthAt(fixture.home, "home", baseline, fixture.kickoff);
   const away = strengthAt(fixture.away, "away", baseline, fixture.kickoff);
 
+  const rHome = teamRating(fixture.home);
+  const rAway = teamRating(fixture.away);
+
+  // Home advantage in modern European football sits around +60 Elo points (~+0.25 goals)
+  const HOME_ADV_ELO = 60;
+  const delta = (rHome + HOME_ADV_ELO) - rAway;
+  const powerRatio = 10 ** (delta / 400);
+
+  // Match goal tempo derived from league baseline and team attack/defence ratings
+  const baseTotal = baseline.homeGoals + baseline.awayGoals;
+  const tempo = (home.attack * away.defence + away.attack * home.defence) / 2;
+  const matchTotal = Math.max(1.8, Math.min(4.5, baseTotal * tempo));
+
+  // Goal allocation following the team power ratio
+  let lambdaHome = (matchTotal * powerRatio) / (1 + powerRatio);
+  let lambdaAway = matchTotal / (1 + powerRatio);
+
+  // Direct H2H historical edge when at least two meetings exist
+  if (fixture.h2h && fixture.h2h.length >= 2) {
+    const homeTeamId = fixture.home.team.id;
+    const homeWins = fixture.h2h.filter((m) =>
+      m.homeId === homeTeamId ? m.goalsHome > m.goalsAway : m.goalsAway > m.goalsHome
+    ).length;
+    const h2hRatio = homeWins / fixture.h2h.length;
+    const shift = Math.max(0.92, Math.min(1.08, 0.92 + 0.16 * h2hRatio));
+    lambdaHome *= shift;
+    lambdaAway /= shift;
+  }
+
   return {
-    home: baseline.homeGoals * home.attack * away.defence,
-    away: baseline.awayGoals * away.attack * home.defence,
+    home: Math.max(0.2, lambdaHome),
+    away: Math.max(0.2, lambdaAway),
     homeStrength: home,
     awayStrength: away,
   };
@@ -246,20 +315,37 @@ export type FirstGoal = {
 
 // Two steady scoring rates are two competing Poisson processes, so the first
 // goal splits by share of the combined rate, scaled by the chance of any goal.
-export function firstGoalFrom(lambdaHome: number, lambdaAway: number): FirstGoal {
+export function firstGoalFrom(
+  lambdaHome: number,
+  lambdaAway: number,
+  homeFirstRate?: number,
+  awayFirstRate?: number
+): FirstGoal {
   const combined = lambdaHome + lambdaAway;
   if (combined <= 0) return { home: 0, away: 0, none: 1, expectedMinute: 0 };
 
   const none = Math.exp(-combined);
   const scored = 1 - none;
 
+  let homeShare = lambdaHome / combined;
+  let awayShare = lambdaAway / combined;
+
+  if (homeFirstRate !== undefined && awayFirstRate !== undefined && (homeFirstRate > 0 || awayFirstRate > 0)) {
+    const empTotal = homeFirstRate + awayFirstRate;
+    if (empTotal > 0) {
+      const empHomeShare = homeFirstRate / empTotal;
+      homeShare = 0.90 * homeShare + 0.10 * empHomeShare;
+      awayShare = 1 - homeShare;
+    }
+  }
+
   // Mean waiting time, conditioned on it landing inside the ninety.
   const perMinute = combined / MINUTES;
-  const expectedMinute = 1 / perMinute - (MINUTES * none) / scored;
+  const expectedMinute = Math.max(1, 1 / perMinute - (MINUTES * none) / scored);
 
   return {
-    home: (lambdaHome / combined) * scored,
-    away: (lambdaAway / combined) * scored,
+    home: homeShare * scored,
+    away: awayShare * scored,
     none,
     expectedMinute,
   };
@@ -410,11 +496,16 @@ export function project(fixture: Fixture, baseline: Baseline): Projection {
   const confidence: Confidence =
     venueMatches >= 2.5 ? "solid" : venueMatches >= 1.2 ? "fair" : "thin";
 
+  const homeSummary = summariseForm(fixture.home, undefined, 5);
+  const awaySummary = summariseForm(fixture.away, undefined, 5);
+  const homeRate = homeSummary.decided > 0 ? homeSummary.scoredFirst / homeSummary.decided : 0.5;
+  const awayRate = awaySummary.decided > 0 ? awaySummary.scoredFirst / awaySummary.decided : 0.5;
+
   return {
     lambdaHome: home,
     lambdaAway: away,
     outcome: outcomeFrom(matrix),
-    firstGoal: firstGoalFrom(home, away),
+    firstGoal: firstGoalFrom(home, away, homeRate, awayRate),
     scorelines: likeliestScorelines(matrix),
     markets: goalMarkets(matrix),
     homeStrength,
@@ -422,11 +513,11 @@ export function project(fixture: Fixture, baseline: Baseline): Projection {
     homeForm: {
       // The overall strip is the last five outright; the venue strip is the
       // five that actually bear on this fixture.
-      overall: summariseForm(fixture.home, undefined, 5),
+      overall: homeSummary,
       venue: summariseForm(fixture.home, "home"),
     },
     awayForm: {
-      overall: summariseForm(fixture.away, undefined, 5),
+      overall: awaySummary,
       venue: summariseForm(fixture.away, "away"),
     },
     h2h: summariseH2H(fixture.h2h ?? [], fixture.home.team.id),

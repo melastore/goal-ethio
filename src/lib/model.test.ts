@@ -293,3 +293,89 @@ test("a venue filter and a limit compose", () => {
   assert.equal(summary.played, 2);
   assert.equal(summary.goalsFor, 3);
 });
+
+test("second tier matches are discounted compared to top flight", async () => {
+  const { strengthAt } = await import("@/lib/model");
+  const elcMatch: PastMatch = {
+    fixtureId: 999,
+    kickoff: NOW,
+    competition: "ELC",
+    venue: "home",
+    opponent: "QPR",
+    opponentName: "QPR",
+    opponentLogo: "",
+    goalsFor: 4,
+    goalsAgainst: 0,
+    halfFor: null,
+    halfAgainst: null,
+    firstGoal: null,
+    firstGoalMinute: null,
+  };
+  const plMatch: PastMatch = { ...elcMatch, competition: "PL" };
+
+  const elcStrength = strengthAt(form([elcMatch]), "home", BASELINE, NOW);
+  const plStrength = strengthAt(form([plMatch]), "home", BASELINE, NOW);
+
+  assert.ok(elcStrength.attack < plStrength.attack);
+});
+
+test("elite teams carry a substantial rating advantage over promoted sides", async () => {
+  const { teamRating } = await import("@/lib/model");
+  const liverpoolForm: TeamForm = {
+    team: { id: 64, name: "Liverpool", short: "LIV", logo: "" },
+    matches: [
+      match("away", 2, 2, null, null, NOW),
+      match("home", 3, 1, null, null, NOW),
+      { ...match("home", 1, 0, null, null, NOW), competition: "CL" },
+    ],
+  };
+  const ipswichForm: TeamForm = {
+    team: { id: 349, name: "Ipswich Town", short: "IPS", logo: "" },
+    matches: [
+      { ...match("home", 2, 1, null, null, NOW), competition: "ELC" },
+      { ...match("away", 1, 1, null, null, NOW), competition: "ELC" },
+      { ...match("home", 3, 0, null, null, NOW), competition: "ELC" },
+    ],
+  };
+
+  const rLiverpool = teamRating(liverpoolForm);
+  const rIpswich = teamRating(ipswichForm);
+
+  assert.ok(rLiverpool > rIpswich + 150);
+});
+
+test("top team away against promoted club realistically favors the top team", async () => {
+  const { project } = await import("@/lib/model");
+  const fixture: Fixture = {
+    id: 101,
+    leagueId: 39,
+    round: "Matchday 1",
+    kickoff: NOW,
+    status: "scheduled",
+    home: {
+      team: { id: 349, name: "Ipswich Town", short: "IPS", logo: "" },
+      matches: [
+        { ...match("home", 2, 1, null, null, NOW), competition: "ELC" },
+        { ...match("home", 3, 0, null, null, NOW), competition: "ELC" },
+        { ...match("home", 1, 1, null, null, NOW), competition: "ELC" },
+      ],
+    },
+    away: {
+      team: { id: 64, name: "Liverpool", short: "LIV", logo: "" },
+      matches: [
+        match("away", 2, 1, null, null, NOW),
+        match("away", 2, 0, null, null, NOW),
+        { ...match("away", 2, 1, null, null, NOW), competition: "CL" },
+      ],
+    },
+    h2h: [],
+    result: null,
+  };
+
+  const p = project(fixture, BASELINE);
+
+  // Liverpool away must be clear favorite against promoted Ipswich
+  assert.ok(p.outcome.away > p.outcome.home);
+  assert.ok(p.outcome.away > 0.55);
+  assert.ok(p.firstGoal.away > p.firstGoal.home);
+});

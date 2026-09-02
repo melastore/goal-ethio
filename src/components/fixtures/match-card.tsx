@@ -90,17 +90,34 @@ export function MatchCard({ match, rank }: { match: MatchView; rank?: number }) 
           <TeamRow team={match.away} chance={p.outcome.away} winning={pick === "away"} />
         </div>
 
-        <div className="shrink-0 border-l border-hairline pl-4 text-right leading-none">
-          <div className="font-mono text-[22px] font-bold tnum">{kickoff.ethiopianClock}</div>
-          <div className="amharic mt-1 text-[11px] text-muted-foreground">
-            {kickoff.periodAmharic}
+        {match.isLive && match.result ? (
+          <div className="shrink-0 border-l border-hairline pl-4 text-right leading-none">
+            <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-bold text-red-500">
+              <span className="size-1.5 rounded-full bg-red-500 animate-ping" />
+              {match.result.period ?? "LIVE"} {match.result.minute ? `${match.result.minute}'` : ""}
+            </span>
+            <div className="font-mono text-[24px] font-bold text-foreground tnum">
+              {match.result.goalsHome} - {match.result.goalsAway}
+            </div>
+            {match.result.halfHome !== null && (
+              <div className="mt-1 font-mono text-[10px] text-muted-foreground tnum">
+                HT {match.result.halfHome}-{match.result.halfAway}
+              </div>
+            )}
           </div>
-          <div className="mt-2 font-mono text-[11px] tnum text-subtle">{kickoff.eatTime}</div>
-          <div className={`mt-1 text-[10px] text-subtle ${amharic ? "amharic" : ""}`}>
-            {amharic ? kickoff.weekday.amharic : kickoff.weekday.label.slice(0, 3)}{" "}
-            {kickoff.ethiopian.day}
+        ) : (
+          <div className="shrink-0 border-l border-hairline pl-4 text-right leading-none">
+            <div className="font-mono text-[22px] font-bold tnum">{kickoff.ethiopianClock}</div>
+            <div className="amharic mt-1 text-[11px] text-muted-foreground">
+              {kickoff.periodAmharic}
+            </div>
+            <div className="mt-2 font-mono text-[11px] text-subtle tnum">{kickoff.eatTime}</div>
+            <div className={`mt-1 text-[10px] text-subtle ${amharic ? "amharic" : ""}`}>
+              {amharic ? kickoff.weekday.amharic : kickoff.weekday.label.slice(0, 3)}{" "}
+              {kickoff.ethiopian.day}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="px-4 pb-3.5">

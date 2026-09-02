@@ -2,7 +2,7 @@ import { FixturesView } from "@/components/fixtures/fixtures-view";
 import { loadWeek } from "@/lib/week-data";
 
 export default function FixturesPage() {
-  const { upcoming, sample } = loadWeek();
+  const { upcoming, live, sample } = loadWeek();
 
-  return <FixturesView upcoming={upcoming} sample={sample} />;
+  return <FixturesView upcoming={upcoming} live={live} sample={sample} />;
 }

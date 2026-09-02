@@ -70,6 +70,37 @@ export function cleanSheets(matrix: number[][]) {
   };
 }
 
+export type Btts = { yes: number; no: number };
+
+export function btts(matrix: number[][]): Btts {
+  const yes = sumWhere(matrix, (h, a) => h > 0 && a > 0);
+  return { yes, no: Math.max(0, 1 - yes) };
+}
+
+export type DrawNoBet = { home: number; away: number };
+
+export function drawNoBet(matrix: number[][]): DrawNoBet {
+  const home = sumWhere(matrix, (h, a) => h > a);
+  const away = sumWhere(matrix, (h, a) => h < a);
+  const sum = home + away;
+  return {
+    home: sum > 0 ? home / sum : 0.5,
+    away: sum > 0 ? away / sum : 0.5,
+  };
+}
+
+export type ExactScore = { score: string; home: number; away: number; probability: number };
+
+export function likeliestExactScores(matrix: number[][], count = 5): ExactScore[] {
+  const all: ExactScore[] = [];
+  matrix.forEach((row, h) =>
+    row.forEach((p, a) => {
+      all.push({ score: `${h}-${a}`, home: h, away: a, probability: p });
+    })
+  );
+  return all.sort((a, b) => b.probability - a.probability).slice(0, count);
+}
+
 export function oddEven(matrix: number[][]) {
   const odd = sumWhere(matrix, (h, a) => (h + a) % 2 === 1);
   return { odd, even: 1 - odd };
@@ -123,6 +154,42 @@ export function firstHalf(
   };
 }
 
+export type HighestScoringHalf = {
+  first: number;
+  draw: number;
+  second: number;
+};
+
+export function highestScoringHalf(
+  lambdaHome: number,
+  lambdaAway: number,
+  share: number
+): HighestScoringHalf {
+  const m1 = scoreMatrix(lambdaHome * share, lambdaAway * share);
+  const m2 = scoreMatrix(lambdaHome * (1 - share), lambdaAway * (1 - share));
+
+  let first = 0;
+  let draw = 0;
+  let second = 0;
+
+  m1.forEach((row1, h1) => {
+    row1.forEach((p1, a1) => {
+      const g1 = h1 + a1;
+      m2.forEach((row2, h2) => {
+        row2.forEach((p2, a2) => {
+          const g2 = h2 + a2;
+          const p = p1 * p2;
+          if (g1 > g2) first += p;
+          else if (g1 === g2) draw += p;
+          else second += p;
+        });
+      });
+    });
+  });
+
+  return { first, draw, second };
+}
+
 /* -------------------------------------------------------------------------- */
 /* The whole board                                                            */
 /* -------------------------------------------------------------------------- */
@@ -131,11 +198,15 @@ export type Board = {
   totals: Line[];
   homeGoals: Line[];
   awayGoals: Line[];
+  btts: Btts;
+  drawNoBet: DrawNoBet;
+  exactScores: ExactScore[];
   doubleChance: ReturnType<typeof doubleChance>;
   handicaps: ReturnType<typeof handicaps>;
   cleanSheets: ReturnType<typeof cleanSheets>;
   oddEven: ReturnType<typeof oddEven>;
   halfTime: HalfTime;
+  highestScoringHalf: HighestScoringHalf;
 };
 
 export function board(
@@ -156,11 +227,15 @@ export function board(
     totals: totals(matrix),
     homeGoals: teamTotals(lambdaHome),
     awayGoals: teamTotals(lambdaAway),
+    btts: btts(matrix),
+    drawNoBet: drawNoBet(matrix),
+    exactScores: likeliestExactScores(matrix, 6),
     doubleChance: doubleChance(matrix),
     handicaps: handicaps(matrix),
     cleanSheets: cleanSheets(matrix),
     oddEven: oddEven(matrix),
     halfTime: firstHalf(lambdaHome, lambdaAway, share),
+    highestScoringHalf: highestScoringHalf(lambdaHome, lambdaAway, share),
   };
 }
 
@@ -169,6 +244,10 @@ export function strongestEdges(board: Board, limit = 4) {
   const candidates: { key: string; probability: number }[] = [
     ...board.totals.map((t) => ({ key: `over${t.line}`, probability: t.over })),
     ...board.totals.map((t) => ({ key: `under${t.line}`, probability: t.under })),
+    { key: "bttsYes", probability: board.btts.yes },
+    { key: "bttsNo", probability: board.btts.no },
+    { key: "dnbHome", probability: board.drawNoBet.home },
+    { key: "dnbAway", probability: board.drawNoBet.away },
     { key: "homeOrDraw", probability: board.doubleChance.homeOrDraw },
     { key: "drawOrAway", probability: board.doubleChance.drawOrAway },
     { key: "homeOrAway", probability: board.doubleChance.homeOrAway },

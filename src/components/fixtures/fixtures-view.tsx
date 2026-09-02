@@ -16,9 +16,10 @@ const NEXT_UP = 3;
 type Props = {
   upcoming: MatchView[];
   sample: boolean;
+  live?: MatchView[];
 };
 
-export function FixturesView({ upcoming, sample }: Props) {
+export function FixturesView({ upcoming, sample, live = [] }: Props) {
   const { t, language } = useLanguage();
   const amharic = language === "am";
 
@@ -124,6 +125,22 @@ export function FixturesView({ upcoming, sample }: Props) {
         </div>
       ) : (
         <div className="space-y-8">
+          {live.length > 0 && (
+            <section className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="size-2.5 rounded-full bg-red-500 animate-ping" />
+                <h2 className={`text-sm font-bold uppercase tracking-wide text-red-500 ${amharic ? "amharic tracking-normal" : ""}`}>
+                  {t("results.liveMatches")} ({live.length})
+                </h2>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {live.map((match) => (
+                  <MatchCard key={match.id} match={match} />
+                ))}
+              </div>
+            </section>
+          )}
+
           <section>
             <SectionHeading title={t("week.picks")} note={t("week.picksNote")} amharic={amharic} />
             <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">

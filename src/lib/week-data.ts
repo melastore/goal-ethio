@@ -38,6 +38,10 @@ export function loadWeek() {
     .filter(({ fixture }) => fixture.status === "scheduled")
     .map(({ fixture, projection }) => toView(fixture, projection));
 
+  const live: MatchView[] = byKickoff
+    .filter(({ fixture }) => fixture.status === "live")
+    .map(({ fixture, projection }) => toView(fixture, projection));
+
   const played = byKickoff.filter(({ fixture }) => fixture.status === "finished");
 
   const graded = played
@@ -60,6 +64,7 @@ export function loadWeek() {
     generatedAt: data.generatedAt,
     weekStart: data.weekStart,
     upcoming,
+    live,
     results,
     record: tally(graded),
   };
