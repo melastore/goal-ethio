@@ -234,7 +234,7 @@ export function FixturesView({ upcoming, sample, live = [] }: Props) {
           {/* Wide enough and the detail sits beside the list; narrower and it
               comes up over it. */}
           <aside className="hidden w-[400px] shrink-0 xl:block">
-            <div className="sticky top-[110px] max-h-[calc(100vh-130px)]">
+            <div className="sticky top-[110px] h-[calc(100vh-130px)]">
               {open ? (
                 <MatchDetail match={open} onClose={() => setOpenId(null)} />
               ) : (

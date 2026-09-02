@@ -125,7 +125,9 @@ export function MatchDetail({ match, onClose }: { match: MatchView; onClose?: ()
         ))}
       </div>
 
-      <div className="flex-1 overflow-y-auto px-4 py-4">
+      {/* min-h-0 is load bearing: a flex child defaults to min-height:auto, so
+          without it this grows to fit its content and never scrolls. */}
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
         {tab === "read" && <ReadPanel match={match} />}
         {tab === "value" && <ValuePanel match={match} />}
         {tab === "goals" && <GoalsBoard match={match} />}
