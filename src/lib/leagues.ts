@@ -27,6 +27,24 @@ export const LEAGUES: League[] = [
 export const leagueById = (id: number): League | undefined =>
   LEAGUES.find((league) => league.id === id);
 
+// The fixture list is keyed by api-football id; football-data, which the live
+// worker calls, knows the same competitions by these codes.
+const CODES: Record<number, string> = {
+  39: "PL",
+  140: "PD",
+  135: "SA",
+  78: "BL1",
+  61: "FL1",
+  2: "CL",
+  88: "DED",
+  94: "PPL",
+  40: "ELC",
+  71: "BSA",
+  4: "EC",
+};
+
+export const codeOf = (id: number): string | undefined => CODES[id];
+
 // Scoring rates are pooled per competition: continental form is set against a
 // different standard than a domestic weekend, and mixing them skews both.
 export const isContinental = (id: number) => id === 2 || id === 4;

@@ -9,6 +9,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { codeOf } from "@/lib/leagues";
 import type { MatchView } from "@/lib/view";
 
 export type LiveScore = {
@@ -70,16 +71,27 @@ function parseWorker(payload: unknown): LiveScore[] {
   });
 }
 
-// Whether any match on the page is close enough to kickoff to be worth asking
-// about. Polling a page of next Saturday's fixtures helps nobody.
-function windowOpen(matches: MatchView[], now: number): boolean {
-  return matches.some((match) => {
-    if (match.isLive) return true;
-    if (match.finished) return false;
-    const kickoff = new Date(match.kickoff).getTime();
-    if (!Number.isFinite(kickoff)) return false;
-    return now >= kickoff - BEFORE_KICKOFF_MS && now <= kickoff + AFTER_KICKOFF_MS;
-  });
+// A match close enough to kickoff to be worth asking about. Polling a page of
+// next Saturday's fixtures helps nobody.
+function inWindow(match: MatchView, now: number): boolean {
+  if (match.isLive) return true;
+  if (match.finished) return false;
+  const kickoff = new Date(match.kickoff).getTime();
+  if (!Number.isFinite(kickoff)) return false;
+  return now >= kickoff - BEFORE_KICKOFF_MS && now <= kickoff + AFTER_KICKOFF_MS;
+}
+
+// The competitions worth asking the worker about. Naming them matters: the
+// upstream is one call per competition on a ten-a-minute allowance, so a quiet
+// evening should cost one call rather than eleven.
+function activeCodes(matches: MatchView[], now: number): string[] {
+  const codes = new Set<string>();
+  for (const match of matches) {
+    if (!inWindow(match, now)) continue;
+    const code = codeOf(match.leagueId);
+    if (code) codes.add(code);
+  }
+  return [...codes].sort();
 }
 
 export function useLive(matches: MatchView[]): LiveState {
@@ -97,12 +109,16 @@ export function useLive(matches: MatchView[]): LiveState {
     [matches, scores]
   );
 
+  // Recomputed only when the fixture list does, not on every poll.
+  const codes = useMemo(() => activeCodes(matches, Date.now()).join(","), [matches]);
+
   const refresh = useCallback(async () => {
     if (inFlight.current) return;
     inFlight.current = true;
     setLoading(true);
 
-    const url = direct ? liveUrl() : `${basePath()}/live.json`;
+    const base = direct ? liveUrl() : `${basePath()}/live.json`;
+    const url = direct && codes ? `${base}?competitions=${codes}` : base;
 
     try {
       const response = await fetch(`${url}${url.includes("?") ? "&" : "?"}t=${Date.now()}`, {
@@ -124,17 +140,18 @@ export function useLive(matches: MatchView[]): LiveState {
       inFlight.current = false;
       setLoading(false);
     }
-  }, [direct]);
+  }, [direct, codes]);
 
   useEffect(() => {
-    if (!windowOpen(matches, Date.now())) return;
+    const open = () => matches.some((match) => inWindow(match, Date.now()));
+    if (!open()) return;
 
     refresh();
     const interval = setInterval(() => {
       // Nothing changes in a background tab that the next foreground poll will
       // not pick up, and phones throttle timers there anyway.
       if (document.visibilityState !== "visible") return;
-      if (!windowOpen(matches, Date.now())) return;
+      if (!open()) return;
       refresh();
     }, anyLive ? LIVE_INTERVAL : IDLE_INTERVAL);
 
