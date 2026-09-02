@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { RotateCw } from "lucide-react";
 
+import { LeagueRail } from "@/components/fixtures/filter-rail";
 import { LiveBar } from "@/components/fixtures/live-bar";
 import { MatchDetail } from "@/components/fixtures/match-detail";
 import { ResultCard } from "@/components/fixtures/result-card";
@@ -11,7 +12,7 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { percent, rate } from "@/lib/format";
 import { applyScore, useLive } from "@/lib/live";
 import type { Tally } from "@/lib/scoring";
-import type { MatchView } from "@/lib/view";
+import { leanOf, type MatchView } from "@/lib/view";
 import type { ResultView } from "@/lib/week-data";
 
 type Props = {
@@ -19,26 +20,86 @@ type Props = {
   record: Tally;
   sample: boolean;
   live?: MatchView[];
+  // Everything not played at build time, so a match that finishes while the
+  // page is open can be graded here rather than waiting for the next deploy.
+  upcoming?: MatchView[];
 };
 
-export function ResultsView({ results, record, sample, live = [] }: Props) {
+// The same grading the build does, for a score that arrived after it. Who
+// scored first is not in the live feed, so that stays ungraded.
+function gradeLive(match: MatchView): ResultView | null {
+  const result = match.result;
+  if (!result) return null;
+
+  const actual =
+    result.goalsHome > result.goalsAway
+      ? "home"
+      : result.goalsHome === result.goalsAway
+        ? "draw"
+        : "away";
+
+  const predicted = leanOf(match);
+
+  return {
+    view: match,
+    outcomeHit: predicted === actual,
+    firstGoalHit: null,
+    predicted,
+    actual,
+  };
+}
+
+export function ResultsView({ results, record, sample, live = [], upcoming = [] }: Props) {
   const { t, language } = useLanguage();
   const amharic = language === "am";
 
   const [openId, setOpenId] = useState<number | null>(null);
+  const [league, setLeague] = useState<number | null>(null);
 
-  const feed = useLive(live);
-  const liveNow = useMemo(
+  const all = useMemo(() => [...live, ...upcoming], [live, upcoming]);
+  const feed = useLive(all);
+
+  const scored = useMemo(
     () =>
-      live
+      all
         .map((match) => applyScore(match, feed.scores.get(match.id)))
-        .filter((match) => match.isLive),
-    [live, feed.scores]
+        .filter((match) => feed.scores.has(match.id)),
+    [all, feed.scores]
   );
 
+  const scoreboard = useMemo(() => scored.filter((match) => match.isLive), [scored]);
+
   const open = useMemo(
-    () => liveNow.find((match) => match.id === openId) ?? null,
-    [liveNow, openId]
+    () => scored.find((match) => match.id === openId) ?? null,
+    [scored, openId]
+  );
+
+  // Anything that finished since the build, graded here and put in front of the
+  // results the build already had.
+  const merged = useMemo(() => {
+    const known = new Set(results.map((entry) => entry.view.id));
+    const fresh = scored
+      .filter((match) => match.finished && !known.has(match.id))
+      .map(gradeLive)
+      .filter((entry): entry is ResultView => entry !== null)
+      .sort((a, b) => (a.view.kickoff < b.view.kickoff ? 1 : -1));
+
+    return [...fresh, ...results];
+  }, [scored, results]);
+
+  // Counted over everything, so a league with results is still offered when
+  // another one is the current filter.
+  const counts = useMemo(() => {
+    const byLeague = new Map<number, number>();
+    for (const entry of merged) {
+      byLeague.set(entry.view.leagueId, (byLeague.get(entry.view.leagueId) ?? 0) + 1);
+    }
+    return byLeague;
+  }, [merged]);
+
+  const shown = useMemo(
+    () => (league === null ? merged : merged.filter((entry) => entry.view.leagueId === league)),
+    [merged, league]
   );
 
   return (
@@ -68,7 +129,8 @@ export function ResultsView({ results, record, sample, live = [] }: Props) {
       </div>
 
       <LiveBar
-        matches={liveNow}
+        matches={scoreboard}
+        liveCount={scoreboard.length}
         scores={feed.scores}
         checkedAt={feed.checkedAt}
         loading={feed.loading}
@@ -77,7 +139,7 @@ export function ResultsView({ results, record, sample, live = [] }: Props) {
         onOpen={setOpenId}
       />
 
-      {results.length === 0 && liveNow.length === 0 ? (
+      {merged.length === 0 && scoreboard.length === 0 ? (
         <p
           className={`rounded-[14px] border border-hairline bg-card px-6 py-10 text-center text-sm text-muted-foreground ${
             amharic ? "amharic" : ""
@@ -89,11 +151,32 @@ export function ResultsView({ results, record, sample, live = [] }: Props) {
         <div className="space-y-6">
           <Record record={record} amharic={amharic} />
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {results.map((entry) => (
-              <ResultCard key={entry.view.id} entry={entry} />
-            ))}
-          </div>
+          {merged.length > 0 && (
+            <div className="rounded-xl border border-hairline bg-card px-3 py-2">
+              <LeagueRail
+                counts={counts}
+                active={league}
+                onSelect={setLeague}
+                total={merged.length}
+              />
+            </div>
+          )}
+
+          {shown.length === 0 ? (
+            <p
+              className={`rounded-[14px] border border-hairline bg-card px-6 py-10 text-center text-sm text-muted-foreground ${
+                amharic ? "amharic" : ""
+              }`}
+            >
+              {t("filter.noMatches")}
+            </p>
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {shown.map((entry) => (
+                <ResultCard key={entry.view.id} entry={entry} />
+              ))}
+            </div>
+          )}
         </div>
       )}
 

@@ -8,6 +8,8 @@ import type { MatchView } from "@/lib/view";
 
 type Props = {
   matches: MatchView[];
+  // How many of them are still on, for the heading.
+  liveCount: number;
   scores: Map<number, LiveScore>;
   checkedAt: Date | null;
   loading: boolean;
@@ -20,6 +22,7 @@ type Props = {
 // tap away and a bar that tries to say more stops being scannable.
 export function LiveBar({
   matches,
+  liveCount,
   scores,
   checkedAt,
   loading,
@@ -35,15 +38,17 @@ export function LiveBar({
   return (
     <div className="sticky top-[49px] z-20 -mx-4 mb-4 border-b border-hairline bg-background/95 backdrop-blur-md sm:mx-0 sm:rounded-xl sm:border">
       <div className="flex items-center gap-2 px-4 pt-2 sm:px-3">
-        <span className="size-2 rounded-full bg-live live-dot" />
+        {liveCount > 0 && <span className="size-2 rounded-full bg-live live-dot" />}
         <span
-          className={`text-[11px] font-bold uppercase tracking-wider text-live ${
-            amharic ? "amharic normal-case tracking-normal" : ""
-          }`}
+          className={`text-[11px] font-bold uppercase tracking-wider ${
+            liveCount > 0 ? "text-live" : "text-muted-foreground"
+          } ${amharic ? "amharic normal-case tracking-normal" : ""}`}
         >
-          {t("results.liveMatches")}
+          {liveCount > 0 ? t("results.liveMatches") : t("live.finalScores")}
         </span>
-        <span className="font-mono text-[11px] tnum text-subtle">{matches.length}</span>
+        <span className="font-mono text-[11px] tnum text-subtle">
+          {liveCount > 0 ? `${liveCount}/${matches.length}` : matches.length}
+        </span>
 
         <span className="ml-auto flex items-center gap-2">
           {checkedAt && (
@@ -74,13 +79,16 @@ export function LiveBar({
           const goalsAway = score?.goalsAway ?? match.result?.goalsAway ?? 0;
           const minute = score?.minute ?? match.result?.minute ?? null;
           const period = score?.period ?? match.result?.period ?? "LIVE";
+          const on = match.isLive;
 
           return (
             <button
               key={match.id}
               type="button"
               onClick={() => onOpen(match.id)}
-              className="flex shrink-0 items-center gap-2.5 rounded-lg border border-hairline bg-card px-2.5 py-1.5 text-left transition hover:border-live/40 hover:bg-muted"
+              className={`flex shrink-0 items-center gap-2.5 rounded-lg border bg-card px-2.5 py-1.5 text-left transition hover:bg-muted ${
+                on ? "border-hairline hover:border-live/40" : "border-hairline/60 opacity-80"
+              }`}
             >
               <span className="flex flex-col gap-0.5 text-[11px] font-semibold leading-tight">
                 <span className="max-w-[92px] truncate">{match.home.short}</span>
@@ -90,8 +98,12 @@ export function LiveBar({
                 <span>{goalsHome}</span>
                 <span>{goalsAway}</span>
               </span>
-              <span className="ml-1 shrink-0 font-mono text-[10px] font-bold tnum text-live">
-                {period === "HT" ? "HT" : minute !== null ? `${minute}'` : "LIVE"}
+              <span
+                className={`ml-1 shrink-0 font-mono text-[10px] font-bold tnum ${
+                  on ? "text-live" : "text-muted-foreground"
+                }`}
+              >
+                {!on ? t("live.fullTime") : period === "HT" ? "HT" : minute !== null ? `${minute}'` : "LIVE"}
               </span>
             </button>
           );

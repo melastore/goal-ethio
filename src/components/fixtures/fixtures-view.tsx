@@ -57,13 +57,24 @@ export function FixturesView({ upcoming, sample, live = [] }: Props) {
     return ids;
   }, [feed.scores]);
 
-  const liveNow = useMemo(
+  // Live, plus anything that has finished since the page was built. A score
+  // that vanishes the moment the whistle goes is the one people came for.
+  const scoreboard = useMemo(
     () =>
       all
-        .filter((match) => match.isLive || feed.scores.get(match.id)?.status === "live")
         .map((match) => applyScore(match, feed.scores.get(match.id)))
-        .filter((match) => match.isLive),
+        .filter((match) => match.isLive || (match.finished && feed.scores.has(match.id)))
+        .sort((a, b) => {
+          // Still playing first, then by kickoff.
+          if (a.isLive !== b.isLive) return a.isLive ? -1 : 1;
+          return a.kickoff < b.kickoff ? -1 : 1;
+        }),
     [all, feed.scores]
+  );
+
+  const liveCount = useMemo(
+    () => scoreboard.filter((match) => match.isLive).length,
+    [scoreboard]
   );
 
   const pending = useMemo(
@@ -125,10 +136,10 @@ export function FixturesView({ upcoming, sample, live = [] }: Props) {
   useEffect(() => {
     if (openId === null) return;
     const visible =
-      liveNow.some((match) => match.id === openId) ||
+      scoreboard.some((match) => match.id === openId) ||
       shown.some((entry) => entry.match.id === openId);
     if (!visible) setOpenId(null);
-  }, [openId, liveNow, shown]);
+  }, [openId, scoreboard, shown]);
 
   // The overlay takes the whole screen on a phone, so the page behind it should
   // not scroll under it.
@@ -165,7 +176,8 @@ export function FixturesView({ upcoming, sample, live = [] }: Props) {
       </div>
 
       <LiveBar
-        matches={liveNow}
+        matches={scoreboard}
+        liveCount={liveCount}
         scores={feed.scores}
         checkedAt={feed.checkedAt}
         loading={feed.loading}
