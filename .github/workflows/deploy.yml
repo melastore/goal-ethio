@@ -41,6 +41,10 @@ jobs:
           # at build time.
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          # Set the LIVE_URL repo variable to the deployed worker (see
+          # worker/README.md) for scores in seconds. Unset, the site falls back
+          # to feed.json and moves only when this workflow runs.
+          NEXT_PUBLIC_LIVE_URL: ${{ vars.LIVE_URL }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -8,8 +8,8 @@
 // rows it needs from public/detail.
 
 import { readMatch, type Note } from "@/lib/read";
-import type { Board, Line } from "@/lib/markets";
-import type { FormSummary, H2HSummary, Projection } from "@/lib/model";
+import type { Board, Line, Standout } from "@/lib/markets";
+import type { FormSummary, H2HSummary, Projection, SideRating } from "@/lib/model";
 import type { Fixture, Result, Team } from "@/lib/types";
 
 const r = (value: number) => Math.round(value * 1e4) / 1e4;
@@ -26,13 +26,22 @@ export type MatchView = {
   away: Team;
   result: Result | null;
   notes: Note[];
+  standouts: Standout[];
   p: {
     lambdaHome: number;
     lambdaAway: number;
     outcome: { home: number; draw: number; away: number };
-    firstGoal: { home: number; away: number; none: number; expectedMinute: number };
+    firstGoal: {
+      home: number;
+      away: number;
+      none: number;
+      expectedMinute: number;
+      byMinute: { minute: number; scored: number }[];
+    };
     scorelines: { home: number; away: number; probability: number }[];
     confidence: "thin" | "fair" | "solid";
+    homeRating: SideRating;
+    awayRating: SideRating;
     homeForm: { overall: FormSummary; venue: FormSummary };
     awayForm: { overall: FormSummary; venue: FormSummary };
     // The record only; the meetings behind it are fetched when a card is opened.
@@ -40,6 +49,14 @@ export type MatchView = {
     board: Board;
   };
 };
+
+const rating = (side: SideRating): SideRating => ({
+  attack: r(side.attack),
+  defence: r(side.defence),
+  homeEdge: r(side.homeEdge),
+  sample: r(side.sample),
+  overall: side.overall,
+});
 
 const compactBoard = (board: Board): Board => ({
   totals: board.totals.map(line),
@@ -69,6 +86,14 @@ const compactBoard = (board: Board): Board => ({
     homeGives: r(h.homeGives),
     awayGives: r(h.awayGives),
   })),
+  asian: board.asian.map((a) => ({
+    line: a.line,
+    home: { win: r(a.home.win), push: r(a.home.push), lose: r(a.home.lose), price: r(a.home.price) },
+    away: { win: r(a.away.win), push: r(a.away.push), lose: r(a.away.lose), price: r(a.away.price) },
+  })),
+  margins: board.margins.map((m) => ({ side: m.side, by: m.by, probability: r(m.probability) })),
+  resultAndBtts: board.resultAndBtts.map((c) => ({ key: c.key, probability: r(c.probability) })),
+  resultAndTotal: board.resultAndTotal.map((c) => ({ key: c.key, probability: r(c.probability) })),
   cleanSheets: {
     home: r(board.cleanSheets.home),
     away: r(board.cleanSheets.away),
@@ -85,6 +110,9 @@ const compactBoard = (board: Board): Board => ({
     totals: board.halfTime.totals.map(line),
     share: r(board.halfTime.share),
   },
+  htft: board.htft.map((c) => ({ key: c.key, probability: r(c.probability) })),
+  bothHalves: { home: r(board.bothHalves.home), away: r(board.bothHalves.away) },
+  goalEachHalf: r(board.goalEachHalf),
   highestScoringHalf: {
     first: r(board.highestScoringHalf.first),
     draw: r(board.highestScoringHalf.draw),
@@ -92,7 +120,11 @@ const compactBoard = (board: Board): Board => ({
   },
 });
 
-export function toView(fixture: Fixture, projection: Projection): MatchView {
+export function toView(
+  fixture: Fixture,
+  projection: Projection,
+  standouts: Standout[] = []
+): MatchView {
   return {
     id: fixture.id,
     leagueId: fixture.leagueId,
@@ -108,6 +140,12 @@ export function toView(fixture: Fixture, projection: Projection): MatchView {
       homeName: fixture.home.team.short,
       awayName: fixture.away.team.short,
     }),
+    standouts: standouts.map((s) => ({
+      ...s,
+      probability: r(s.probability),
+      typical: r(s.typical),
+      edge: r(s.edge),
+    })),
     p: {
       lambdaHome: r(projection.lambdaHome),
       lambdaAway: r(projection.lambdaAway),
@@ -121,6 +159,10 @@ export function toView(fixture: Fixture, projection: Projection): MatchView {
         away: r(projection.firstGoal.away),
         none: r(projection.firstGoal.none),
         expectedMinute: Math.round(projection.firstGoal.expectedMinute),
+        byMinute: projection.firstGoal.byMinute.map((w) => ({
+          minute: w.minute,
+          scored: r(w.scored),
+        })),
       },
       scorelines: projection.scorelines.map((s) => ({
         home: s.home,
@@ -128,6 +170,8 @@ export function toView(fixture: Fixture, projection: Projection): MatchView {
         probability: r(s.probability),
       })),
       confidence: projection.confidence,
+      homeRating: rating(projection.homeRating),
+      awayRating: rating(projection.awayRating),
       homeForm: projection.homeForm,
       awayForm: projection.awayForm,
       h2h: projection.h2h,

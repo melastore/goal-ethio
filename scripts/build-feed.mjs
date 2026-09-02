@@ -12,7 +12,10 @@
 
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 
-import { baselineFor, project, scoreMatrix } from "../src/lib/model.ts";
+import { fromArchived } from "../src/lib/history.ts";
+import { quotes, standouts, typicalRates } from "../src/lib/markets.ts";
+import { project, scoreMatrix } from "../src/lib/model.ts";
+import { fitRatings } from "../src/lib/ratings.ts";
 import { grade, tally } from "../src/lib/scoring.ts";
 import { readMatch } from "../src/lib/read.ts";
 
@@ -25,17 +28,23 @@ const r = (value) => Math.round(value * 1e4) / 1e4;
 
 const week = JSON.parse(await readFile("src/data/week.json", "utf8"));
 
-const baselines = new Map();
-for (const fixture of week.fixtures) {
-  if (!baselines.has(fixture.leagueId)) {
-    baselines.set(fixture.leagueId, baselineFor(week.fixtures, fixture.leagueId));
-  }
+let history = [];
+try {
+  history = JSON.parse(await readFile("src/data/history.json", "utf8")).matches.map(fromArchived);
+} catch {
+  // The archive is written by scripts/archive.mjs; without it the fit falls
+  // back to the ten matches a side that week.json carries.
 }
+
+const ratings = fitRatings(week.fixtures, undefined, { history });
 
 const entries = week.fixtures.map((fixture) => ({
   fixture,
-  projection: project(fixture, baselines.get(fixture.leagueId)),
+  projection: project(fixture, ratings),
 }));
+
+const boards = entries.map(({ projection }) => quotes(projection.board, projection.outcome));
+const typical = typicalRates(boards);
 
 const graded = entries
   .map(({ fixture, projection }) => grade(fixture, projection))
@@ -46,7 +55,7 @@ const feed = {
   generatedAt: week.generatedAt,
   weekStart: week.weekStart,
   record: tally(graded),
-  fixtures: entries.map(({ fixture, projection }) => {
+  fixtures: entries.map(({ fixture, projection }, index) => {
     const matrix = scoreMatrix(projection.lambdaHome, projection.lambdaAway);
 
     return {
@@ -63,6 +72,7 @@ const feed = {
         homeName: fixture.home.team.short,
         awayName: fixture.away.team.short,
       }),
+      standouts: standouts(boards[index], typical),
       // Row is the home score, column the away score.
       grid: matrix.slice(0, GRID).map((row) => row.slice(0, GRID).map(r)),
       projection,
@@ -72,6 +82,26 @@ const feed = {
 
 await mkdir("public", { recursive: true });
 await writeFile("public/feed.json", `${JSON.stringify(feed)}\n`);
+
+// Scores only, for the page to poll when no live worker is configured. The feed
+// is megabytes and a browser asking for it every half minute is not on.
+const live = {
+  at: week.generatedAt,
+  matches: entries
+    .filter(({ fixture }) => fixture.status !== "scheduled" && fixture.result)
+    .map(({ fixture }) => ({
+      id: fixture.id,
+      status: fixture.status,
+      minute: fixture.result.minute ?? null,
+      period: fixture.result.period ?? null,
+      goalsHome: fixture.result.goalsHome,
+      goalsAway: fixture.result.goalsAway,
+      halfHome: fixture.result.halfHome ?? null,
+      halfAway: fixture.result.halfAway ?? null,
+    })),
+};
+
+await writeFile("public/live.json", `${JSON.stringify(live)}\n`);
 
 // Rebuilt from scratch so a fixture that has dropped out of the window does not
 // leave a stale file behind in the export.
@@ -94,4 +124,6 @@ await Promise.all(
   )
 );
 
-console.log(`feed: ${feed.fixtures.length} fixtures, ${week.fixtures.length} detail files`);
+console.log(
+  `feed: ${feed.fixtures.length} fixtures, ${live.matches.length} in live.json, ${week.fixtures.length} detail files`
+);
