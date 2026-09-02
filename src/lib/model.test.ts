@@ -2,27 +2,33 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
-  baselineFor,
+  elapsedShare,
   firstGoalFrom,
   goalMarkets,
+  intensitySlope,
   lean,
   outcomeFrom,
   poisson,
+  project,
   scoreMatrix,
-  strengthAt,
   summariseForm,
   summariseH2H,
-  type Baseline,
 } from "@/lib/model";
-import type { Fixture, H2HMatch, PastMatch, TeamForm, Venue } from "@/lib/types";
-
-const BASELINE: Baseline = { homeGoals: 1.5, awayGoals: 1.2, sample: 100 };
+import { fitRatings } from "@/lib/ratings";
+import type { Fixture, H2HMatch, PastMatch, Team, TeamForm, Venue } from "@/lib/types";
 
 let nextFixtureId = 1;
 
 // Everything is dated on NOW so time decay leaves the weights at 1 and the
-// arithmetic under test is the shrinkage, not the decay.
+// arithmetic under test is the model, not the decay.
 const NOW = "2026-08-29T12:00:00Z";
+
+const team = (id: number, short: string): Team => ({
+  id,
+  name: short,
+  short,
+  logo: `https://crests.football-data.org/${id}.png`,
+});
 
 const match = (
   venue: Venue,
@@ -30,15 +36,16 @@ const match = (
   goalsAgainst: number,
   firstGoal: PastMatch["firstGoal"] = null,
   firstGoalMinute: number | null = null,
-  kickoff = NOW
+  kickoff = NOW,
+  opponent = team(9000 + nextFixtureId, "OPP")
 ): PastMatch => ({
   fixtureId: nextFixtureId++,
   kickoff,
   competition: "PL",
   venue,
-  opponent: "Someone",
-  opponentName: "Someone",
-  opponentLogo: "",
+  opponent: opponent.short,
+  opponentName: opponent.name,
+  opponentLogo: opponent.logo,
   goalsFor,
   goalsAgainst,
   halfFor: null,
@@ -47,9 +54,21 @@ const match = (
   firstGoalMinute,
 });
 
-const form = (matches: PastMatch[]): TeamForm => ({
-  team: { id: 1, name: "Team", short: "TEA", logo: "" },
+const form = (matches: PastMatch[], id = 1, short = "TEA"): TeamForm => ({
+  team: team(id, short),
   matches,
+});
+
+const fixture = (home: TeamForm, away: TeamForm, h2h: H2HMatch[] = []): Fixture => ({
+  id: nextFixtureId++,
+  leagueId: 39,
+  round: "Matchday 1",
+  kickoff: NOW,
+  status: "scheduled",
+  home,
+  away,
+  h2h,
+  result: null,
 });
 
 test("poisson sums to one over enough goals", () => {
@@ -76,34 +95,11 @@ test("equal rates give a symmetric match", () => {
   assert.ok(Math.abs(outcome.home - outcome.away) < 1e-9);
 });
 
-test("a thin sample is pulled back toward the league", () => {
-  // One 5-0 at home is not a 5-goal team.
-  const strength = strengthAt(form([match("home", 5, 0)]), "home", BASELINE, NOW);
-  assert.ok(strength.attack > 1);
-  assert.ok(strength.attack < 2);
-});
-
-test("a full venue sample moves further than a thin one", () => {
-  const one = strengthAt(form([match("home", 3, 0)]), "home", BASELINE, NOW);
-  const four = strengthAt(
-    form([
-      match("home", 3, 0),
-      match("home", 3, 0),
-      match("home", 3, 0),
-      match("home", 3, 0),
-    ]),
-    "home",
-    BASELINE,
-    NOW
-  );
-  assert.ok(four.attack > one.attack);
-});
-
-test("no matches at a venue reads as exactly average", () => {
-  const strength = strengthAt(form([match("away", 4, 0)]), "home", BASELINE, NOW);
-  assert.equal(strength.matches, 0);
-  assert.ok(Math.abs(strength.attack - 1) < 1e-9);
-  assert.ok(Math.abs(strength.defence - 1) < 1e-9);
+test("the low score correction can be turned off for a half", () => {
+  const corrected = scoreMatrix(0.7, 0.6);
+  const plain = scoreMatrix(0.7, 0.6, false);
+  // The correction is what firms up the goalless scoreline.
+  assert.ok(corrected[0][0] > plain[0][0]);
 });
 
 test("first goal splits by share of the combined rate", () => {
@@ -117,6 +113,38 @@ test("a goalless-looking match pushes the opening goal later", () => {
   const busy = firstGoalFrom(2.2, 1.8);
   const quiet = firstGoalFrom(0.8, 0.6);
   assert.ok(quiet.expectedMinute > busy.expectedMinute);
+});
+
+test("the observed first-goal record moves the split, but not far", () => {
+  const flat = firstGoalFrom(1.4, 1.4);
+  const nudged = firstGoalFrom(1.4, 1.4, {
+    homeFirstRate: 1,
+    awayFirstRate: 0,
+    decided: 10,
+  });
+  assert.ok(nudged.home > flat.home);
+  assert.ok(nudged.home - flat.home < 0.1);
+});
+
+test("a rising rate keeps the early windows quieter than a flat one", () => {
+  const slope = intensitySlope(0.45);
+  assert.ok(slope > 0);
+  // Half the clock has gone by 45, but less than half the scoring.
+  assert.ok(elapsedShare(45, slope) < 0.5);
+  assert.ok(Math.abs(elapsedShare(90, slope) - 1) < 1e-9);
+
+  const rising = firstGoalFrom(1.5, 1.2, { slope });
+  const flat = firstGoalFrom(1.5, 1.2, { slope: 0 });
+  assert.ok(rising.expectedMinute > flat.expectedMinute);
+  assert.ok(rising.byMinute[0].scored < flat.byMinute[0].scored);
+});
+
+test("the windows are a rising curve toward the full chance of a goal", () => {
+  const first = firstGoalFrom(1.5, 1.2, { slope: intensitySlope(0.45) });
+  for (let i = 1; i < first.byMinute.length; i += 1) {
+    assert.ok(first.byMinute[i].scored > first.byMinute[i - 1].scored);
+  }
+  assert.ok(first.byMinute[first.byMinute.length - 1].scored < 1 - first.none);
 });
 
 test("form reads the venue half on its own", () => {
@@ -145,53 +173,10 @@ test("a goalless match is left out of the scored-first denominator", () => {
   assert.equal(summary.scoredFirst, 1);
 });
 
-test("baseline falls back until there is enough of a sample", () => {
-  const fixture: Fixture = {
-    id: 1,
-    leagueId: 39,
-    round: "Round 1",
-    kickoff: NOW,
-    status: "scheduled",
-    home: form([match("home", 2, 1)]),
-    away: form([match("away", 0, 0)]),
-    h2h: [],
-    result: null,
-  };
-
-  const baseline = baselineFor([fixture], 39);
-  assert.equal(baseline.sample, 0);
-  assert.equal(baseline.homeGoals, 1.5);
-});
-
 test("both teams to score is never above the chance of a goal", () => {
   const markets = goalMarkets(scoreMatrix(1.6, 1.3));
   assert.ok(markets.btts > 0 && markets.btts < 1);
   assert.ok(markets.overTwoFive > 0 && markets.overTwoFive < 1);
-});
-
-test("a stale match counts for less than a fresh one", () => {
-  const fresh = strengthAt(form([match("home", 4, 0)]), "home", BASELINE, NOW);
-  // Four months back is roughly two half-lives.
-  const stale = strengthAt(
-    form([match("home", 4, 0, null, null, "2026-04-29T12:00:00Z")]),
-    "home",
-    BASELINE,
-    NOW
-  );
-
-  assert.ok(stale.attack < fresh.attack);
-  assert.ok(stale.effective < 0.3);
-  assert.equal(fresh.effective, 1);
-});
-
-test("weighting never revives a match into the future", () => {
-  const ahead = strengthAt(
-    form([match("home", 2, 0, null, null, "2027-01-01T12:00:00Z")]),
-    "home",
-    BASELINE,
-    NOW
-  );
-  assert.equal(ahead.effective, 1);
 });
 
 test("lean names the top outcome and its margin", () => {
@@ -294,88 +279,144 @@ test("a venue filter and a limit compose", () => {
   assert.equal(summary.goalsFor, 3);
 });
 
-test("second tier matches are discounted compared to top flight", async () => {
-  const { strengthAt } = await import("@/lib/model");
-  const elcMatch: PastMatch = {
-    fixtureId: 999,
-    kickoff: NOW,
-    competition: "ELC",
-    venue: "home",
-    opponent: "QPR",
-    opponentName: "QPR",
-    opponentLogo: "",
-    goalsFor: 4,
-    goalsAgainst: 0,
-    halfFor: null,
-    halfAgainst: null,
-    firstGoal: null,
-    firstGoalMinute: null,
-  };
-  const plMatch: PastMatch = { ...elcMatch, competition: "PL" };
+/* -------------------------------------------------------------------------- */
+/* The projection end to end                                                   */
+/* -------------------------------------------------------------------------- */
 
-  const elcStrength = strengthAt(form([elcMatch]), "home", BASELINE, NOW);
-  const plStrength = strengthAt(form([plMatch]), "home", BASELINE, NOW);
+// A league of ordinary sides, so a team under test has something to be rated
+// against. Every side plays every other once each way.
+function league(strengths: Record<string, number>, competition = "PL"): Fixture[] {
+  const names = Object.keys(strengths);
+  const teams = new Map(names.map((name, index) => [name, team(100 + index, name)]));
+  const rows = new Map<string, PastMatch[]>(names.map((name) => [name, []]));
 
-  assert.ok(elcStrength.attack < plStrength.attack);
+  for (const home of names) {
+    for (const away of names) {
+      if (home === away) continue;
+      const id = nextFixtureId++;
+      // Goals scale with the difference in strength, with a home bonus on top
+      // so the league has an advantage in it for the fit to find.
+      const goalsHome = Math.max(0, Math.round(1.6 + (strengths[home] - strengths[away])));
+      const goalsAway = Math.max(0, Math.round(1.0 + (strengths[away] - strengths[home])));
+
+      rows.get(home)!.push({
+        fixtureId: id,
+        kickoff: NOW,
+        competition,
+        venue: "home",
+        opponent: away,
+        opponentName: away,
+        opponentLogo: teams.get(away)!.logo,
+        goalsFor: goalsHome,
+        goalsAgainst: goalsAway,
+        halfFor: null,
+        halfAgainst: null,
+        firstGoal: null,
+        firstGoalMinute: null,
+      });
+
+      rows.get(away)!.push({
+        fixtureId: id,
+        kickoff: NOW,
+        competition,
+        venue: "away",
+        opponent: home,
+        opponentName: home,
+        opponentLogo: teams.get(home)!.logo,
+        goalsFor: goalsAway,
+        goalsAgainst: goalsHome,
+        halfFor: null,
+        halfAgainst: null,
+        firstGoal: null,
+        firstGoalMinute: null,
+      });
+    }
+  }
+
+  const forms = new Map(
+    names.map((name) => [name, { team: teams.get(name)!, matches: rows.get(name)! }])
+  );
+
+  const out: Fixture[] = [];
+  for (const home of names) {
+    for (const away of names) {
+      if (home === away) continue;
+      out.push({
+        id: nextFixtureId++,
+        leagueId: 39,
+        round: "Next",
+        kickoff: NOW,
+        status: "scheduled",
+        home: forms.get(home)!,
+        away: forms.get(away)!,
+        h2h: [],
+        result: null,
+      });
+    }
+  }
+
+  return out;
+}
+
+const find = (fixtures: Fixture[], home: string, away: string) =>
+  fixtures.find((f) => f.home.team.short === home && f.away.team.short === away)!;
+
+test("the better side is favoured, and more so at home", () => {
+  const fixtures = league({ STRONG: 0.7, MID: 0, WEAK: -0.7 });
+  const ratings = fitRatings(fixtures, NOW);
+
+  const atHome = project(find(fixtures, "STRONG", "WEAK"), ratings);
+  const away = project(find(fixtures, "WEAK", "STRONG"), ratings);
+
+  assert.ok(atHome.outcome.home > 0.6);
+  assert.ok(away.outcome.away > away.outcome.home);
+  assert.ok(atHome.outcome.home > away.outcome.away);
 });
 
-test("elite teams carry a substantial rating advantage over promoted sides", async () => {
-  const { teamRating } = await import("@/lib/model");
-  const liverpoolForm: TeamForm = {
-    team: { id: 64, name: "Liverpool", short: "LIV", logo: "" },
-    matches: [
-      match("away", 2, 2, null, null, NOW),
-      match("home", 3, 1, null, null, NOW),
-      { ...match("home", 1, 0, null, null, NOW), competition: "CL" },
-    ],
-  };
-  const ipswichForm: TeamForm = {
-    team: { id: 349, name: "Ipswich Town", short: "IPS", logo: "" },
-    matches: [
-      { ...match("home", 2, 1, null, null, NOW), competition: "ELC" },
-      { ...match("away", 1, 1, null, null, NOW), competition: "ELC" },
-      { ...match("home", 3, 0, null, null, NOW), competition: "ELC" },
-    ],
-  };
+test("a goal against a mean defence counts for more than one against a leaky one", () => {
+  // Two sides with the same goals scored, one of them all against the weakest.
+  const fixtures = league({ A: 0.5, B: 0.5, C: 0, D: -0.6 });
+  const ratings = fitRatings(fixtures, NOW);
 
-  const rLiverpool = teamRating(liverpoolForm);
-  const rIpswich = teamRating(ipswichForm);
-
-  assert.ok(rLiverpool > rIpswich + 150);
+  const a = ratings.attack.get("t100")!;
+  const d = ratings.attack.get("t103")!;
+  assert.ok(a > d, "the stronger side rates higher on attack");
+  assert.ok(ratings.defence.get("t100")! < ratings.defence.get("t103")!);
 });
 
-test("top team away against promoted club realistically favors the top team", async () => {
-  const { project } = await import("@/lib/model");
-  const fixture: Fixture = {
-    id: 101,
-    leagueId: 39,
-    round: "Matchday 1",
-    kickoff: NOW,
-    status: "scheduled",
-    home: {
-      team: { id: 349, name: "Ipswich Town", short: "IPS", logo: "" },
-      matches: [
-        { ...match("home", 2, 1, null, null, NOW), competition: "ELC" },
-        { ...match("home", 3, 0, null, null, NOW), competition: "ELC" },
-        { ...match("home", 1, 1, null, null, NOW), competition: "ELC" },
-      ],
-    },
-    away: {
-      team: { id: 64, name: "Liverpool", short: "LIV", logo: "" },
-      matches: [
-        match("away", 2, 1, null, null, NOW),
-        match("away", 2, 0, null, null, NOW),
-        { ...match("away", 2, 1, null, null, NOW), competition: "CL" },
-      ],
-    },
-    h2h: [],
-    result: null,
-  };
+test("a lopsided head-to-head moves the match, but only a little", () => {
+  const fixtures = league({ ONE: 0, TWO: 0 });
+  const ratings = fitRatings(fixtures, NOW);
+  const level = find(fixtures, "ONE", "TWO");
 
-  const p = project(fixture, BASELINE);
+  const plain = project(level, ratings);
+  const withRecord = project(
+    { ...level, h2h: [meeting(100, 4, 0), meeting(100, 3, 0), meeting(100, 3, 1)] },
+    ratings
+  );
 
-  // Liverpool away must be clear favorite against promoted Ipswich
-  assert.ok(p.outcome.away > p.outcome.home);
-  assert.ok(p.outcome.away > 0.55);
-  assert.ok(p.firstGoal.away > p.firstGoal.home);
+  assert.ok(withRecord.outcome.home > plain.outcome.home);
+  assert.ok(withRecord.outcome.home - plain.outcome.home < 0.08);
+});
+
+test("the projection is a whole distribution", () => {
+  const fixtures = league({ STRONG: 0.6, MID: 0, WEAK: -0.6 });
+  const ratings = fitRatings(fixtures, NOW);
+  const p = project(find(fixtures, "STRONG", "MID"), ratings);
+
+  const { home, draw, away } = p.outcome;
+  assert.ok(Math.abs(home + draw + away - 1) < 1e-9);
+  assert.ok(Math.abs(p.board.btts.yes + p.board.btts.no - 1) < 1e-9);
+  assert.ok(p.lambdaHome > p.lambdaAway);
+  assert.ok(p.firstGoal.home > p.firstGoal.away);
+});
+
+test("a side with no form at all reads as average rather than as a forecast", () => {
+  const fixtures = league({ MID: 0, OTHER: 0 });
+  const ratings = fitRatings(fixtures, NOW);
+  const blank = form([], 500, "BLANK");
+  const p = project(fixture(blank, fixtures[0].away), ratings);
+
+  assert.equal(p.confidence, "thin");
+  assert.ok(p.outcome.home > 0.2 && p.outcome.home < 0.7);
 });

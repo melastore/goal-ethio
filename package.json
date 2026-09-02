@@ -15,7 +15,9 @@
     "lint": "eslint",
     "test": "node --import ./scripts/test-alias.mjs --test \"src/**/*.test.ts\"",
     "fetch:week": "node --env-file-if-exists=.env scripts/fetch-week.mjs",
-    "feed": "node --import ./scripts/test-alias.mjs scripts/build-feed.mjs"
+    "feed": "node --import ./scripts/test-alias.mjs scripts/build-feed.mjs",
+    "backtest": "node --import ./scripts/test-alias.mjs scripts/backtest.mjs",
+    "archive": "node --import ./scripts/test-alias.mjs scripts/archive.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

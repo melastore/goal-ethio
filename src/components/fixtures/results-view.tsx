@@ -1,12 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { RotateCw } from "lucide-react";
 
-import { LiveResultCard, ResultCard } from "@/components/fixtures/result-card";
+import { LiveBar } from "@/components/fixtures/live-bar";
+import { MatchDetail } from "@/components/fixtures/match-detail";
+import { ResultCard } from "@/components/fixtures/result-card";
 import { SampleNotice } from "@/components/layout/sample-notice";
 import { useLanguage } from "@/components/providers/language-provider";
 import { percent, rate } from "@/lib/format";
+import { applyScore, useLive } from "@/lib/live";
 import type { Tally } from "@/lib/scoring";
 import type { MatchView } from "@/lib/view";
 import type { ResultView } from "@/lib/week-data";
@@ -18,66 +21,31 @@ type Props = {
   live?: MatchView[];
 };
 
-type FeedFixture = MatchView & {
-  projection?: MatchView["p"];
-};
-
 export function ResultsView({ results, record, sample, live = [] }: Props) {
   const { t, language } = useLanguage();
   const amharic = language === "am";
 
-  const [liveMatches, setLiveMatches] = useState<MatchView[]>(live);
-  const [currentResults] = useState<ResultView[]>(results);
-  const [currentRecord, setCurrentRecord] = useState<Tally>(record);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [lastChecked, setLastChecked] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<number | null>(null);
 
-  const fetchLiveFeed = useCallback(async () => {
-    setIsRefreshing(true);
-    try {
-      const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-      const res = await fetch(`${basePath}/feed.json?_t=${Date.now()}`, { cache: "no-store" });
-      if (!res.ok) return;
-      const data = (await res.json()) as { fixtures?: FeedFixture[]; record?: Tally };
-      if (data && Array.isArray(data.fixtures)) {
-        const activeLive: MatchView[] = data.fixtures
-          .filter((f) => f.status === "live")
-          .map((f) => ({
-            ...f,
-            p: f.projection ?? f.p,
-            finished: false,
-            isLive: true,
-          }));
-        setLiveMatches(activeLive);
-        if (data.record) setCurrentRecord(data.record);
-      }
-    } catch {
-      // Retain existing state on transient network failure
-    } finally {
-      setIsRefreshing(false);
-      const now = new Date();
-      setLastChecked(
-        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
-      );
-    }
-  }, []);
+  const feed = useLive(live);
+  const liveNow = useMemo(
+    () =>
+      live
+        .map((match) => applyScore(match, feed.scores.get(match.id)))
+        .filter((match) => match.isLive),
+    [live, feed.scores]
+  );
 
-  useEffect(() => {
-    const now = new Date();
-    setLastChecked(
-      now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
-    );
-
-    // Auto-poll live feed every 30 seconds
-    const timer = setInterval(fetchLiveFeed, 30_000);
-    return () => clearInterval(timer);
-  }, [fetchLiveFeed]);
+  const open = useMemo(
+    () => liveNow.find((match) => match.id === openId) ?? null,
+    [liveNow, openId]
+  );
 
   return (
     <>
       {sample && <SampleNotice />}
 
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <h1
           className={`text-[26px] font-bold leading-tight tracking-tight sm:text-3xl ${
             amharic ? "amharic" : ""
@@ -86,47 +54,32 @@ export function ResultsView({ results, record, sample, live = [] }: Props) {
           {t("results.heading")}
         </h1>
 
-        <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className={amharic ? "amharic" : ""}>{t("market.liveActive")}</span>
-            {lastChecked && (
-              <span className="font-mono text-[11px] text-subtle tnum">· {lastChecked}</span>
-            )}
-          </span>
-
-          <button
-            type="button"
-            onClick={fetchLiveFeed}
-            disabled={isRefreshing}
-            className="flex items-center gap-1 rounded-lg border border-hairline bg-card px-2.5 py-1 text-xs font-medium transition hover:bg-muted active:scale-95 disabled:opacity-50"
-            title={t("market.refresh")}
-          >
-            <RotateCw className={`size-3 text-muted-foreground ${isRefreshing ? "animate-spin" : ""}`} />
-            <span className={amharic ? "amharic" : ""}>{t("market.refresh")}</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={feed.refresh}
+          disabled={feed.loading}
+          className="flex items-center gap-1.5 rounded-lg border border-hairline bg-card px-2.5 py-1 text-xs font-medium transition hover:bg-muted active:scale-95 disabled:opacity-50"
+        >
+          <RotateCw
+            className={`size-3 text-muted-foreground ${feed.loading ? "animate-spin" : ""}`}
+          />
+          <span className={amharic ? "amharic" : ""}>{t("market.refresh")}</span>
+        </button>
       </div>
 
-      {liveMatches.length > 0 && (
-        <section className="mb-8 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="size-2.5 rounded-full bg-red-500 animate-ping" />
-            <h2 className={`text-sm font-bold text-red-500 uppercase tracking-wide ${amharic ? "amharic tracking-normal" : ""}`}>
-              {t("results.liveMatches")} ({liveMatches.length})
-            </h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {liveMatches.map((match) => (
-              <LiveResultCard key={match.id} match={match} />
-            ))}
-          </div>
-        </section>
-      )}
+      <LiveBar
+        matches={liveNow}
+        scores={feed.scores}
+        checkedAt={feed.checkedAt}
+        loading={feed.loading}
+        direct={feed.direct}
+        onRefresh={feed.refresh}
+        onOpen={setOpenId}
+      />
 
-      {currentResults.length === 0 && liveMatches.length === 0 ? (
+      {results.length === 0 && liveNow.length === 0 ? (
         <p
-          className={`rounded-[16px] border border-hairline bg-card px-6 py-10 text-center text-sm text-muted-foreground ${
+          className={`rounded-[14px] border border-hairline bg-card px-6 py-10 text-center text-sm text-muted-foreground ${
             amharic ? "amharic" : ""
           }`}
         >
@@ -134,48 +87,139 @@ export function ResultsView({ results, record, sample, live = [] }: Props) {
         </p>
       ) : (
         <div className="space-y-6">
-          <section className="rounded-[16px] border border-hairline bg-card p-4 shadow-[var(--shadow-card)]">
-            <h2 className={`text-sm font-bold ${amharic ? "amharic" : ""}`}>{t("results.record")}</h2>
-
-            <dl className="mt-4 grid grid-cols-3 gap-4">
-              <Score
-                label={t("results.outcomeHits")}
-                value={rate(currentRecord.outcomeHits, currentRecord.played)}
-                detail={`${currentRecord.outcomeHits}/${currentRecord.played}`}
-                amharic={amharic}
-              />
-              <Score
-                label={t("results.firstGoalHits")}
-                value={rate(currentRecord.firstGoalHits, currentRecord.firstGoalGraded)}
-                detail={`${currentRecord.firstGoalHits}/${currentRecord.firstGoalGraded}`}
-                amharic={amharic}
-              />
-              <Score
-                label={t("results.scorelineHits")}
-                value={rate(currentRecord.scorelineHits, currentRecord.played)}
-                detail={`${currentRecord.scorelineHits}/${currentRecord.played}`}
-                amharic={amharic}
-              />
-            </dl>
-
-            <div className="mt-4 flex items-baseline justify-between gap-3 border-t border-hairline pt-3">
-              <span className={`text-xs text-muted-foreground ${amharic ? "amharic" : ""}`}>
-                {t("results.calibration")}
-              </span>
-              <span className="font-mono text-xs font-semibold tnum">
-                {percent(currentRecord.meanProbabilityOfActual, 1)}
-              </span>
-            </div>
-          </section>
+          <Record record={record} amharic={amharic} />
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {currentResults.map((entry) => (
+            {results.map((entry) => (
               <ResultCard key={entry.view.id} entry={entry} />
             ))}
           </div>
         </div>
       )}
+
+      {open && (
+        <div className="fixed inset-0 z-40">
+          <button
+            type="button"
+            aria-label={t("detail.close")}
+            onClick={() => setOpenId(null)}
+            className="absolute inset-0 bg-black/45 backdrop-blur-[2px]"
+          />
+          <div className="panel-in absolute inset-x-0 bottom-0 top-10 sm:inset-x-6 sm:top-16 lg:inset-x-[22%]">
+            <MatchDetail match={open} onClose={() => setOpenId(null)} />
+          </div>
+        </div>
+      )}
     </>
+  );
+}
+
+// A three-way coin flip, for the two scores that need something to sit against.
+const COIN_BRIER = 2 / 3;
+const COIN_LOG_LOSS = Math.log(3);
+
+function Record({ record, amharic }: { record: Tally; amharic: boolean }) {
+  const { t } = useLanguage();
+
+  return (
+    <section className="rounded-[14px] border border-hairline bg-card p-4 shadow-[var(--shadow-card)]">
+      <div className="flex items-baseline justify-between gap-3">
+        <h2 className={`text-sm font-bold ${amharic ? "amharic" : ""}`}>{t("results.record")}</h2>
+        <span className="font-mono text-[11px] tnum text-subtle">
+          {record.played} {t("count.matches")}
+        </span>
+      </div>
+
+      <dl className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <Score
+          label={t("results.outcomeHits")}
+          value={rate(record.outcomeHits, record.played)}
+          detail={`${record.outcomeHits}/${record.played}`}
+          amharic={amharic}
+        />
+        <Score
+          label={t("results.firstGoalHits")}
+          value={rate(record.firstGoalHits, record.firstGoalGraded)}
+          detail={`${record.firstGoalHits}/${record.firstGoalGraded}`}
+          amharic={amharic}
+        />
+        <Score
+          label={t("results.bttsHits")}
+          value={rate(record.bttsHits, record.played)}
+          detail={`${record.bttsHits}/${record.played}`}
+          amharic={amharic}
+        />
+        <Score
+          label={t("results.scorelineHits")}
+          value={rate(record.scorelineHits, record.played)}
+          detail={`${record.scorelineHits}/${record.played}`}
+          amharic={amharic}
+        />
+      </dl>
+
+      {/* Hit rate says the ordering is right; these say the numbers are. */}
+      <dl className="mt-4 grid grid-cols-3 gap-4 border-t border-hairline pt-3.5">
+        <Small
+          label={t("results.calibration")}
+          value={percent(record.meanProbabilityOfActual, 1)}
+          note={t("results.vsCoin33")}
+          amharic={amharic}
+        />
+        <Small
+          label={t("results.brier")}
+          value={record.brier.toFixed(3)}
+          note={`${t("results.coin")} ${COIN_BRIER.toFixed(3)}`}
+          amharic={amharic}
+          good={record.played > 0 && record.brier < COIN_BRIER}
+        />
+        <Small
+          label={t("results.logLoss")}
+          value={record.logLoss.toFixed(3)}
+          note={`${t("results.coin")} ${COIN_LOG_LOSS.toFixed(3)}`}
+          amharic={amharic}
+          good={record.played > 0 && record.logLoss < COIN_LOG_LOSS}
+        />
+      </dl>
+
+      {record.bands.length > 0 && (
+        <div className="mt-4 border-t border-hairline pt-3.5">
+          <div className="flex items-baseline justify-between gap-3">
+            <h3 className={`text-[11px] font-semibold uppercase tracking-wider text-subtle ${amharic ? "amharic normal-case tracking-normal" : ""}`}>
+              {t("results.reliability")}
+            </h3>
+            <span className={`text-[10px] text-subtle ${amharic ? "amharic" : ""}`}>
+              {t("results.reliabilityNote")}
+            </span>
+          </div>
+
+          <div className="mt-2.5 space-y-1.5">
+            {record.bands.map((band) => (
+              <div key={band.from} className="flex items-center gap-2.5">
+                <span className="w-[62px] shrink-0 font-mono text-[11px] tnum text-muted-foreground">
+                  {Math.round(band.from * 100)}-{Math.round(Math.min(band.to, 1) * 100)}%
+                </span>
+                <div className="relative h-4 flex-1 overflow-hidden rounded bg-muted">
+                  <div
+                    className="h-full rounded bg-primary/70"
+                    style={{ width: `${Math.min(band.hits / band.n, 1) * 100}%` }}
+                  />
+                  {/* Where the model said it would land. */}
+                  <span
+                    className="absolute top-0 h-full w-[2px] bg-foreground/70"
+                    style={{ left: `${Math.min(band.claimed, 1) * 100}%` }}
+                    aria-hidden
+                  />
+                </div>
+                <span className="w-[64px] shrink-0 text-right font-mono text-[11px] tnum">
+                  {rate(band.hits, band.n)}
+                  <span className="ml-1 text-subtle">/{band.n}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -195,8 +239,38 @@ function Score({
       <dt className={`truncate text-[11px] text-muted-foreground ${amharic ? "amharic" : ""}`}>
         {label}
       </dt>
-      <dd className="mt-1 font-mono text-2xl font-bold tnum leading-none">{value}</dd>
+      <dd className="mt-1 font-mono text-2xl font-bold leading-none tnum">{value}</dd>
       <div className="mt-1 font-mono text-[11px] tnum text-subtle">{detail}</div>
+    </div>
+  );
+}
+
+function Small({
+  label,
+  value,
+  note,
+  amharic,
+  good,
+}: {
+  label: string;
+  value: string;
+  note: string;
+  amharic: boolean;
+  good?: boolean;
+}) {
+  return (
+    <div>
+      <dt className={`truncate text-[11px] text-muted-foreground ${amharic ? "amharic" : ""}`}>
+        {label}
+      </dt>
+      <dd
+        className={`mt-1 font-mono text-base font-bold leading-none tnum ${
+          good === undefined ? "" : good ? "text-home" : "text-live"
+        }`}
+      >
+        {value}
+      </dd>
+      <div className={`mt-1 text-[10px] text-subtle ${amharic ? "amharic" : ""}`}>{note}</div>
     </div>
   );
 }

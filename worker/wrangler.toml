@@ -1,0 +1,6 @@
+name = "goalethio-live"
+main = "index.js"
+compatibility_date = "2025-09-01"
+
+# FOOTBALL_DATA_TOKEN is a secret, not a var:
+#   npx wrangler secret put FOOTBALL_DATA_TOKEN

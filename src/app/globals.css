@@ -17,16 +17,19 @@
   --color-home: var(--home);
   --color-draw: var(--draw);
   --color-away: var(--away);
+  --color-live: var(--live);
+  --color-value: var(--value);
 
   --font-sans: var(--font-inter), "Segoe UI", sans-serif;
   --font-mono: var(--font-mono-face), ui-monospace, monospace;
   --font-ethiopic: var(--font-ethiopic), var(--font-inter), sans-serif;
 
-  --radius-card: 16px;
+  --radius-card: 14px;
   --radius-pill: 999px;
 
   --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.04), 0 4px 16px oklch(0% 0 0 / 0.04);
   --shadow-lift: 0 2px 4px oklch(0% 0 0 / 0.05), 0 12px 32px oklch(0% 0 0 / 0.08);
+  --shadow-panel: 0 8px 24px oklch(0% 0 0 / 0.1), 0 32px 64px oklch(0% 0 0 / 0.12);
 }
 
 /*
@@ -36,44 +39,50 @@
 :root {
   color-scheme: light;
 
-  --background: oklch(97.5% 0.006 150);
-  --foreground: oklch(20% 0.02 165);
+  --background: oklch(97.8% 0.005 160);
+  --foreground: oklch(18% 0.022 168);
   --card: oklch(100% 0 0);
-  --elevated: oklch(99.2% 0.003 150);
-  --muted: oklch(95.2% 0.008 155);
-  --muted-foreground: oklch(50% 0.016 160);
-  --subtle: oklch(64% 0.012 160);
-  --border: oklch(90.5% 0.009 155);
-  --hairline: oklch(93.5% 0.007 155);
-  --primary: oklch(48% 0.12 158);
+  --elevated: oklch(99.2% 0.003 155);
+  --muted: oklch(95.4% 0.008 158);
+  --muted-foreground: oklch(48% 0.018 162);
+  --subtle: oklch(62% 0.014 162);
+  --border: oklch(90% 0.01 158);
+  --hairline: oklch(93.8% 0.007 158);
+  --primary: oklch(46% 0.125 158);
   --primary-foreground: oklch(98.5% 0.008 150);
 
-  --home: oklch(52% 0.132 158);
-  --draw: oklch(63% 0.105 78);
-  --away: oklch(52% 0.13 258);
+  --home: oklch(50% 0.135 158);
+  --draw: oklch(60% 0.11 72);
+  --away: oklch(50% 0.14 258);
+  --live: oklch(55% 0.2 22);
+  --value: oklch(52% 0.14 300);
 }
 
 .dark {
   color-scheme: dark;
 
-  --background: oklch(16.5% 0.014 168);
-  --foreground: oklch(95% 0.008 150);
-  --card: oklch(21% 0.017 168);
-  --elevated: oklch(24% 0.018 168);
-  --muted: oklch(26.5% 0.018 168);
-  --muted-foreground: oklch(71% 0.014 155);
-  --subtle: oklch(58% 0.015 158);
-  --border: oklch(30% 0.018 168);
-  --hairline: oklch(26% 0.016 168);
-  --primary: oklch(76% 0.15 158);
-  --primary-foreground: oklch(17% 0.02 168);
+  /* Deeper than a grey: a scoreboard reads better against something near black. */
+  --background: oklch(13.5% 0.012 168);
+  --foreground: oklch(96% 0.006 150);
+  --card: oklch(17.5% 0.015 168);
+  --elevated: oklch(21% 0.017 168);
+  --muted: oklch(24.5% 0.018 168);
+  --muted-foreground: oklch(73% 0.013 155);
+  --subtle: oklch(56% 0.014 158);
+  --border: oklch(28% 0.018 168);
+  --hairline: oklch(23% 0.015 168);
+  --primary: oklch(78% 0.16 158);
+  --primary-foreground: oklch(15% 0.02 168);
 
-  --home: oklch(74% 0.148 158);
-  --draw: oklch(80% 0.115 82);
-  --away: oklch(70% 0.13 255);
+  --home: oklch(76% 0.155 158);
+  --draw: oklch(81% 0.13 78);
+  --away: oklch(72% 0.14 255);
+  --live: oklch(70% 0.2 22);
+  --value: oklch(76% 0.15 300);
 
-  --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.3), 0 4px 16px oklch(0% 0 0 / 0.2);
-  --shadow-lift: 0 2px 4px oklch(0% 0 0 / 0.35), 0 12px 32px oklch(0% 0 0 / 0.3);
+  --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.35), 0 4px 16px oklch(0% 0 0 / 0.25);
+  --shadow-lift: 0 2px 4px oklch(0% 0 0 / 0.4), 0 12px 32px oklch(0% 0 0 / 0.35);
+  --shadow-panel: 0 8px 24px oklch(0% 0 0 / 0.5), 0 32px 64px oklch(0% 0 0 / 0.5);
 }
 
 body {
@@ -100,11 +109,41 @@ body {
   font-feature-settings: "tnum";
 }
 
+/* The rails scroll sideways on a phone; the bar is noise on top of content. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* A live score should catch the eye once, not pulse forever. */
+@keyframes tick {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.45; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.live-dot {
+  animation: tick 2s ease-in-out infinite;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.panel-in {
+  animation: slide-up 0.22s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
