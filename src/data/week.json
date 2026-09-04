@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T20:32:06.751Z",
+  "generatedAt": "2026-09-04T02:39:15.960Z",
   "weekStart": "2026-08-31",
   "fixtures": [
     {
@@ -7658,7 +7658,7 @@
       "leagueId": 61,
       "round": "Matchday 3",
       "kickoff": "2026-09-03T18:45:00Z",
-      "status": "live",
+      "status": "finished",
       "home": {
         "team": {
           "id": 511,
@@ -8037,7 +8037,7 @@
         "firstGoal": "away",
         "firstGoalMinute": null,
         "firstScorer": null,
-        "period": "LIVE"
+        "period": null
       }
     },
     {
@@ -8045,7 +8045,7 @@
       "leagueId": 140,
       "round": "Matchday 6",
       "kickoff": "2026-09-03T19:00:00Z",
-      "status": "live",
+      "status": "finished",
       "home": {
         "team": {
           "id": 92,
@@ -8424,7 +8424,7 @@
         "firstGoal": null,
         "firstGoalMinute": null,
         "firstScorer": null,
-        "period": "LIVE"
+        "period": null
       }
     },
     {
@@ -29264,6 +29264,21 @@
         },
         "matches": [
           {
+            "fixtureId": 554775,
+            "kickoff": "2026-09-02T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "FLA",
+            "opponentName": "Flamengo",
+            "opponentLogo": "https://crests.football-data.org/1783.png",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "halfFor": 0,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 554986,
             "kickoff": "2026-08-30T21:30:00Z",
             "competition": "BSA",
@@ -29396,21 +29411,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554891,
-            "kickoff": "2026-05-16T21:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "CAM",
-            "opponentName": "Mineiro",
-            "opponentLogo": "https://crests.football-data.org/1766.png",
-            "goalsFor": 1,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -34911,6 +34911,21 @@
         },
         "matches": [
           {
+            "fixtureId": 554775,
+            "kickoff": "2026-09-02T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "MIR",
+            "opponentName": "Mirassol",
+            "opponentLogo": "https://crests.football-data.org/4364.png",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "halfFor": 2,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 554984,
             "kickoff": "2026-08-30T19:00:00Z",
             "competition": "BSA",
@@ -35028,21 +35043,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554903,
-            "kickoff": "2026-05-24T00:00:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "PAL",
-            "opponentName": "Palmeiras",
-            "opponentLogo": "https://crests.football-data.org/1769.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           },
           {
@@ -36602,6 +36602,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564682,
+            "kickoff": "2026-09-03T19:00:00Z",
+            "competition": "PD",
+            "venue": "away",
+            "opponent": "RSO",
+            "opponentName": "Real Sociedad",
+            "opponentLogo": "https://crests.football-data.org/92.png",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564652,
             "kickoff": "2026-08-30T19:30:00Z",
             "competition": "PD",
@@ -36733,21 +36748,6 @@
             "goalsAgainst": 2,
             "halfFor": 0,
             "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544532,
-            "kickoff": "2026-04-22T19:30:00Z",
-            "competition": "PD",
-            "venue": "away",
-            "opponent": "FCB",
-            "opponentName": "Barça",
-            "opponentLogo": "https://crests.football-data.org/81.png",
-            "goalsFor": 0,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 1,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -37736,6 +37736,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564682,
+            "kickoff": "2026-09-03T19:00:00Z",
+            "competition": "PD",
+            "venue": "home",
+            "opponent": "CEL",
+            "opponentName": "Celta",
+            "opponentLogo": "https://crests.football-data.org/558.png",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564653,
             "kickoff": "2026-08-29T17:00:00Z",
             "competition": "PD",
@@ -37868,21 +37883,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544516,
-            "kickoff": "2026-04-11T12:00:00Z",
-            "competition": "PD",
-            "venue": "home",
-            "opponent": "ALA",
-            "opponentName": "Alavés",
-            "opponentLogo": "https://crests.football-data.org/263.png",
-            "goalsFor": 3,
-            "goalsAgainst": 3,
-            "halfFor": 2,
-            "halfAgainst": 2,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -41860,6 +41860,21 @@
         },
         "matches": [
           {
+            "fixtureId": 559696,
+            "kickoff": "2026-09-03T18:45:00Z",
+            "competition": "FL1",
+            "venue": "away",
+            "opponent": "TOU",
+            "opponentName": "Toulouse",
+            "opponentLogo": "https://crests.football-data.org/511.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 559702,
             "kickoff": "2026-08-28T18:45:00Z",
             "competition": "FL1",
@@ -41992,21 +42007,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 542646,
-            "kickoff": "2026-03-22T16:15:00Z",
-            "competition": "FL1",
-            "venue": "away",
-            "opponent": "MAR",
-            "opponentName": "Marseille",
-            "opponentLogo": "https://crests.football-data.org/516.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -51055,6 +51055,21 @@
         },
         "matches": [
           {
+            "fixtureId": 554775,
+            "kickoff": "2026-09-02T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "MIR",
+            "opponentName": "Mirassol",
+            "opponentLogo": "https://crests.football-data.org/4364.png",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "halfFor": 2,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 554984,
             "kickoff": "2026-08-30T19:00:00Z",
             "competition": "BSA",
@@ -51172,21 +51187,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554903,
-            "kickoff": "2026-05-24T00:00:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "PAL",
-            "opponentName": "Palmeiras",
-            "opponentLogo": "https://crests.football-data.org/1769.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           },
           {
@@ -51445,6 +51445,21 @@
         },
         "matches": [
           {
+            "fixtureId": 554775,
+            "kickoff": "2026-09-02T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "FLA",
+            "opponentName": "Flamengo",
+            "opponentLogo": "https://crests.football-data.org/1783.png",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "halfFor": 0,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 554986,
             "kickoff": "2026-08-30T21:30:00Z",
             "competition": "BSA",
@@ -51577,21 +51592,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554891,
-            "kickoff": "2026-05-16T21:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "CAM",
-            "opponentName": "Mineiro",
-            "opponentLogo": "https://crests.football-data.org/1766.png",
-            "goalsFor": 1,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -62926,6 +62926,21 @@
         },
         "matches": [
           {
+            "fixtureId": 559696,
+            "kickoff": "2026-09-03T18:45:00Z",
+            "competition": "FL1",
+            "venue": "home",
+            "opponent": "LIL",
+            "opponentName": "Lille",
+            "opponentLogo": "https://crests.football-data.org/521.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 559710,
             "kickoff": "2026-08-29T18:45:00Z",
             "competition": "FL1",
@@ -63043,21 +63058,6 @@
             "halfFor": 1,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 542643,
-            "kickoff": "2026-03-21T16:00:00Z",
-            "competition": "FL1",
-            "venue": "home",
-            "opponent": "FCL",
-            "opponentName": "Lorient",
-            "opponentLogo": "https://crests.football-data.org/525.png",
-            "goalsFor": 1,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -71252,6 +71252,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564682,
+            "kickoff": "2026-09-03T19:00:00Z",
+            "competition": "PD",
+            "venue": "away",
+            "opponent": "RSO",
+            "opponentName": "Real Sociedad",
+            "opponentLogo": "https://crests.football-data.org/92.png",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564652,
             "kickoff": "2026-08-30T19:30:00Z",
             "competition": "PD",
@@ -71383,21 +71398,6 @@
             "goalsAgainst": 2,
             "halfFor": 0,
             "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544532,
-            "kickoff": "2026-04-22T19:30:00Z",
-            "competition": "PD",
-            "venue": "away",
-            "opponent": "FCB",
-            "opponentName": "Barça",
-            "opponentLogo": "https://crests.football-data.org/81.png",
-            "goalsFor": 0,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 1,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -72513,6 +72513,21 @@
         },
         "matches": [
           {
+            "fixtureId": 559696,
+            "kickoff": "2026-09-03T18:45:00Z",
+            "competition": "FL1",
+            "venue": "away",
+            "opponent": "TOU",
+            "opponentName": "Toulouse",
+            "opponentLogo": "https://crests.football-data.org/511.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 559702,
             "kickoff": "2026-08-28T18:45:00Z",
             "competition": "FL1",
@@ -72645,21 +72660,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 542646,
-            "kickoff": "2026-03-22T16:15:00Z",
-            "competition": "FL1",
-            "venue": "away",
-            "opponent": "MAR",
-            "opponentName": "Marseille",
-            "opponentLogo": "https://crests.football-data.org/516.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -76325,6 +76325,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564682,
+            "kickoff": "2026-09-03T19:00:00Z",
+            "competition": "PD",
+            "venue": "home",
+            "opponent": "CEL",
+            "opponentName": "Celta",
+            "opponentLogo": "https://crests.football-data.org/558.png",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564653,
             "kickoff": "2026-08-29T17:00:00Z",
             "competition": "PD",
@@ -76457,21 +76472,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544516,
-            "kickoff": "2026-04-11T12:00:00Z",
-            "competition": "PD",
-            "venue": "home",
-            "opponent": "ALA",
-            "opponentName": "Alavés",
-            "opponentLogo": "https://crests.football-data.org/263.png",
-            "goalsFor": 3,
-            "goalsAgainst": 3,
-            "halfFor": 2,
-            "halfAgainst": 2,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -85761,6 +85761,21 @@
         },
         "matches": [
           {
+            "fixtureId": 554775,
+            "kickoff": "2026-09-02T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "MIR",
+            "opponentName": "Mirassol",
+            "opponentLogo": "https://crests.football-data.org/4364.png",
+            "goalsFor": 2,
+            "goalsAgainst": 0,
+            "halfFor": 2,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 554984,
             "kickoff": "2026-08-30T19:00:00Z",
             "competition": "BSA",
@@ -85878,21 +85893,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554903,
-            "kickoff": "2026-05-24T00:00:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "PAL",
-            "opponentName": "Palmeiras",
-            "opponentLogo": "https://crests.football-data.org/1769.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           },
           {
@@ -95673,6 +95673,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564682,
+            "kickoff": "2026-09-03T19:00:00Z",
+            "competition": "PD",
+            "venue": "away",
+            "opponent": "RSO",
+            "opponentName": "Real Sociedad",
+            "opponentLogo": "https://crests.football-data.org/92.png",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564652,
             "kickoff": "2026-08-30T19:30:00Z",
             "competition": "PD",
@@ -95804,21 +95819,6 @@
             "goalsAgainst": 2,
             "halfFor": 0,
             "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544532,
-            "kickoff": "2026-04-22T19:30:00Z",
-            "competition": "PD",
-            "venue": "away",
-            "opponent": "FCB",
-            "opponentName": "Barça",
-            "opponentLogo": "https://crests.football-data.org/81.png",
-            "goalsFor": 0,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 1,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -97570,6 +97570,21 @@
         },
         "matches": [
           {
+            "fixtureId": 559696,
+            "kickoff": "2026-09-03T18:45:00Z",
+            "competition": "FL1",
+            "venue": "home",
+            "opponent": "LIL",
+            "opponentName": "Lille",
+            "opponentLogo": "https://crests.football-data.org/521.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 559710,
             "kickoff": "2026-08-29T18:45:00Z",
             "competition": "FL1",
@@ -97687,21 +97702,6 @@
             "halfFor": 1,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 542643,
-            "kickoff": "2026-03-21T16:00:00Z",
-            "competition": "FL1",
-            "venue": "home",
-            "opponent": "FCL",
-            "opponentName": "Lorient",
-            "opponentLogo": "https://crests.football-data.org/525.png",
-            "goalsFor": 1,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -99609,6 +99609,21 @@
         },
         "matches": [
           {
+            "fixtureId": 554775,
+            "kickoff": "2026-09-02T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "FLA",
+            "opponentName": "Flamengo",
+            "opponentLogo": "https://crests.football-data.org/1783.png",
+            "goalsFor": 0,
+            "goalsAgainst": 2,
+            "halfFor": 0,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 554986,
             "kickoff": "2026-08-30T21:30:00Z",
             "competition": "BSA",
@@ -99741,21 +99756,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554891,
-            "kickoff": "2026-05-16T21:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "CAM",
-            "opponentName": "Mineiro",
-            "opponentLogo": "https://crests.football-data.org/1766.png",
-            "goalsFor": 1,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -109798,6 +109798,21 @@
         },
         "matches": [
           {
+            "fixtureId": 559696,
+            "kickoff": "2026-09-03T18:45:00Z",
+            "competition": "FL1",
+            "venue": "away",
+            "opponent": "TOU",
+            "opponentName": "Toulouse",
+            "opponentLogo": "https://crests.football-data.org/511.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 559702,
             "kickoff": "2026-08-28T18:45:00Z",
             "competition": "FL1",
@@ -109930,21 +109945,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 542646,
-            "kickoff": "2026-03-22T16:15:00Z",
-            "competition": "FL1",
-            "venue": "away",
-            "opponent": "MAR",
-            "opponentName": "Marseille",
-            "opponentLogo": "https://crests.football-data.org/516.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -112519,6 +112519,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564682,
+            "kickoff": "2026-09-03T19:00:00Z",
+            "competition": "PD",
+            "venue": "home",
+            "opponent": "CEL",
+            "opponentName": "Celta",
+            "opponentLogo": "https://crests.football-data.org/558.png",
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564653,
             "kickoff": "2026-08-29T17:00:00Z",
             "competition": "PD",
@@ -112651,21 +112666,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544516,
-            "kickoff": "2026-04-11T12:00:00Z",
-            "competition": "PD",
-            "venue": "home",
-            "opponent": "ALA",
-            "opponentName": "Alavés",
-            "opponentLogo": "https://crests.football-data.org/263.png",
-            "goalsFor": 3,
-            "goalsAgainst": 3,
-            "halfFor": 2,
-            "halfAgainst": 2,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
