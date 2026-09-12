@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T07:23:17.451Z",
+  "generatedAt": "2026-09-12T11:48:08.045Z",
   "weekStart": "2026-09-07",
   "fixtures": [
     {
@@ -15140,7 +15140,7 @@
       "leagueId": 40,
       "round": "Matchday 7",
       "kickoff": "2026-09-12T11:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 342,
@@ -15487,14 +15487,23 @@
           "halfAway": 1
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 561837,
       "leagueId": 40,
       "round": "Matchday 7",
       "kickoff": "2026-09-12T11:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 60,
@@ -15756,14 +15765,23 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 561839,
       "leagueId": 40,
       "round": "Matchday 7",
       "kickoff": "2026-09-12T11:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 74,
@@ -16134,7 +16152,16 @@
           "halfAway": 1
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 564670,
