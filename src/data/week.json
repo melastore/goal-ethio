@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T07:41:35.927Z",
+  "generatedAt": "2026-09-13T13:07:07.698Z",
   "weekStart": "2026-09-07",
   "fixtures": [
     {
@@ -2327,6 +2327,21 @@
         },
         "matches": [
           {
+            "fixtureId": 558894,
+            "kickoff": "2026-09-13T10:15:00Z",
+            "competition": "DED",
+            "venue": "away",
+            "opponent": "EXC",
+            "opponentName": "Excelsior",
+            "opponentLogo": "https://crests.football-data.org/670.png",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 558245,
             "kickoff": "2026-08-30T10:15:00Z",
             "competition": "DED",
@@ -2458,21 +2473,6 @@
             "goalsAgainst": 1,
             "halfFor": 1,
             "halfAgainst": 0,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 537699,
-            "kickoff": "2026-04-04T14:30:00Z",
-            "competition": "DED",
-            "venue": "away",
-            "opponent": "PSV",
-            "opponentName": "PSV",
-            "opponentLogo": "https://crests.football-data.org/674.png",
-            "goalsFor": 3,
-            "goalsAgainst": 4,
-            "halfFor": 2,
-            "halfAgainst": 1,
             "firstGoal": "for",
             "firstGoalMinute": null
           }
@@ -3285,6 +3285,21 @@
         },
         "matches": [
           {
+            "fixtureId": 558894,
+            "kickoff": "2026-09-13T10:15:00Z",
+            "competition": "DED",
+            "venue": "home",
+            "opponent": "UTR",
+            "opponentName": "Utrecht",
+            "opponentLogo": "https://crests.football-data.org/676.png",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 558254,
             "kickoff": "2026-09-05T19:00:00Z",
             "competition": "DED",
@@ -3417,21 +3432,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 537695,
-            "kickoff": "2026-04-04T19:00:00Z",
-            "competition": "DED",
-            "venue": "home",
-            "opponent": "NEC",
-            "opponentName": "NEC",
-            "opponentLogo": "https://crests.football-data.org/1915.png",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -3648,6 +3648,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561844,
+            "kickoff": "2026-09-13T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "WOL",
+            "opponentName": "Wolverhampton",
+            "opponentLogo": "https://crests.football-data.org/76.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561810,
             "kickoff": "2026-09-05T14:00:00Z",
             "competition": "ELC",
@@ -3749,21 +3764,6 @@
             "goalsAgainst": 3,
             "halfFor": 0,
             "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541239,
-            "kickoff": "2026-04-22T18:45:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "BLA",
-            "opponentName": "Blackburn",
-            "opponentLogo": "https://crests.football-data.org/59.png",
-            "goalsFor": 1,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 3,
             "firstGoal": "against",
             "firstGoalMinute": null
           },
@@ -32351,7 +32351,7 @@
       "leagueId": 88,
       "round": "Matchday 6",
       "kickoff": "2026-09-13T10:15:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 670,
@@ -32698,14 +32698,23 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 2,
+        "halfHome": 0,
+        "halfAway": 1,
+        "firstGoal": "away",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 561844,
       "leagueId": 40,
       "round": "Matchday 7",
       "kickoff": "2026-09-13T11:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 356,
@@ -33027,14 +33036,23 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "halfHome": 0,
+        "halfAway": 0,
+        "firstGoal": "away",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 564672,
       "leagueId": 140,
       "round": "Matchday 5",
       "kickoff": "2026-09-13T12:00:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 558,
@@ -33266,14 +33284,23 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "halfHome": 1,
+        "halfAway": 0,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 558895,
       "leagueId": 88,
       "round": "Matchday 6",
       "kickoff": "2026-09-13T12:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 673,
@@ -33620,7 +33647,16 @@
           "halfAway": 2
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 560578,
@@ -51132,6 +51168,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561844,
+            "kickoff": "2026-09-13T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "WOL",
+            "opponentName": "Wolverhampton",
+            "opponentLogo": "https://crests.football-data.org/76.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561821,
             "kickoff": "2026-09-08T18:45:00Z",
             "competition": "ELC",
@@ -51248,21 +51299,6 @@
             "goalsAgainst": 3,
             "halfFor": 0,
             "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541239,
-            "kickoff": "2026-04-22T18:45:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "BLA",
-            "opponentName": "Blackburn",
-            "opponentLogo": "https://crests.football-data.org/59.png",
-            "goalsFor": 1,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 3,
             "firstGoal": "against",
             "firstGoalMinute": null
           },
@@ -61582,6 +61618,21 @@
         },
         "matches": [
           {
+            "fixtureId": 558894,
+            "kickoff": "2026-09-13T10:15:00Z",
+            "competition": "DED",
+            "venue": "home",
+            "opponent": "UTR",
+            "opponentName": "Utrecht",
+            "opponentLogo": "https://crests.football-data.org/676.png",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 558233,
             "kickoff": "2026-09-08T16:45:00Z",
             "competition": "DED",
@@ -61714,21 +61765,6 @@
             "halfFor": 2,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 537695,
-            "kickoff": "2026-04-04T19:00:00Z",
-            "competition": "DED",
-            "venue": "home",
-            "opponent": "NEC",
-            "opponentName": "NEC",
-            "opponentLogo": "https://crests.football-data.org/1915.png",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -66386,6 +66422,21 @@
         },
         "matches": [
           {
+            "fixtureId": 558894,
+            "kickoff": "2026-09-13T10:15:00Z",
+            "competition": "DED",
+            "venue": "away",
+            "opponent": "EXC",
+            "opponentName": "Excelsior",
+            "opponentLogo": "https://crests.football-data.org/670.png",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 558252,
             "kickoff": "2026-09-08T12:00:00Z",
             "competition": "DED",
@@ -66518,21 +66569,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 537699,
-            "kickoff": "2026-04-04T14:30:00Z",
-            "competition": "DED",
-            "venue": "away",
-            "opponent": "PSV",
-            "opponentName": "PSV",
-            "opponentLogo": "https://crests.football-data.org/674.png",
-            "goalsFor": 3,
-            "goalsAgainst": 4,
-            "halfFor": 2,
-            "halfAgainst": 1,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -66982,6 +67018,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561844,
+            "kickoff": "2026-09-13T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SHE",
+            "opponentName": "Sheffield Utd",
+            "opponentLogo": "https://crests.football-data.org/356.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561819,
             "kickoff": "2026-09-06T11:00:00Z",
             "competition": "ELC",
@@ -67084,21 +67135,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538136,
-            "kickoff": "2026-05-09T14:00:00Z",
-            "competition": "PL",
-            "venue": "away",
-            "opponent": "BHA",
-            "opponentName": "Brighton Hove",
-            "opponentLogo": "https://crests.football-data.org/397.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
-            "firstGoal": "against",
             "firstGoalMinute": null
           },
           {
@@ -90046,6 +90082,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561844,
+            "kickoff": "2026-09-13T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "WOL",
+            "opponentName": "Wolverhampton",
+            "opponentLogo": "https://crests.football-data.org/76.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561821,
             "kickoff": "2026-09-08T18:45:00Z",
             "competition": "ELC",
@@ -90162,21 +90213,6 @@
             "goalsAgainst": 3,
             "halfFor": 0,
             "halfAgainst": 2,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541239,
-            "kickoff": "2026-04-22T18:45:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "BLA",
-            "opponentName": "Blackburn",
-            "opponentLogo": "https://crests.football-data.org/59.png",
-            "goalsFor": 1,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 3,
             "firstGoal": "against",
             "firstGoalMinute": null
           },
@@ -92199,6 +92235,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561844,
+            "kickoff": "2026-09-13T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SHE",
+            "opponentName": "Sheffield Utd",
+            "opponentLogo": "https://crests.football-data.org/356.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561819,
             "kickoff": "2026-09-06T11:00:00Z",
             "competition": "ELC",
@@ -92301,21 +92352,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538136,
-            "kickoff": "2026-05-09T14:00:00Z",
-            "competition": "PL",
-            "venue": "away",
-            "opponent": "BHA",
-            "opponentName": "Brighton Hove",
-            "opponentLogo": "https://crests.football-data.org/397.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
-            "firstGoal": "against",
             "firstGoalMinute": null
           },
           {
@@ -99732,6 +99768,21 @@
         },
         "matches": [
           {
+            "fixtureId": 558894,
+            "kickoff": "2026-09-13T10:15:00Z",
+            "competition": "DED",
+            "venue": "away",
+            "opponent": "EXC",
+            "opponentName": "Excelsior",
+            "opponentLogo": "https://crests.football-data.org/670.png",
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 558252,
             "kickoff": "2026-09-08T12:00:00Z",
             "competition": "DED",
@@ -99864,21 +99915,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 537699,
-            "kickoff": "2026-04-04T14:30:00Z",
-            "competition": "DED",
-            "venue": "away",
-            "opponent": "PSV",
-            "opponentName": "PSV",
-            "opponentLogo": "https://crests.football-data.org/674.png",
-            "goalsFor": 3,
-            "goalsAgainst": 4,
-            "halfFor": 2,
-            "halfAgainst": 1,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -104498,6 +104534,21 @@
         },
         "matches": [
           {
+            "fixtureId": 558894,
+            "kickoff": "2026-09-13T10:15:00Z",
+            "competition": "DED",
+            "venue": "home",
+            "opponent": "UTR",
+            "opponentName": "Utrecht",
+            "opponentLogo": "https://crests.football-data.org/676.png",
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 558233,
             "kickoff": "2026-09-08T16:45:00Z",
             "competition": "DED",
@@ -104630,21 +104681,6 @@
             "halfFor": 2,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 537695,
-            "kickoff": "2026-04-04T19:00:00Z",
-            "competition": "DED",
-            "venue": "home",
-            "opponent": "NEC",
-            "opponentName": "NEC",
-            "opponentLogo": "https://crests.football-data.org/1915.png",
-            "goalsFor": 0,
-            "goalsAgainst": 2,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -113429,6 +113465,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561844,
+            "kickoff": "2026-09-13T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SHE",
+            "opponentName": "Sheffield Utd",
+            "opponentLogo": "https://crests.football-data.org/356.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561819,
             "kickoff": "2026-09-06T11:00:00Z",
             "competition": "ELC",
@@ -113531,21 +113582,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 538136,
-            "kickoff": "2026-05-09T14:00:00Z",
-            "competition": "PL",
-            "venue": "away",
-            "opponent": "BHA",
-            "opponentName": "Brighton Hove",
-            "opponentLogo": "https://crests.football-data.org/397.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 2,
-            "firstGoal": "against",
             "firstGoalMinute": null
           },
           {
