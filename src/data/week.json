@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T16:11:30.201Z",
+  "generatedAt": "2026-09-17T20:59:38.655Z",
   "weekStart": "2026-09-14",
   "fixtures": [
     {
@@ -2088,6 +2088,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564686,
+            "kickoff": "2026-09-17T17:00:00Z",
+            "competition": "PD",
+            "venue": "home",
+            "opponent": "GET",
+            "opponentName": "Getafe",
+            "opponentLogo": "https://crests.football-data.org/82.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 575328,
             "kickoff": "2026-09-08T19:00:00Z",
             "competition": "CL",
@@ -2218,21 +2233,6 @@
             "goalsFor": 2,
             "goalsAgainst": 2,
             "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544542,
-            "kickoff": "2026-05-03T16:30:00Z",
-            "competition": "PD",
-            "venue": "home",
-            "opponent": "OVI",
-            "opponentName": "Real Oviedo",
-            "opponentLogo": "https://crests.football-data.org/1048.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 2,
             "halfAgainst": 0,
             "firstGoal": "for",
             "firstGoalMinute": null
@@ -7137,7 +7137,7 @@
       "leagueId": 140,
       "round": "Matchday 6",
       "kickoff": "2026-09-17T17:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 90,
@@ -7508,14 +7508,23 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "halfHome": 1,
+        "halfAway": 0,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 564683,
       "leagueId": 140,
       "round": "Matchday 6",
       "kickoff": "2026-09-17T19:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 84,
@@ -7762,7 +7771,16 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 2,
+        "halfHome": 1,
+        "halfAway": 2,
+        "firstGoal": "away",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 558888,
@@ -27144,6 +27162,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564686,
+            "kickoff": "2026-09-17T17:00:00Z",
+            "competition": "PD",
+            "venue": "away",
+            "opponent": "BET",
+            "opponentName": "Real Betis",
+            "opponentLogo": "https://crests.football-data.org/90.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564668,
             "kickoff": "2026-09-13T16:30:00Z",
             "competition": "PD",
@@ -27276,21 +27309,6 @@
             "halfFor": 0,
             "halfAgainst": 0,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544540,
-            "kickoff": "2026-04-22T18:00:00Z",
-            "competition": "PD",
-            "venue": "away",
-            "opponent": "RSO",
-            "opponentName": "Real Sociedad",
-            "opponentLogo": "https://crests.football-data.org/92.png",
-            "goalsFor": 1,
-            "goalsAgainst": 0,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -34043,6 +34061,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564686,
+            "kickoff": "2026-09-17T17:00:00Z",
+            "competition": "PD",
+            "venue": "home",
+            "opponent": "GET",
+            "opponentName": "Getafe",
+            "opponentLogo": "https://crests.football-data.org/82.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564671,
             "kickoff": "2026-09-14T19:00:00Z",
             "competition": "PD",
@@ -34175,21 +34208,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544542,
-            "kickoff": "2026-05-03T16:30:00Z",
-            "competition": "PD",
-            "venue": "home",
-            "opponent": "OVI",
-            "opponentName": "Real Oviedo",
-            "opponentLogo": "https://crests.football-data.org/1048.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 2,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -54734,6 +54752,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564686,
+            "kickoff": "2026-09-17T17:00:00Z",
+            "competition": "PD",
+            "venue": "away",
+            "opponent": "BET",
+            "opponentName": "Real Betis",
+            "opponentLogo": "https://crests.football-data.org/90.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564668,
             "kickoff": "2026-09-13T16:30:00Z",
             "competition": "PD",
@@ -54866,21 +54899,6 @@
             "halfFor": 0,
             "halfAgainst": 0,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544540,
-            "kickoff": "2026-04-22T18:00:00Z",
-            "competition": "PD",
-            "venue": "away",
-            "opponent": "RSO",
-            "opponentName": "Real Sociedad",
-            "opponentLogo": "https://crests.football-data.org/92.png",
-            "goalsFor": 1,
-            "goalsAgainst": 0,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -66184,6 +66202,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564686,
+            "kickoff": "2026-09-17T17:00:00Z",
+            "competition": "PD",
+            "venue": "home",
+            "opponent": "GET",
+            "opponentName": "Getafe",
+            "opponentLogo": "https://crests.football-data.org/82.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564671,
             "kickoff": "2026-09-14T19:00:00Z",
             "competition": "PD",
@@ -66316,21 +66349,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544542,
-            "kickoff": "2026-05-03T16:30:00Z",
-            "competition": "PD",
-            "venue": "home",
-            "opponent": "OVI",
-            "opponentName": "Real Oviedo",
-            "opponentLogo": "https://crests.football-data.org/1048.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 2,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -81274,6 +81292,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564686,
+            "kickoff": "2026-09-17T17:00:00Z",
+            "competition": "PD",
+            "venue": "home",
+            "opponent": "GET",
+            "opponentName": "Getafe",
+            "opponentLogo": "https://crests.football-data.org/82.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564671,
             "kickoff": "2026-09-14T19:00:00Z",
             "competition": "PD",
@@ -81406,21 +81439,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544542,
-            "kickoff": "2026-05-03T16:30:00Z",
-            "competition": "PD",
-            "venue": "home",
-            "opponent": "OVI",
-            "opponentName": "Real Oviedo",
-            "opponentLogo": "https://crests.football-data.org/1048.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 2,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -97067,6 +97085,21 @@
         },
         "matches": [
           {
+            "fixtureId": 564686,
+            "kickoff": "2026-09-17T17:00:00Z",
+            "competition": "PD",
+            "venue": "home",
+            "opponent": "GET",
+            "opponentName": "Getafe",
+            "opponentLogo": "https://crests.football-data.org/82.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 564671,
             "kickoff": "2026-09-14T19:00:00Z",
             "competition": "PD",
@@ -97199,21 +97232,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 544542,
-            "kickoff": "2026-05-03T16:30:00Z",
-            "competition": "PD",
-            "venue": "home",
-            "opponent": "OVI",
-            "opponentName": "Real Oviedo",
-            "opponentLogo": "https://crests.football-data.org/1048.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 2,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
