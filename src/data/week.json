@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T07:35:13.923Z",
+  "generatedAt": "2026-09-19T12:07:52.377Z",
   "weekStart": "2026-09-14",
   "fixtures": [
     {
@@ -10069,7 +10069,7 @@
       "leagueId": 39,
       "round": "Matchday 5",
       "kickoff": "2026-09-19T11:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 73,
@@ -10440,14 +10440,23 @@
           "halfAway": 1
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 561847,
       "leagueId": 40,
       "round": "Matchday 8",
       "kickoff": "2026-09-19T11:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 70,
@@ -10818,14 +10827,23 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 561849,
       "leagueId": 40,
       "round": "Matchday 8",
       "kickoff": "2026-09-19T11:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 384,
@@ -11147,14 +11165,23 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 561852,
       "leagueId": 40,
       "round": "Matchday 8",
       "kickoff": "2026-09-19T11:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 715,
@@ -11476,7 +11503,16 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 2,
+        "goalsAway": 1,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 564693,
