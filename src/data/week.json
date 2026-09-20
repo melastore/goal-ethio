@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T05:41:48.406Z",
+  "generatedAt": "2026-09-20T10:28:55.473Z",
   "weekStart": "2026-09-14",
   "fixtures": [
     {
@@ -26226,7 +26226,7 @@
       "leagueId": 88,
       "round": "Matchday 7",
       "kickoff": "2026-09-20T10:15:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 675,
@@ -26597,7 +26597,16 @@
           "halfAway": 1
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 558591,
