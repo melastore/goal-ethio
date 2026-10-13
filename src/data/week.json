@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T00:10:49.651Z",
+  "generatedAt": "2026-10-13T13:30:06.270Z",
   "weekStart": "2026-10-12",
   "fixtures": [
     {
@@ -2172,7 +2172,7 @@
       "leagueId": 71,
       "round": "Matchday 30",
       "kickoff": "2026-10-12T22:30:00Z",
-      "status": "live",
+      "status": "finished",
       "home": {
         "team": {
           "id": 1772,
@@ -2515,7 +2515,7 @@
         "firstGoal": "away",
         "firstGoalMinute": null,
         "firstScorer": null,
-        "period": "LIVE"
+        "period": null
       }
     },
     {
@@ -2523,7 +2523,7 @@
       "leagueId": 71,
       "round": "Matchday 30",
       "kickoff": "2026-10-13T00:00:00Z",
-      "status": "live",
+      "status": "finished",
       "home": {
         "team": {
           "id": 4286,
@@ -2907,14 +2907,14 @@
         }
       ],
       "result": {
-        "goalsHome": 0,
-        "goalsAway": 0,
-        "halfHome": null,
-        "halfAway": null,
-        "firstGoal": null,
+        "goalsHome": 4,
+        "goalsAway": 2,
+        "halfHome": 3,
+        "halfAway": 1,
+        "firstGoal": "home",
         "firstGoalMinute": null,
         "firstScorer": null,
-        "period": "LIVE"
+        "period": null
       }
     },
     {
@@ -8970,6 +8970,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SOU",
+            "opponentName": "Southampton",
+            "opponentLogo": "https://crests.football-data.org/340.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561854,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -9102,21 +9117,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541228,
-            "kickoff": "2026-04-21T18:45:00Z",
-            "competition": "ELC",
-            "venue": "away",
-            "opponent": "COV",
-            "opponentName": "Coventry City",
-            "opponentLogo": "https://crests.football-data.org/1076.png",
-            "goalsFor": 1,
-            "goalsAgainst": 5,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -9508,6 +9508,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "POR",
+            "opponentName": "Portsmouth",
+            "opponentLogo": "https://crests.football-data.org/325.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561846,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -9625,21 +9640,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 557838,
-            "kickoff": "2026-05-12T19:00:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "MID",
-            "opponentName": "Middlesbrough",
-            "opponentLogo": "https://crests.football-data.org/343.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -19548,6 +19548,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SOU",
+            "opponentName": "Southampton",
+            "opponentLogo": "https://crests.football-data.org/340.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561854,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -19681,21 +19696,6 @@
             "halfAgainst": 0,
             "firstGoal": "for",
             "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541228,
-            "kickoff": "2026-04-21T18:45:00Z",
-            "competition": "ELC",
-            "venue": "away",
-            "opponent": "COV",
-            "opponentName": "Coventry City",
-            "opponentLogo": "https://crests.football-data.org/1076.png",
-            "goalsFor": 1,
-            "goalsAgainst": 5,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
-            "firstGoalMinute": null
           }
         ]
       },
@@ -19765,6 +19765,21 @@
           "logo": "https://crests.football-data.org/340.png"
         },
         "matches": [
+          {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "POR",
+            "opponentName": "Portsmouth",
+            "opponentLogo": "https://crests.football-data.org/325.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
           {
             "fixtureId": 561846,
             "kickoff": "2026-09-19T14:00:00Z",
@@ -19883,21 +19898,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 557838,
-            "kickoff": "2026-05-12T19:00:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "MID",
-            "opponentName": "Middlesbrough",
-            "opponentLogo": "https://crests.football-data.org/343.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -27089,6 +27089,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555033,
+            "kickoff": "2026-10-12T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CAP",
+            "opponentName": "Paranaense",
+            "opponentLogo": "https://crests.football-data.org/1768.png",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 0,
+            "halfAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555029,
             "kickoff": "2026-10-07T23:00:00Z",
             "competition": "BSA",
@@ -27221,21 +27236,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554895,
-            "kickoff": "2026-05-17T21:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "CRE",
-            "opponentName": "Clube do Remo",
-            "opponentLogo": "https://crests.football-data.org/4287.png",
-            "goalsFor": 2,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -27613,6 +27613,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555033,
+            "kickoff": "2026-10-12T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "CHA",
+            "opponentName": "Chapecoense",
+            "opponentLogo": "https://crests.football-data.org/1772_large.png",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 3,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555020,
             "kickoff": "2026-10-08T23:00:00Z",
             "competition": "BSA",
@@ -27730,21 +27745,6 @@
             "halfFor": 2,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554943,
-            "kickoff": "2026-07-30T22:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "COR",
-            "opponentName": "Corinthians",
-            "opponentLogo": "https://crests.football-data.org/1779.png",
-            "goalsFor": 0,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -37634,6 +37634,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555032,
+            "kickoff": "2026-10-13T00:00:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "RBB",
+            "opponentName": "Bragantino",
+            "opponentLogo": "https://crests.football-data.org/4286.png",
+            "goalsFor": 2,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555023,
             "kickoff": "2026-10-08T00:30:00Z",
             "competition": "BSA",
@@ -37751,21 +37766,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554944,
-            "kickoff": "2026-07-31T00:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "COR",
-            "opponentName": "Coritiba",
-            "opponentLogo": "https://crests.football-data.org/4241.png",
-            "goalsFor": 1,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -38414,6 +38414,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555032,
+            "kickoff": "2026-10-13T00:00:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CRU",
+            "opponentName": "Cruzeiro",
+            "opponentLogo": "https://crests.football-data.org/1771.png",
+            "goalsFor": 4,
+            "goalsAgainst": 2,
+            "halfFor": 3,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555022,
             "kickoff": "2026-10-07T22:30:00Z",
             "competition": "BSA",
@@ -38546,21 +38561,6 @@
             "halfFor": 0,
             "halfAgainst": 0,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554932,
-            "kickoff": "2026-07-26T21:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "COR",
-            "opponentName": "Coritiba",
-            "opponentLogo": "https://crests.football-data.org/4241.png",
-            "goalsFor": 0,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -41336,6 +41336,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SOU",
+            "opponentName": "Southampton",
+            "opponentLogo": "https://crests.football-data.org/340.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561854,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -41468,21 +41483,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541228,
-            "kickoff": "2026-04-21T18:45:00Z",
-            "competition": "ELC",
-            "venue": "away",
-            "opponent": "COV",
-            "opponentName": "Coventry City",
-            "opponentLogo": "https://crests.football-data.org/1076.png",
-            "goalsFor": 1,
-            "goalsAgainst": 5,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -49444,6 +49444,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555032,
+            "kickoff": "2026-10-13T00:00:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "RBB",
+            "opponentName": "Bragantino",
+            "opponentLogo": "https://crests.football-data.org/4286.png",
+            "goalsFor": 2,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555023,
             "kickoff": "2026-10-08T00:30:00Z",
             "competition": "BSA",
@@ -49561,21 +49576,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554944,
-            "kickoff": "2026-07-31T00:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "COR",
-            "opponentName": "Coritiba",
-            "opponentLogo": "https://crests.football-data.org/4241.png",
-            "goalsFor": 1,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -50896,6 +50896,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SOU",
+            "opponentName": "Southampton",
+            "opponentLogo": "https://crests.football-data.org/340.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561854,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -51028,21 +51043,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541228,
-            "kickoff": "2026-04-21T18:45:00Z",
-            "competition": "ELC",
-            "venue": "away",
-            "opponent": "COV",
-            "opponentName": "Coventry City",
-            "opponentLogo": "https://crests.football-data.org/1076.png",
-            "goalsFor": 1,
-            "goalsAgainst": 5,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -56522,6 +56522,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "POR",
+            "opponentName": "Portsmouth",
+            "opponentLogo": "https://crests.football-data.org/325.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561846,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -56639,21 +56654,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 557838,
-            "kickoff": "2026-05-12T19:00:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "MID",
-            "opponentName": "Middlesbrough",
-            "opponentLogo": "https://crests.football-data.org/343.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -63512,6 +63512,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555033,
+            "kickoff": "2026-10-12T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "CHA",
+            "opponentName": "Chapecoense",
+            "opponentLogo": "https://crests.football-data.org/1772_large.png",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 3,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555020,
             "kickoff": "2026-10-08T23:00:00Z",
             "competition": "BSA",
@@ -63629,21 +63644,6 @@
             "halfFor": 2,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554943,
-            "kickoff": "2026-07-30T22:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "COR",
-            "opponentName": "Corinthians",
-            "opponentLogo": "https://crests.football-data.org/1779.png",
-            "goalsFor": 0,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -63878,6 +63878,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555032,
+            "kickoff": "2026-10-13T00:00:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CRU",
+            "opponentName": "Cruzeiro",
+            "opponentLogo": "https://crests.football-data.org/1771.png",
+            "goalsFor": 4,
+            "goalsAgainst": 2,
+            "halfFor": 3,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555022,
             "kickoff": "2026-10-07T22:30:00Z",
             "competition": "BSA",
@@ -64010,21 +64025,6 @@
             "halfFor": 0,
             "halfAgainst": 0,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554932,
-            "kickoff": "2026-07-26T21:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "COR",
-            "opponentName": "Coritiba",
-            "opponentLogo": "https://crests.football-data.org/4241.png",
-            "goalsFor": 0,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -64498,6 +64498,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555033,
+            "kickoff": "2026-10-12T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CAP",
+            "opponentName": "Paranaense",
+            "opponentLogo": "https://crests.football-data.org/1768.png",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 0,
+            "halfAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555029,
             "kickoff": "2026-10-07T23:00:00Z",
             "competition": "BSA",
@@ -64630,21 +64645,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554895,
-            "kickoff": "2026-05-17T21:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "CRE",
-            "opponentName": "Clube do Remo",
-            "opponentLogo": "https://crests.football-data.org/4287.png",
-            "goalsFor": 2,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -80922,6 +80922,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555032,
+            "kickoff": "2026-10-13T00:00:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CRU",
+            "opponentName": "Cruzeiro",
+            "opponentLogo": "https://crests.football-data.org/1771.png",
+            "goalsFor": 4,
+            "goalsAgainst": 2,
+            "halfFor": 3,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555022,
             "kickoff": "2026-10-07T22:30:00Z",
             "competition": "BSA",
@@ -81055,21 +81070,6 @@
             "halfAgainst": 0,
             "firstGoal": "against",
             "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554932,
-            "kickoff": "2026-07-26T21:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "COR",
-            "opponentName": "Coritiba",
-            "opponentLogo": "https://crests.football-data.org/4241.png",
-            "goalsFor": 0,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
-            "firstGoalMinute": null
           }
         ]
       },
@@ -81081,6 +81081,21 @@
           "logo": "https://crests.football-data.org/1772_large.png"
         },
         "matches": [
+          {
+            "fixtureId": 555033,
+            "kickoff": "2026-10-12T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CAP",
+            "opponentName": "Paranaense",
+            "opponentLogo": "https://crests.football-data.org/1768.png",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 0,
+            "halfAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
           {
             "fixtureId": 555029,
             "kickoff": "2026-10-07T23:00:00Z",
@@ -81214,21 +81229,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554895,
-            "kickoff": "2026-05-17T21:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "CRE",
-            "opponentName": "Clube do Remo",
-            "opponentLogo": "https://crests.football-data.org/4287.png",
-            "goalsFor": 2,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -83559,6 +83559,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555032,
+            "kickoff": "2026-10-13T00:00:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "RBB",
+            "opponentName": "Bragantino",
+            "opponentLogo": "https://crests.football-data.org/4286.png",
+            "goalsFor": 2,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555023,
             "kickoff": "2026-10-08T00:30:00Z",
             "competition": "BSA",
@@ -83676,21 +83691,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554944,
-            "kickoff": "2026-07-31T00:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "COR",
-            "opponentName": "Coritiba",
-            "opponentLogo": "https://crests.football-data.org/4241.png",
-            "goalsFor": 1,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -84681,6 +84681,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555033,
+            "kickoff": "2026-10-12T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "CHA",
+            "opponentName": "Chapecoense",
+            "opponentLogo": "https://crests.football-data.org/1772_large.png",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 3,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555020,
             "kickoff": "2026-10-08T23:00:00Z",
             "competition": "BSA",
@@ -84798,21 +84813,6 @@
             "halfFor": 2,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554943,
-            "kickoff": "2026-07-30T22:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "COR",
-            "opponentName": "Corinthians",
-            "opponentLogo": "https://crests.football-data.org/1779.png",
-            "goalsFor": 0,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -94877,6 +94877,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SOU",
+            "opponentName": "Southampton",
+            "opponentLogo": "https://crests.football-data.org/340.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561854,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -95009,21 +95024,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541228,
-            "kickoff": "2026-04-21T18:45:00Z",
-            "competition": "ELC",
-            "venue": "away",
-            "opponent": "COV",
-            "opponentName": "Coventry City",
-            "opponentLogo": "https://crests.football-data.org/1076.png",
-            "goalsFor": 1,
-            "goalsAgainst": 5,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -95449,6 +95449,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "POR",
+            "opponentName": "Portsmouth",
+            "opponentLogo": "https://crests.football-data.org/325.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561846,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -95566,21 +95581,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 557838,
-            "kickoff": "2026-05-12T19:00:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "MID",
-            "opponentName": "Middlesbrough",
-            "opponentLogo": "https://crests.football-data.org/343.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -112852,6 +112852,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555032,
+            "kickoff": "2026-10-13T00:00:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CRU",
+            "opponentName": "Cruzeiro",
+            "opponentLogo": "https://crests.football-data.org/1771.png",
+            "goalsFor": 4,
+            "goalsAgainst": 2,
+            "halfFor": 3,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555022,
             "kickoff": "2026-10-07T22:30:00Z",
             "competition": "BSA",
@@ -112984,21 +112999,6 @@
             "halfFor": 0,
             "halfAgainst": 0,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554932,
-            "kickoff": "2026-07-26T21:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "COR",
-            "opponentName": "Coritiba",
-            "opponentLogo": "https://crests.football-data.org/4241.png",
-            "goalsFor": 0,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -115599,6 +115599,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SOU",
+            "opponentName": "Southampton",
+            "opponentLogo": "https://crests.football-data.org/340.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561854,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -115731,21 +115746,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541228,
-            "kickoff": "2026-04-21T18:45:00Z",
-            "competition": "ELC",
-            "venue": "away",
-            "opponent": "COV",
-            "opponentName": "Coventry City",
-            "opponentLogo": "https://crests.football-data.org/1076.png",
-            "goalsFor": 1,
-            "goalsAgainst": 5,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -118693,6 +118693,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "POR",
+            "opponentName": "Portsmouth",
+            "opponentLogo": "https://crests.football-data.org/325.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561846,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -118810,21 +118825,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 557838,
-            "kickoff": "2026-05-12T19:00:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "MID",
-            "opponentName": "Middlesbrough",
-            "opponentLogo": "https://crests.football-data.org/343.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -119241,6 +119241,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555033,
+            "kickoff": "2026-10-12T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CAP",
+            "opponentName": "Paranaense",
+            "opponentLogo": "https://crests.football-data.org/1768.png",
+            "goalsFor": 1,
+            "goalsAgainst": 4,
+            "halfFor": 0,
+            "halfAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555029,
             "kickoff": "2026-10-07T23:00:00Z",
             "competition": "BSA",
@@ -119373,21 +119388,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554895,
-            "kickoff": "2026-05-17T21:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "CRE",
-            "opponentName": "Clube do Remo",
-            "opponentLogo": "https://crests.football-data.org/4287.png",
-            "goalsFor": 2,
-            "goalsAgainst": 3,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -123356,6 +123356,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555033,
+            "kickoff": "2026-10-12T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "CHA",
+            "opponentName": "Chapecoense",
+            "opponentLogo": "https://crests.football-data.org/1772_large.png",
+            "goalsFor": 4,
+            "goalsAgainst": 1,
+            "halfFor": 3,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555020,
             "kickoff": "2026-10-08T23:00:00Z",
             "competition": "BSA",
@@ -123473,21 +123488,6 @@
             "halfFor": 2,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554943,
-            "kickoff": "2026-07-30T22:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "COR",
-            "opponentName": "Corinthians",
-            "opponentLogo": "https://crests.football-data.org/1779.png",
-            "goalsFor": 0,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
@@ -125234,6 +125234,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555032,
+            "kickoff": "2026-10-13T00:00:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "RBB",
+            "opponentName": "Bragantino",
+            "opponentLogo": "https://crests.football-data.org/4286.png",
+            "goalsFor": 2,
+            "goalsAgainst": 4,
+            "halfFor": 1,
+            "halfAgainst": 3,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555023,
             "kickoff": "2026-10-08T00:30:00Z",
             "competition": "BSA",
@@ -125351,21 +125366,6 @@
             "halfFor": 1,
             "halfAgainst": 1,
             "firstGoal": null,
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554944,
-            "kickoff": "2026-07-31T00:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "COR",
-            "opponentName": "Coritiba",
-            "opponentLogo": "https://crests.football-data.org/4241.png",
-            "goalsFor": 1,
-            "goalsAgainst": 0,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -129536,6 +129536,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "away",
+            "opponent": "SOU",
+            "opponentName": "Southampton",
+            "opponentLogo": "https://crests.football-data.org/340.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 1,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561854,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -129668,21 +129683,6 @@
             "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 541228,
-            "kickoff": "2026-04-21T18:45:00Z",
-            "competition": "ELC",
-            "venue": "away",
-            "opponent": "COV",
-            "opponentName": "Coventry City",
-            "opponentLogo": "https://crests.football-data.org/1076.png",
-            "goalsFor": 1,
-            "goalsAgainst": 5,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -135446,6 +135446,21 @@
         },
         "matches": [
           {
+            "fixtureId": 561859,
+            "kickoff": "2026-10-11T11:00:00Z",
+            "competition": "ELC",
+            "venue": "home",
+            "opponent": "POR",
+            "opponentName": "Portsmouth",
+            "opponentLogo": "https://crests.football-data.org/325.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 1,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 561846,
             "kickoff": "2026-09-19T14:00:00Z",
             "competition": "ELC",
@@ -135563,21 +135578,6 @@
             "halfFor": 0,
             "halfAgainst": 2,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 557838,
-            "kickoff": "2026-05-12T19:00:00Z",
-            "competition": "ELC",
-            "venue": "home",
-            "opponent": "MID",
-            "opponentName": "Middlesbrough",
-            "opponentLogo": "https://crests.football-data.org/343.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 1,
-            "firstGoal": null,
             "firstGoalMinute": null
           },
           {
