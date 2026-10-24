@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T12:29:54.830Z",
+  "generatedAt": "2026-10-24T16:16:20.059Z",
   "weekStart": "2026-10-19",
   "fixtures": [
     {
@@ -11662,7 +11662,7 @@
       "leagueId": 39,
       "round": "Matchday 8",
       "kickoff": "2026-10-24T11:30:00Z",
-      "status": "live",
+      "status": "scheduled",
       "home": {
         "team": {
           "id": 58,
@@ -12033,16 +12033,7 @@
           "halfAway": 0
         }
       ],
-      "result": {
-        "goalsHome": 1,
-        "goalsAway": 0,
-        "halfHome": null,
-        "halfAway": null,
-        "firstGoal": "home",
-        "firstGoalMinute": null,
-        "firstScorer": null,
-        "period": "LIVE"
-      }
+      "result": null
     },
     {
       "id": 561895,
@@ -12781,7 +12772,7 @@
       "leagueId": 40,
       "round": "Matchday 12",
       "kickoff": "2026-10-24T11:30:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 325,
@@ -13152,7 +13143,16 @@
           "halfAway": 1
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 2,
+        "goalsAway": 1,
+        "halfHome": 1,
+        "halfAway": 1,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 564718,
@@ -15161,7 +15161,7 @@
       "leagueId": 78,
       "round": "Matchday 7",
       "kickoff": "2026-10-24T13:30:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 29,
@@ -15423,7 +15423,16 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "halfHome": 0,
+        "halfAway": 0,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 565838,
@@ -16844,7 +16853,7 @@
       "leagueId": 40,
       "round": "Matchday 12",
       "kickoff": "2026-10-24T14:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 69,
@@ -17215,7 +17224,16 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 5,
+        "goalsAway": 0,
+        "halfHome": 4,
+        "halfAway": 0,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 561897,
@@ -17978,7 +17996,7 @@
       "leagueId": 40,
       "round": "Matchday 12",
       "kickoff": "2026-10-24T14:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 1126,
@@ -18300,7 +18318,16 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 4,
+        "goalsAway": 1,
+        "halfHome": 1,
+        "halfAway": 1,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 561900,
@@ -18661,7 +18688,7 @@
       "leagueId": 40,
       "round": "Matchday 12",
       "kickoff": "2026-10-24T14:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 59,
@@ -19008,14 +19035,23 @@
           "halfAway": 1
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 2,
+        "goalsAway": 0,
+        "halfHome": 1,
+        "halfAway": 0,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 561903,
       "leagueId": 40,
       "round": "Matchday 12",
       "kickoff": "2026-10-24T14:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 76,
@@ -19337,7 +19373,16 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "halfHome": 1,
+        "halfAway": 0,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 564727,
