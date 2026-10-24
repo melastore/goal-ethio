@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T07:54:19.550Z",
+  "generatedAt": "2026-10-24T12:29:54.830Z",
   "weekStart": "2026-10-19",
   "fixtures": [
     {
@@ -11662,7 +11662,7 @@
       "leagueId": 39,
       "round": "Matchday 8",
       "kickoff": "2026-10-24T11:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 58,
@@ -12033,7 +12033,16 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 561895,
