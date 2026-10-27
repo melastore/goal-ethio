@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T22:19:30.189Z",
+  "generatedAt": "2026-10-27T03:29:01.832Z",
   "weekStart": "2026-10-26",
   "fixtures": [
     {
@@ -1168,7 +1168,7 @@
       "leagueId": 71,
       "round": "Matchday 32",
       "kickoff": "2026-10-26T22:30:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 4241,
@@ -1503,14 +1503,23 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "halfHome": 0,
+        "halfAway": 0,
+        "firstGoal": "away",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 555053,
       "leagueId": 71,
       "round": "Matchday 32",
       "kickoff": "2026-10-26T23:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 1783,
@@ -1893,7 +1902,16 @@
           "halfAway": 2
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 3,
+        "goalsAway": 2,
+        "halfHome": 2,
+        "halfAway": 1,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 558556,
@@ -7369,6 +7387,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555053,
+            "kickoff": "2026-10-26T23:00:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "FLA",
+            "opponentName": "Flamengo",
+            "opponentLogo": "https://crests.football-data.org/1783.png",
+            "goalsFor": 2,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555041,
             "kickoff": "2026-10-17T21:30:00Z",
             "competition": "BSA",
@@ -7501,21 +7534,6 @@
             "halfFor": 2,
             "halfAgainst": 1,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554936,
-            "kickoff": "2026-07-26T22:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "PAL",
-            "opponentName": "Palmeiras",
-            "opponentLogo": "https://crests.football-data.org/1769.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -7919,6 +7937,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555053,
+            "kickoff": "2026-10-26T23:00:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CAM",
+            "opponentName": "Mineiro",
+            "opponentLogo": "https://crests.football-data.org/1766.png",
+            "goalsFor": 3,
+            "goalsAgainst": 2,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555042,
             "kickoff": "2026-10-18T21:30:00Z",
             "competition": "BSA",
@@ -8019,21 +8052,6 @@
             "goalsFor": 2,
             "goalsAgainst": 0,
             "halfFor": 2,
-            "halfAgainst": 0,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554984,
-            "kickoff": "2026-08-30T19:00:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "BOT",
-            "opponentName": "Botafogo",
-            "opponentLogo": "https://crests.football-data.org/1770.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
             "firstGoalMinute": null
@@ -8148,6 +8166,21 @@
           "logo": "https://crests.football-data.org/1767.png"
         },
         "matches": [
+          {
+            "fixtureId": 555051,
+            "kickoff": "2026-10-26T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "COR",
+            "opponentName": "Coritiba",
+            "opponentLogo": "https://crests.football-data.org/4241.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
           {
             "fixtureId": 555046,
             "kickoff": "2026-10-18T19:00:00Z",
@@ -8280,21 +8313,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554961,
-            "kickoff": "2026-08-16T19:00:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "CAM",
-            "opponentName": "Mineiro",
-            "opponentLogo": "https://crests.football-data.org/1766.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -23258,6 +23276,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555051,
+            "kickoff": "2026-10-26T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "FBP",
+            "opponentName": "Grêmio",
+            "opponentLogo": "https://crests.football-data.org/1767.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555041,
             "kickoff": "2026-10-17T21:30:00Z",
             "competition": "BSA",
@@ -23390,21 +23423,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554953,
-            "kickoff": "2026-08-08T23:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "CHA",
-            "opponentName": "Chapecoense",
-            "opponentLogo": "https://crests.football-data.org/1772_large.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -44193,6 +44211,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555051,
+            "kickoff": "2026-10-26T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "FBP",
+            "opponentName": "Grêmio",
+            "opponentLogo": "https://crests.football-data.org/1767.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555041,
             "kickoff": "2026-10-17T21:30:00Z",
             "competition": "BSA",
@@ -44325,21 +44358,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554953,
-            "kickoff": "2026-08-08T23:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "CHA",
-            "opponentName": "Chapecoense",
-            "opponentLogo": "https://crests.football-data.org/1772_large.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -48307,6 +48325,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555053,
+            "kickoff": "2026-10-26T23:00:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CAM",
+            "opponentName": "Mineiro",
+            "opponentLogo": "https://crests.football-data.org/1766.png",
+            "goalsFor": 3,
+            "goalsAgainst": 2,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555042,
             "kickoff": "2026-10-18T21:30:00Z",
             "competition": "BSA",
@@ -48412,21 +48445,6 @@
             "firstGoalMinute": null
           },
           {
-            "fixtureId": 554984,
-            "kickoff": "2026-08-30T19:00:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "BOT",
-            "opponentName": "Botafogo",
-            "opponentLogo": "https://crests.football-data.org/1770.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
             "fixtureId": 554974,
             "kickoff": "2026-08-22T23:30:00Z",
             "competition": "BSA",
@@ -48466,6 +48484,21 @@
           "logo": "https://crests.football-data.org/1767.png"
         },
         "matches": [
+          {
+            "fixtureId": 555051,
+            "kickoff": "2026-10-26T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "COR",
+            "opponentName": "Coritiba",
+            "opponentLogo": "https://crests.football-data.org/4241.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
           {
             "fixtureId": 555046,
             "kickoff": "2026-10-18T19:00:00Z",
@@ -48598,21 +48631,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554961,
-            "kickoff": "2026-08-16T19:00:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "CAM",
-            "opponentName": "Mineiro",
-            "opponentLogo": "https://crests.football-data.org/1766.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -48857,6 +48875,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555053,
+            "kickoff": "2026-10-26T23:00:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "FLA",
+            "opponentName": "Flamengo",
+            "opponentLogo": "https://crests.football-data.org/1783.png",
+            "goalsFor": 2,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555041,
             "kickoff": "2026-10-17T21:30:00Z",
             "competition": "BSA",
@@ -48989,21 +49022,6 @@
             "halfFor": 2,
             "halfAgainst": 1,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554936,
-            "kickoff": "2026-07-26T22:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "PAL",
-            "opponentName": "Palmeiras",
-            "opponentLogo": "https://crests.football-data.org/1769.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -78880,6 +78898,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555051,
+            "kickoff": "2026-10-26T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "FBP",
+            "opponentName": "Grêmio",
+            "opponentLogo": "https://crests.football-data.org/1767.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555041,
             "kickoff": "2026-10-17T21:30:00Z",
             "competition": "BSA",
@@ -79012,21 +79045,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554953,
-            "kickoff": "2026-08-08T23:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "CHA",
-            "opponentName": "Chapecoense",
-            "opponentLogo": "https://crests.football-data.org/1772_large.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -79612,6 +79630,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555053,
+            "kickoff": "2026-10-26T23:00:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CAM",
+            "opponentName": "Mineiro",
+            "opponentLogo": "https://crests.football-data.org/1766.png",
+            "goalsFor": 3,
+            "goalsAgainst": 2,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555042,
             "kickoff": "2026-10-18T21:30:00Z",
             "competition": "BSA",
@@ -79712,21 +79745,6 @@
             "goalsFor": 2,
             "goalsAgainst": 0,
             "halfFor": 2,
-            "halfAgainst": 0,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554984,
-            "kickoff": "2026-08-30T19:00:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "BOT",
-            "opponentName": "Botafogo",
-            "opponentLogo": "https://crests.football-data.org/1770.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
             "firstGoalMinute": null
@@ -79978,6 +79996,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555051,
+            "kickoff": "2026-10-26T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "COR",
+            "opponentName": "Coritiba",
+            "opponentLogo": "https://crests.football-data.org/4241.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555046,
             "kickoff": "2026-10-18T19:00:00Z",
             "competition": "BSA",
@@ -80109,21 +80142,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554961,
-            "kickoff": "2026-08-16T19:00:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "CAM",
-            "opponentName": "Mineiro",
-            "opponentLogo": "https://crests.football-data.org/1766.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
@@ -80528,6 +80546,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555053,
+            "kickoff": "2026-10-26T23:00:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "FLA",
+            "opponentName": "Flamengo",
+            "opponentLogo": "https://crests.football-data.org/1783.png",
+            "goalsFor": 2,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555041,
             "kickoff": "2026-10-17T21:30:00Z",
             "competition": "BSA",
@@ -80660,21 +80693,6 @@
             "halfFor": 2,
             "halfAgainst": 1,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554936,
-            "kickoff": "2026-07-26T22:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "PAL",
-            "opponentName": "Palmeiras",
-            "opponentLogo": "https://crests.football-data.org/1769.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -83619,6 +83637,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555053,
+            "kickoff": "2026-10-26T23:00:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "FLA",
+            "opponentName": "Flamengo",
+            "opponentLogo": "https://crests.football-data.org/1783.png",
+            "goalsFor": 2,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 2,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555041,
             "kickoff": "2026-10-17T21:30:00Z",
             "competition": "BSA",
@@ -83751,21 +83784,6 @@
             "halfFor": 2,
             "halfAgainst": 1,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554936,
-            "kickoff": "2026-07-26T22:30:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "PAL",
-            "opponentName": "Palmeiras",
-            "opponentLogo": "https://crests.football-data.org/1769.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 0,
-            "halfAgainst": 0,
-            "firstGoal": null,
             "firstGoalMinute": null
           }
         ]
@@ -84169,6 +84187,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555051,
+            "kickoff": "2026-10-26T22:30:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "FBP",
+            "opponentName": "Grêmio",
+            "opponentLogo": "https://crests.football-data.org/1767.png",
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "against",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555041,
             "kickoff": "2026-10-17T21:30:00Z",
             "competition": "BSA",
@@ -84301,21 +84334,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554953,
-            "kickoff": "2026-08-08T23:30:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "CHA",
-            "opponentName": "Chapecoense",
-            "opponentLogo": "https://crests.football-data.org/1772_large.png",
-            "goalsFor": 2,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           }
         ]
@@ -86389,6 +86407,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555053,
+            "kickoff": "2026-10-26T23:00:00Z",
+            "competition": "BSA",
+            "venue": "home",
+            "opponent": "CAM",
+            "opponentName": "Mineiro",
+            "opponentLogo": "https://crests.football-data.org/1766.png",
+            "goalsFor": 3,
+            "goalsAgainst": 2,
+            "halfFor": 2,
+            "halfAgainst": 1,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555042,
             "kickoff": "2026-10-18T21:30:00Z",
             "competition": "BSA",
@@ -86489,21 +86522,6 @@
             "goalsFor": 2,
             "goalsAgainst": 0,
             "halfFor": 2,
-            "halfAgainst": 0,
-            "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554984,
-            "kickoff": "2026-08-30T19:00:00Z",
-            "competition": "BSA",
-            "venue": "home",
-            "opponent": "BOT",
-            "opponentName": "Botafogo",
-            "opponentLogo": "https://crests.football-data.org/1770.png",
-            "goalsFor": 3,
-            "goalsAgainst": 0,
-            "halfFor": 1,
             "halfAgainst": 0,
             "firstGoal": "for",
             "firstGoalMinute": null
@@ -86779,6 +86797,21 @@
         },
         "matches": [
           {
+            "fixtureId": 555051,
+            "kickoff": "2026-10-26T22:30:00Z",
+            "competition": "BSA",
+            "venue": "away",
+            "opponent": "COR",
+            "opponentName": "Coritiba",
+            "opponentLogo": "https://crests.football-data.org/4241.png",
+            "goalsFor": 1,
+            "goalsAgainst": 0,
+            "halfFor": 0,
+            "halfAgainst": 0,
+            "firstGoal": "for",
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 555046,
             "kickoff": "2026-10-18T19:00:00Z",
             "competition": "BSA",
@@ -86910,21 +86943,6 @@
             "goalsAgainst": 1,
             "halfFor": 0,
             "halfAgainst": 0,
-            "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 554961,
-            "kickoff": "2026-08-16T19:00:00Z",
-            "competition": "BSA",
-            "venue": "away",
-            "opponent": "CAM",
-            "opponentName": "Mineiro",
-            "opponentLogo": "https://crests.football-data.org/1766.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
             "firstGoal": "against",
             "firstGoalMinute": null
           }
