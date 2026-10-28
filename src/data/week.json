@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T12:06:21.691Z",
+  "generatedAt": "2026-10-28T18:11:14.162Z",
   "weekStart": "2026-10-26",
   "fixtures": [
     {
@@ -3055,7 +3055,7 @@
       "leagueId": 135,
       "round": "Matchday 9",
       "kickoff": "2026-10-28T17:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 98,
@@ -3426,14 +3426,23 @@
           "halfAway": 1
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 2,
+        "goalsAway": 1,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 558550,
       "leagueId": 135,
       "round": "Matchday 9",
       "kickoff": "2026-10-28T17:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 454,
@@ -3780,14 +3789,23 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 558553,
       "leagueId": 135,
       "round": "Matchday 9",
       "kickoff": "2026-10-28T17:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 112,
@@ -4158,7 +4176,16 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 558552,
