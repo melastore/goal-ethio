@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T17:38:04.642Z",
+  "generatedAt": "2026-11-14T21:47:23.182Z",
   "weekStart": "2026-11-09",
   "fixtures": [
     {
@@ -7,7 +7,7 @@
       "leagueId": 71,
       "round": "Matchday 35",
       "kickoff": "2026-11-14T21:30:00Z",
-      "status": "scheduled",
+      "status": "live",
       "home": {
         "team": {
           "id": 4364,
@@ -366,7 +366,16 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": null,
+        "halfAway": null,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": "LIVE"
+      }
     },
     {
       "id": 554942,
