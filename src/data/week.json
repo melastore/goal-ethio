@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-28T01:06:08.260Z",
+  "generatedAt": "2026-11-28T05:48:34.528Z",
   "weekStart": "2026-11-23",
   "fixtures": [
     {
@@ -13218,7 +13218,7 @@
       "leagueId": 88,
       "round": "Matchday 14",
       "kickoff": "2026-11-27T19:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 677,
@@ -13565,14 +13565,23 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 1,
+        "halfHome": 0,
+        "halfAway": 1,
+        "firstGoal": "away",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 565869,
       "leagueId": 78,
       "round": "Matchday 11",
       "kickoff": "2026-11-27T19:30:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 12,
@@ -13943,14 +13952,23 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 3,
+        "goalsAway": 3,
+        "halfHome": 1,
+        "halfAway": 1,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 558515,
       "leagueId": 135,
       "round": "Matchday 13",
       "kickoff": "2026-11-27T19:45:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 454,
@@ -14297,7 +14315,16 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 0,
+        "halfHome": 0,
+        "halfAway": 0,
+        "firstGoal": null,
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 559616,
@@ -15054,7 +15081,7 @@
       "leagueId": 140,
       "round": "Matchday 14",
       "kickoff": "2026-11-27T20:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 88,
@@ -15376,14 +15403,23 @@
         ]
       },
       "h2h": [],
-      "result": null
+      "result": {
+        "goalsHome": 1,
+        "goalsAway": 3,
+        "halfHome": 1,
+        "halfAway": 0,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 561968,
       "leagueId": 40,
       "round": "Matchday 18",
       "kickoff": "2026-11-27T20:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 340,
@@ -15754,7 +15790,16 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 2,
+        "goalsAway": 0,
+        "halfHome": 0,
+        "halfAway": 0,
+        "firstGoal": "home",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 567361,
@@ -16099,7 +16144,7 @@
       "leagueId": 71,
       "round": "Matchday 37",
       "kickoff": "2026-11-27T23:00:00Z",
-      "status": "scheduled",
+      "status": "finished",
       "home": {
         "team": {
           "id": 1765,
@@ -16482,7 +16527,16 @@
           "halfAway": 0
         }
       ],
-      "result": null
+      "result": {
+        "goalsHome": 0,
+        "goalsAway": 1,
+        "halfHome": 0,
+        "halfAway": 1,
+        "firstGoal": "away",
+        "firstGoalMinute": null,
+        "firstScorer": null,
+        "period": null
+      }
     },
     {
       "id": 561969,
@@ -58039,6 +58093,21 @@
         },
         "matches": [
           {
+            "fixtureId": 565869,
+            "kickoff": "2026-11-27T19:30:00Z",
+            "competition": "BL1",
+            "venue": "away",
+            "opponent": "SVW",
+            "opponentName": "Bremen",
+            "opponentLogo": "https://crests.football-data.org/12.png",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 1,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 565862,
             "kickoff": "2026-11-21T14:30:00Z",
             "competition": "BL1",
@@ -58171,21 +58240,6 @@
             "halfFor": 2,
             "halfAgainst": 1,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 565777,
-            "kickoff": "2026-08-29T13:30:00Z",
-            "competition": "BL1",
-            "venue": "away",
-            "opponent": "RBL",
-            "opponentName": "RB Leipzig",
-            "opponentLogo": "https://crests.football-data.org/721.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -65528,6 +65582,21 @@
         },
         "matches": [
           {
+            "fixtureId": 565869,
+            "kickoff": "2026-11-27T19:30:00Z",
+            "competition": "BL1",
+            "venue": "home",
+            "opponent": "BMG",
+            "opponentName": "M'gladbach",
+            "opponentLogo": "https://crests.football-data.org/18.png",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 1,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 565863,
             "kickoff": "2026-11-22T16:30:00Z",
             "competition": "BL1",
@@ -65645,21 +65714,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 565785,
-            "kickoff": "2026-09-05T13:30:00Z",
-            "competition": "BL1",
-            "venue": "home",
-            "opponent": "RBL",
-            "opponentName": "RB Leipzig",
-            "opponentLogo": "https://crests.football-data.org/721.png",
-            "goalsFor": 3,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -102114,6 +102168,21 @@
         },
         "matches": [
           {
+            "fixtureId": 565869,
+            "kickoff": "2026-11-27T19:30:00Z",
+            "competition": "BL1",
+            "venue": "away",
+            "opponent": "SVW",
+            "opponentName": "Bremen",
+            "opponentLogo": "https://crests.football-data.org/12.png",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 1,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 565862,
             "kickoff": "2026-11-21T14:30:00Z",
             "competition": "BL1",
@@ -102246,21 +102315,6 @@
             "halfFor": 2,
             "halfAgainst": 1,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 565777,
-            "kickoff": "2026-08-29T13:30:00Z",
-            "competition": "BL1",
-            "venue": "away",
-            "opponent": "RBL",
-            "opponentName": "RB Leipzig",
-            "opponentLogo": "https://crests.football-data.org/721.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
@@ -114016,6 +114070,21 @@
         },
         "matches": [
           {
+            "fixtureId": 565869,
+            "kickoff": "2026-11-27T19:30:00Z",
+            "competition": "BL1",
+            "venue": "home",
+            "opponent": "BMG",
+            "opponentName": "M'gladbach",
+            "opponentLogo": "https://crests.football-data.org/18.png",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 1,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 565863,
             "kickoff": "2026-11-22T16:30:00Z",
             "competition": "BL1",
@@ -114133,21 +114202,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 565785,
-            "kickoff": "2026-09-05T13:30:00Z",
-            "competition": "BL1",
-            "venue": "home",
-            "opponent": "RBL",
-            "opponentName": "RB Leipzig",
-            "opponentLogo": "https://crests.football-data.org/721.png",
-            "goalsFor": 3,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -119248,6 +119302,21 @@
         },
         "matches": [
           {
+            "fixtureId": 565869,
+            "kickoff": "2026-11-27T19:30:00Z",
+            "competition": "BL1",
+            "venue": "home",
+            "opponent": "BMG",
+            "opponentName": "M'gladbach",
+            "opponentLogo": "https://crests.football-data.org/18.png",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 1,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 565863,
             "kickoff": "2026-11-22T16:30:00Z",
             "competition": "BL1",
@@ -119365,21 +119434,6 @@
             "halfFor": 0,
             "halfAgainst": 1,
             "firstGoal": "against",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 565785,
-            "kickoff": "2026-09-05T13:30:00Z",
-            "competition": "BL1",
-            "venue": "home",
-            "opponent": "RBL",
-            "opponentName": "RB Leipzig",
-            "opponentLogo": "https://crests.football-data.org/721.png",
-            "goalsFor": 3,
-            "goalsAgainst": 1,
-            "halfFor": 1,
-            "halfAgainst": 0,
-            "firstGoal": "for",
             "firstGoalMinute": null
           },
           {
@@ -140006,6 +140060,21 @@
         },
         "matches": [
           {
+            "fixtureId": 565869,
+            "kickoff": "2026-11-27T19:30:00Z",
+            "competition": "BL1",
+            "venue": "away",
+            "opponent": "SVW",
+            "opponentName": "Bremen",
+            "opponentLogo": "https://crests.football-data.org/12.png",
+            "goalsFor": 3,
+            "goalsAgainst": 3,
+            "halfFor": 1,
+            "halfAgainst": 1,
+            "firstGoal": null,
+            "firstGoalMinute": null
+          },
+          {
             "fixtureId": 565862,
             "kickoff": "2026-11-21T14:30:00Z",
             "competition": "BL1",
@@ -140138,21 +140207,6 @@
             "halfFor": 2,
             "halfAgainst": 1,
             "firstGoal": "for",
-            "firstGoalMinute": null
-          },
-          {
-            "fixtureId": 565777,
-            "kickoff": "2026-08-29T13:30:00Z",
-            "competition": "BL1",
-            "venue": "away",
-            "opponent": "RBL",
-            "opponentName": "RB Leipzig",
-            "opponentLogo": "https://crests.football-data.org/721.png",
-            "goalsFor": 0,
-            "goalsAgainst": 3,
-            "halfFor": 0,
-            "halfAgainst": 1,
-            "firstGoal": "against",
             "firstGoalMinute": null
           }
         ]
